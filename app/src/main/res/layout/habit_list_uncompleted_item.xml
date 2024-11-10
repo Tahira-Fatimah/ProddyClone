@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="100dp"
     android:orientation="vertical"
     android:paddingHorizontal="12dp"
     android:paddingVertical="4dp"
@@ -16,7 +16,7 @@
         android:layout_marginLeft="2dp"
         android:textStyle="bold"
         android:text="09:13"
-        android:textSize="8sp"
+        android:textSize="12sp"
         android:textColor="@color/font_dark_purple" />
 
     <LinearLayout
@@ -29,8 +29,8 @@
 
         <ImageView
             android:id="@+id/image_icon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:src="@drawable/fun"/>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="habit"
             android:layout_marginLeft="15dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:textColor="#333333" />

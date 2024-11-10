@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_purple">#A085E5</color>
+    <color name="light_grey">#7A7FA4</color>
+    <color name="icon_light_purple">#5F4697</color>
+    <color name="font_dark_purple">#1A111E</color>
+    <color name="medium_purple">#220546</color>
+    <color name="font_light_yellow">#BBA469</color>
+    <color name="checkmark_purple">#331657</color>
 </resources>

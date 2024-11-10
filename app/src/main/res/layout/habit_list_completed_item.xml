@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="100dp"
     android:orientation="vertical"
     android:paddingHorizontal="12dp"
     android:background="@drawable/rounded_background_1"
@@ -17,9 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/evaicons"
-            android:textSize="200dp"
-            android:layout_marginTop="-62dp"
-            android:layout_marginRight="-30dp"
+            android:textSize="250dp"
+            android:layout_marginTop="-75dp"
+            android:layout_marginRight="-45dp"
             android:text="\uE9C6"
             android:layout_gravity="top|end"
             android:textColor="#331657"
@@ -34,7 +34,7 @@
             android:textStyle="bold"
             android:paddingTop="4dp"
             android:text="09:13"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:textColor="@color/font_light_yellow" />
 
         <LinearLayout
@@ -46,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/image_icon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/fun"/>
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="habit"
                 android:layout_marginLeft="15dp"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/light_purple" />
