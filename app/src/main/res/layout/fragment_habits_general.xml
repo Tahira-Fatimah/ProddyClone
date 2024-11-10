@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".HabitsGeneral"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5FF">
+
+    <!-- General Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_background_1"
+        android:backgroundTint="@color/completed_habits_bg_purple"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="26dp"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!-- Title Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPLETED HABITS"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/completed_habit_font"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WEEK"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/habits_general_week_font_color" />
+            </RelativeLayout>
+
+            <!-- Habits Progress -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="13"
+                android:layout_marginTop="8dp"
+                >
+
+                <!-- 7 Squares for habit tracking -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits_start"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/habits_general_font_color"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits_end"
+                    android:backgroundTint="@color/completed_habits_scale_5"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/completed_habit_font_light_yellow" />
+
+            </GridLayout>
+
+            <!-- Less/More Labels -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Less"
+                    android:layout_weight="1"
+                    android:textColor="@color/completed_habit_font" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/completed_habits_scale_1"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/completed_habits_scale_2"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/completed_habits_scale_3"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/completed_habits_scale_4"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/completed_habits_scale_5"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="More"
+                    android:layout_weight="1"
+                    android:textColor="@color/completed_habit_font"
+                    android:gravity="end"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="25dp">
+
+            <!-- Title Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DAILY MOOD"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/completed_habit_font"
+                    />
+            </RelativeLayout>
+
+            <!-- Habits Progress -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="13"
+                android:layout_marginTop="8dp"
+                >
+
+                <!-- 7 Squares for habit tracking -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits_start"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/habits_general_font_color"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="3"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_columnWeight="15"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="4"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits"
+                    android:backgroundTint="@color/insights_original_color"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/habits_general_font_color" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="50dp"
+                    android:background="@color/completed_habits_bg_purple" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="15"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_background_general_habits_end"
+                    android:backgroundTint="@color/completed_habits_scale_5"
+                    android:gravity="center"
+                    android:text="6"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/completed_habit_font_light_yellow" />
+
+            </GridLayout>
+
+            <!-- Less/More Labels -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Worse"
+                    android:layout_weight="1"
+                    android:textColor="@color/completed_habit_font" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/daily_mood_scale_1"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/daily_mood_scale_2"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/daily_mood_scale_3"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/daily_mood_scale_4"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="9dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/daily_mood_scale_5"
+                    android:background="@drawable/rounded_background_general_habits_scale"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="3dp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Better"
+                    android:layout_weight="1"
+                    android:textColor="@color/completed_habit_font"
+                    android:gravity="end"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
