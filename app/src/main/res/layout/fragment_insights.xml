@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F5F5FF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insights"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:textColor="@color/bg_dark_purple"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_marginHorizontal="16dp"
+        android:padding="5dp"
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_background_1"
+        android:backgroundTint="@color/insights_tab"
+        app:tabIndicator="@drawable/tab_indicator"
+        app:tabIndicatorHeight="30dp"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorAnimationMode="linear"
+        app:tabSelectedTextColor="@color/bg_dark_purple"
+        app:tabTextColor="@color/bg_dark_purple"
+        app:tabGravity="fill"
+        app:tabMode="fixed">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabGeneral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General">
+        </com.google.android.material.tabs.TabItem>
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabIndividual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Individual" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+</LinearLayout>
+
+
+
+

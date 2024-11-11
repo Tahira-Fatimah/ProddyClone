@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_columnWeight="15"
+        android:gravity="center"
+        android:background="@drawable/rounded_background_general_habits"
+        android:backgroundTint="@color/grid_item_calendar"
+        android:text="2"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/checkmark_purple" />
+
+</LinearLayout>

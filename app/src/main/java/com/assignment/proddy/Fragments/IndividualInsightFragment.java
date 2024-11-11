@@ -1,4 +1,4 @@
-package com.assignment.proddy;
+package com.assignment.proddy.Fragments;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.assignment.proddy.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HabitsGeneral#newInstance} factory method to
+ * Use the {@link IndividualInsightFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HabitsGeneral extends Fragment {
+public class IndividualInsightFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class HabitsGeneral extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HabitsGeneral() {
+    public IndividualInsightFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class HabitsGeneral extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HabitsGeneral.
+     * @return A new instance of fragment IndividualInsightFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HabitsGeneral newInstance(String param1, String param2) {
-        HabitsGeneral fragment = new HabitsGeneral();
+    public static IndividualInsightFragment newInstance(String param1, String param2) {
+        IndividualInsightFragment fragment = new IndividualInsightFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class HabitsGeneral extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_habits_general, container, false);
+        return inflater.inflate(R.layout.fragment_individual_insight, container, false);
     }
 }

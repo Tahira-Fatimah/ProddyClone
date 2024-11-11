@@ -6,7 +6,7 @@
     android:paddingHorizontal="12dp"
     android:background="@drawable/rounded_background_1"
     android:elevation="8dp"
-    android:backgroundTint="#25023E"
+    android:backgroundTint="@color/bg_dark_purple"
     android:layout_margin="8dp">
 
     <FrameLayout

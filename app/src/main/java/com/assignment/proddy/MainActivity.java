@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.habit_list_completed_item);
+        setContentView(R.layout.fragment_habits_general);
 //        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
 //        new InsertHabit(getApplicationContext()).execute(new Habit("habit 2", "aise hi", "M,T,W", HabitType.FINANCES, 1));
 //        new InsertHabitStep(getApplicationContext()).execute(

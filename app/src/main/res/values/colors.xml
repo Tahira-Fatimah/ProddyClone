@@ -9,6 +9,12 @@
     <color name="medium_purple">#220546</color>
     <color name="font_light_yellow">#BBA469</color>
     <color name="checkmark_purple">#331657</color>
+    <color name="bg_dark_purple">#25023E</color>
+    <color name="grid_item_calendar">#634694</color>
+    <color name="today_item_calendar">#FCD532</color>
+    <color name="habit_track">#FBD6A4</color>
+    <color name="insights_tab">#DFDEE3</color>
+    <color name="habit_light_purple">#2C104C</color>
 
     <color name="completed_habits_bg_purple">#E2D5FC</color>
     <color name="completed_habits_scale_1">#CBBEE1</color>
