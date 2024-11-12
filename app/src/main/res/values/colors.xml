@@ -115,4 +115,47 @@
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6ffffff</color>
 
+
+
+
+    <color name="reflection_date_light_grey">#E2E0E6</color>
+    <color name="reflection_date_font_purple">#220545</color>
+    <color name="reflect_on_day_purple">#A389E8</color>
+    <color name="your_mood_on_bg_purple">#220545</color>
+    <color name="your_mood_on_font_white">#FDFDFC</color>
+    <color name="thought_feelings_box_bg_purple">#E7D8FF</color>
+    <color name="feeling_tag_positive_bg">#B6A3D0</color>
+    <color name="feeling_tag_positive_font">#311552</color>
+    <color name="feeling_tag_negative_bg">#E2AECB</color>
+    <color name="feeling_tag_negative_font">#D32F2F</color>
+    <color name="your_week_bg_colour">#220545</color>
+
+    <color name="reflection_bg">#220545</color>
+    <color name="check_in_streak_bg">#FFC4C4</color>
+    <color name="reflection_quote_bg">#311B92</color>
+    <color name="reflection_quote_font">#E7D8FF</color>
+    <color name="reflection_quote_author_font">#7986CB</color>
+    <color name="reflection_bg_pattern">#180330</color>
+    <color name="reflection_avg_mood_bg">#825CC4</color>
+
+    <color name="reflection_feeling_bg_dark">#2D124F</color>
+    <color name="reflection_feeling_bg_dark_font">#FFFFFF</color>
+    <color name="reflection_feeling_bg_light">#A389E8</color>
+    <color name="reflection_feeling_bg_light_font">#220545</color>
+    <color name="reflection_feeling_I_feel_font">#7A698F</color>
+    <color name="reflection_feeling_title">#E7D8FF</color>
+
+    <color name="reflection_add_note">#9182A2</color>
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

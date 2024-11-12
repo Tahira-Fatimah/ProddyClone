@@ -1,0 +1,31 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/habit_create_bg"
+    android:backgroundTint="@color/reflection_date_font_purple"
+    android:paddingVertical="20dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/mindfulness"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="blabla habit blabla"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="40dp"
+        android:textColor="@color/white"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/white"
+        android:layout_gravity="center_vertical"/>
+</LinearLayout>

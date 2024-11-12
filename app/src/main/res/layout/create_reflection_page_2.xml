@@ -1,0 +1,302 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/habit_create_bg"
+    android:backgroundTint="@color/reflection_bg"
+    android:paddingTop="40dp"
+    android:paddingHorizontal="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Would you like to go into more detail?"
+        android:textColor="@color/reflection_feeling_title"
+        android:textStyle="bold"
+        android:layout_marginVertical="10dp"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I feel..."
+        android:textStyle="bold"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/reflection_feeling_I_feel_font"
+        android:layout_marginTop="20dp"
+        android:textSize="28sp"/>
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:columnCount="3">
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Proud"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Foggy"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_light"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Peaceful"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/reflection_feeling_bg_light_font" />
+
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Euphoric"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Sad"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Happy"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Moody"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Helpless"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Anxious"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Grateful"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Loved"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Angry"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Calm"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Creative"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Distracted"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Motivated"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Insecure"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="4dp"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/reflection_feeling_bg_dark"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Nostalgic"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:textColor="@color/reflection_feeling_bg_dark_font" />
+
+
+
+    <!-- Repeat for additional items -->
+
+</GridLayout>
+
+
+
+    </LinearLayout>

@@ -1,0 +1,61 @@
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="4"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/thought_feelings_box_bg_purple"
+ >
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peaceful"
+        android:textColor="@color/feeling_tag_positive_font"
+        android:background="@color/feeling_tag_positive_bg"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="3dp"
+        android:layout_margin="4dp"/>
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Angry"
+        android:textColor="@color/feeling_tag_negative_font"
+        android:background="@color/feeling_tag_negative_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+        android:layout_margin="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creative"
+            android:textColor="@color/feeling_tag_positive_font"
+            android:background="@color/feeling_tag_positive_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:layout_margin="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gratefel"
+            android:textColor="@color/feeling_tag_positive_font"
+            android:background="@color/feeling_tag_positive_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:layout_margin="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Angry"
+            android:textColor="@color/feeling_tag_negative_font"
+            android:background="@color/feeling_tag_negative_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:layout_margin="4dp" />
+
+    </GridLayout>
