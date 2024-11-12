@@ -102,16 +102,16 @@
                 android:textColor="@color/white"
                 />
 
+                <GridView
+                    android:id="@+id/calendarIndividual"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginVertical="30dp"
+                    android:horizontalSpacing="3dp"
+                    android:verticalSpacing="5dp"
+                    android:paddingHorizontal="40dp"
+                    android:numColumns="7" />
 
-            <GridView
-                android:id="@+id/calenderIndividual"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="30dp"
-                android:horizontalSpacing="8dp"
-                android:verticalSpacing="20dp"
-                android:paddingHorizontal="10dp"
-                android:numColumns="7" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -260,7 +260,7 @@
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="8dp"
                 android:verticalSpacing="20dp"
-                android:numColumns="4" />
+                android:numColumns="3" />
 
 
         </LinearLayout>
