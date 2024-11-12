@@ -1,9 +1,12 @@
-package com.assignment.proddy.Fragments;
+package com.assignment.proddy.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.assignment.proddy.Fragments.GeneralInsightFragment;
+import com.assignment.proddy.Fragments.IndividualInsightFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
