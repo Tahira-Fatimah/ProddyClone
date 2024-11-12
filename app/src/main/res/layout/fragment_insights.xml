@@ -18,9 +18,9 @@
         />
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_marginHorizontal="16dp"
         android:padding="5dp"
-        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -51,6 +51,11 @@
             android:text="Individual" />
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
 

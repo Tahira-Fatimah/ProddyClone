@@ -3,13 +3,21 @@ package com.assignment.proddy;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.assignment.proddy.Fragments.insights;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_reflection);
+        setContentView(R.layout.activity_main);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, new insights());
+        transaction.commit();
+
 //        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
 //        new InsertHabit(getApplicationContext()).execute(new Habit("habit 2", "aise hi", "M,T,W", HabitType.FINANCES, 1));
 //        new InsertHabitStep(getApplicationContext()).execute(
