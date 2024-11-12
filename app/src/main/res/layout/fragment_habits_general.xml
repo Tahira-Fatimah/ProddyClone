@@ -533,8 +533,9 @@
 
 
             <GridView
+                android:id="@+id/calenderGeneral"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
                 android:horizontalSpacing="8dp"
                 android:verticalSpacing="20dp"
@@ -714,5 +715,5 @@
         </LinearLayout>
 
     </LinearLayout>
-    
+
 </ScrollView>

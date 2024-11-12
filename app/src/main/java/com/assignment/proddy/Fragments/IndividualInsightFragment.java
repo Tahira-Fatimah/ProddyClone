@@ -49,7 +49,7 @@ public class IndividualInsightFragment extends Fragment {
         gridView.setAdapter(new HabitTrackAdapter(requireContext(), DaysData));
 
         //Calender
-        GridView habitGridView = view.findViewById(R.id.calender);
+        GridView habitGridView = view.findViewById(R.id.calenderIndividual);
         List<String> calendarItems = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
             calendarItems.add(String.valueOf(i));
