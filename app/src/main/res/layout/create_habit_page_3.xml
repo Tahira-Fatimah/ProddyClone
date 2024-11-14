@@ -1,0 +1,180 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/habit_create_bg"
+    android:backgroundTint="@color/reflection_bg">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pattern"
+            android:scaleY="4"
+            android:scaleX="4"
+            app:tint="@color/reflection_bg_pattern" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="40dp"
+            android:background="@drawable/habit_card"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select when you want to complete your habit"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/create_habit_prompt"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your habit will become ingrained faster if you do it everyday at a similar time"
+                android:layout_marginVertical="25dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"/>
+
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/create_habit_continue_button_font"
+                android:backgroundTint="@color/create_habit_continue_button"
+                android:textSize="12sp"
+                android:text="Continue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="or"
+                android:textSize="14sp"
+                android:layout_marginVertical="10dp"
+                android:textFontWeight="900"
+                android:textColor="@color/create_habit_your_habit"
+                />
+
+            <Button
+                android:layout_width="135dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/create_habit_days_selection_button_font"
+                android:backgroundTint="@color/create_habit_days_selection_button"
+                android:textSize="12sp"
+                android:text="Continue"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_height="38dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Monday"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Tuesday"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Wednesday"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_height="38dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Thursday"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Friday"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/create_habit_days_button"
+                        android:textSize="12sp"
+                        android:text="Saturday"/>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/create_habit_days_button"
+                    android:textSize="12sp"
+                    android:text="Sunday"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

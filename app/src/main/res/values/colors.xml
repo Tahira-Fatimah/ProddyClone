@@ -155,7 +155,12 @@
     <color name="create_habit_continue_button_font">#1B5E1F</color>
     <color name="create_habit_prompt">#A389E8</color>
     <color name="create_habit_text_bg">#1F0B37</color>
-
+    <color name="create_habit_cancel_button">#D32F2F</color>
+    <color name="create_habit_reminder_bg_back">#80210A40</color>
+    <color name="create_habit_reminder_bg_selected">#2b1647</color>
+    <color name="create_habit_days_selection_button">#FFF0B2</color>
+    <color name="create_habit_days_selection_button_font">#f57c00</color>
+    <color name="create_habit_days_button">#291740</color>
 
 
 

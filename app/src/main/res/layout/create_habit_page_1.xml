@@ -131,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Put in a name for your habit"
+                    android:layout_gravity="center_horizontal"
                     android:textAlignment="center"
                     android:textSize="30sp"
                     android:textStyle="bold"
