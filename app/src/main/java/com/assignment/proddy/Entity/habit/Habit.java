@@ -8,6 +8,8 @@ import androidx.room.TypeConverters;
 
 import com.assignment.proddy.Entity.user.User;
 
+import java.sql.Time;
+
 
 @Entity(tableName = "habit",
         foreignKeys = @ForeignKey(
@@ -33,12 +35,23 @@ public class Habit {
     @TypeConverters(HabitTypeConverter.class)
     private HabitType habitType;
 
-    public Habit(String name, String reason, String schedule, HabitType habitType, int userId) {
+    private Time reminderTime;
+
+    public Time getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(Time reminderTime) {
+        this.reminderTime = reminderTime;
+    }
+
+    public Habit(String name, String reason, String schedule, HabitType habitType, int userId, Time reminderTime) {
         this.name = name;
         this.reason = reason;
         this.schedule = schedule;
         this.habitType = habitType;
         this.userId = userId;
+        this.reminderTime=reminderTime;
     }
 
     public int getId() {
@@ -80,7 +93,6 @@ public class Habit {
     public void setHabitType(HabitType habitType) {
         this.habitType = habitType;
     }
-
 
     public int getUserId() {
         return userId;

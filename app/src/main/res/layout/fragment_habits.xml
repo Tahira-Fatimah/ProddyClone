@@ -111,10 +111,10 @@
         android:textSize="13sp"
         android:textColor="@color/font_dark_purple"/>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
-        android:id="@+id/habit_list_view"/>
+        android:id="@+id/habit_recycler_view"/>
 
 </LinearLayout>
