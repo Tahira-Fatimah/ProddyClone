@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#E9E2FE"
+    android:orientation="vertical"
+    android:padding="35dp"
+    tools:context=".MainActivity">
+
+    <!-- Top Image -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/adventure_flat"/>
+
+    <!-- Title Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin your journey"
+        android:textColor="@color/reflection_bg"
+        android:textSize="28sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Subtitle Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More productivity, more accountability and better habits. Create an account to start."
+        android:textColor="@color/reflection_bg"
+        android:textSize="20sp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Google Sign In Button -->
+    <TextView
+        android:id="@+id/btnGoogleSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_background_1"
+        android:backgroundTint="@color/white"
+        android:focusable="true"
+        android:text="Continue with Google"
+        android:textColor="@color/login_continue_with_google_font"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/google"
+        android:clickable="true"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"
+        android:paddingEnd="50dp"
+        android:paddingStart="20dp"/>
+
+
+    <!-- Email Sign In Button -->
+    <TextView
+        android:id="@+id/btnSignInEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_background_1"
+        android:backgroundTint="@color/reflection_bg"
+        android:focusable="true"
+        android:text="Continue with Email"
+        android:textColor="@color/login_continue_with_email_font"
+        android:gravity="center"
+        android:clickable="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/reflection_bg"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="@string/terms_text" />
+
+
+    <!-- Already have an account link -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_account_text"
+        android:textColor="@color/reflection_bg"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"/>
+
+</LinearLayout>
