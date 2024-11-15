@@ -50,6 +50,7 @@ public class ReflectionFragment extends Fragment {
         TextView thoughtsView = view.findViewById(R.id.thoughts);
         GridLayout feelingsGridView = view.findViewById(R.id.feelingsGrid);
         GridLayout activitiesGridView = view.findViewById(R.id.activitiesGrid);
+        LinearLayout allBarsView = view.findViewById(R.id.Allbars);
         TextView avgMoodTextView = view.findViewById(R.id.avgMoodText);
         ImageView avgMoodEmojiView = view.findViewById(R.id.avgMoodEmoji);
         TextView avgMoodNumView = view.findViewById(R.id.avgMoodNum);
@@ -96,9 +97,8 @@ public class ReflectionFragment extends Fragment {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         GridLayout.LayoutParams layoutparams = new GridLayout.LayoutParams();
-        layoutparams.width = (int) (35 * getResources().getDisplayMetrics().density); // Convert 35dp to px
+        layoutparams.width = (int) (135 * getResources().getDisplayMetrics().density); // Convert 35dp to px
         layoutparams.height = GridLayout.LayoutParams.WRAP_CONTENT;
-        layoutparams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f); // column weight
         linearLayout.setLayoutParams(layoutparams);
 
         // first TextView for emoji
@@ -139,7 +139,7 @@ public class ReflectionFragment extends Fragment {
 
         // Create TextView for mood number
         TextView moodNum = new TextView(requireContext());
-        moodNum.setText("3");
+        moodNum.setText("5");
         moodNum.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
         moodNum.setTypeface(null, Typeface.BOLD);
         moodNum.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16); // 16sp
@@ -165,7 +165,7 @@ public class ReflectionFragment extends Fragment {
 
         // Create the Day TextView
         TextView text = new TextView(requireContext());
-        text.setText("Sat"); // get from db ---------
+        text.setText("Mon"); // get from db ---------
         text.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -174,17 +174,21 @@ public class ReflectionFragment extends Fragment {
         textParams.gravity = Gravity.CENTER_HORIZONTAL;
         text.setLayoutParams(textParams);
 
-        // Add views to the LinearLayout
+        // Add all views to the dayLinearLayout
         daylinearLayout.addView(spacerView);
         daylinearLayout.addView(moodNum);
         daylinearLayout.addView(bar);
         daylinearLayout.addView(text);
 
+        for(int i=0; i<7; i++){
+            allBarsView.addView(daylinearLayout);
+        }
+
 
 
 // AVERAGE MOOD
-        avgMoodTextView.setText("Normal");
-        avgMoodEmojiView.setImageResource(R.drawable.mood1);
+        avgMoodTextView.setText("Fine");
+        avgMoodEmojiView.setImageResource(R.drawable.mood3);
         avgMoodNumView.setText("3.0");
 
     }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container, new insights());
+        transaction.add(R.id.fragment_container, new ReflectionFragment());
         transaction.commit();
 
 //        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));

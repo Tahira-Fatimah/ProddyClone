@@ -1,120 +1,75 @@
 <GridLayout
     android:id="@+id/activitiesGrid"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:columnCount="3"
-    android:layout_marginTop="5dp">
+    android:layout_marginTop="5dp"
+    android:layout_gravity="start">
 
-    <LinearLayout android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="💪"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:textSize="30sp"/>
+<!--    <LinearLayout android:layout_width="135dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Studying"
-            android:textSize="15sp"
-            android:textColor="@color/reflection_date_font_purple"/>
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="\u2764"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:textSize="30sp"/>-->
 
-    <LinearLayout android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:orientation="vertical">
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:text="Studying"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/reflection_date_font_purple"/>-->
+<!--    </LinearLayout>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="👩‍💻"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:textSize="30sp"/>
+<!--    <LinearLayout android:layout_width="135dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Studying"
-            android:textSize="15sp"
-            android:textColor="@color/reflection_date_font_purple"/>
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="💪"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:textSize="30sp"/>-->
 
-    <LinearLayout android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:orientation="vertical">
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:text="Studying"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/reflection_date_font_purple"/>-->
+<!--    </LinearLayout>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\u2764"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:textSize="30sp"/>
+<!--    <LinearLayout android:layout_width="135dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Studying"
-            android:textSize="15sp"
-            android:textColor="@color/reflection_date_font_purple"/>
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="✌️"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:textSize="30sp"/>-->
 
-    <LinearLayout android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="💪"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:textSize="30sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Studying"
-            android:textSize="15sp"
-            android:textColor="@color/reflection_date_font_purple"/>
-    </LinearLayout>
-
-    <LinearLayout android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_columnWeight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✌️"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="8dp"
-            android:textSize="30sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Studying"
-            android:textSize="15sp"
-            android:textColor="@color/reflection_date_font_purple"/>
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:text="Studying"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="@color/reflection_date_font_purple"/>-->
+<!--    </LinearLayout>-->
 
 
 </GridLayout>

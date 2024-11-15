@@ -9,25 +9,25 @@
     android:backgroundTint="@color/thought_feelings_box_bg_purple"
  >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loved"
-            android:textColor="@color/feeling_tag_positive_font"
-            android:background="@color/feeling_tag_positive_bg"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="3dp"
-            android:layout_margin="4dp"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Loved"-->
+<!--            android:textColor="@color/feeling_tag_positive_font"-->
+<!--            android:background="@color/feeling_tag_positive_bg"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingVertical="3dp"-->
+<!--            android:layout_margin="4dp"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Helpless"
-            android:textColor="@color/feeling_tag_negative_font"
-            android:background="@color/feeling_tag_negative_bg"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="3dp"
-            android:layout_margin="4dp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Helpless"-->
+<!--            android:textColor="@color/feeling_tag_negative_font"-->
+<!--            android:background="@color/feeling_tag_negative_bg"-->
+<!--            android:paddingHorizontal="8dp"-->
+<!--            android:paddingVertical="3dp"-->
+<!--            android:layout_margin="4dp" />-->
 
 
     </GridLayout>
