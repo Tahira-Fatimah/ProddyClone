@@ -411,6 +411,7 @@
                 android:elevation="4dp">
 
                 <TextView
+                    android:id="@+id/moodDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -433,6 +434,7 @@
                         android:layout_alignParentStart="true">
 
                         <TextView
+                            android:id="@+id/moodText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Good"
@@ -442,6 +444,7 @@
                             android:textStyle="bold"/>
 
                         <ImageView
+                            android:id="@+id/moodEmoji"
                             android:layout_width="33dp"
                             android:layout_height="33dp"
                             android:layout_marginLeft="10dp"
@@ -450,6 +453,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/moodNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4"
@@ -487,6 +491,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/thoughts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Good thoughts onlyyyyyyyyyyyyyy"
@@ -565,30 +570,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
+                            android:id="@+id/satMoodNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="3"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
                             android:textSize="16sp" />
 
                         <View
+                            android:id="@+id/satBar"
                             android:layout_width="12dp"
                             android:layout_height="80dp"
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Wed"
+                            android:text="Sat"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -597,13 +611,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="3"
-                            android:layout_weight="1"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
@@ -612,18 +631,17 @@
                         <View
                             android:layout_width="12dp"
                             android:layout_height="80dp"
-                            android:layout_weight="2"
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_gravity="center_horizontal"
-                            android:text="Wed"
+                            android:text="Sun"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -632,12 +650,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="3"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
@@ -649,13 +673,14 @@
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Wed"
+                            android:text="Mon"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -664,12 +689,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="3"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
@@ -681,13 +712,14 @@
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Wed"
+                            android:text="Tue"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -696,12 +728,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="3"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
@@ -713,39 +751,8 @@
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="Wed"
-                            android:textColor="@color/white"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4"
-                            android:layout_gravity="center_horizontal"
-                            android:textColor="#FFFFFF"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
-
-                        <View
-                            android:layout_width="12dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/rounded_background_1"
-                            android:backgroundTint="@color/light_purple"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -760,12 +767,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="3"
                             android:layout_gravity="center_horizontal"
                             android:textColor="#FFFFFF"
                             android:textStyle="bold"
@@ -777,13 +790,53 @@
                             android:background="@drawable/rounded_background_1"
                             android:backgroundTint="@color/light_purple"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="Wed"
+                            android:text="Thu"
+                            android:textColor="@color/white"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="bottom">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:textSize="16sp" />
+
+                        <View
+                            android:layout_width="12dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/rounded_background_1"
+                            android:backgroundTint="@color/light_purple"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="4dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Fri"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -823,6 +876,7 @@
                         android:layout_alignParentStart="true">
 
                         <TextView
+                            android:id="@+id/avgMoodText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="AWESOME"
@@ -831,6 +885,7 @@
                             android:textSize="18sp"/>
 
                         <ImageView
+                            android:id="@+id/avgMoodEmoji"
                             android:layout_width="33dp"
                             android:layout_height="33dp"
                             android:layout_marginLeft="10dp"
@@ -839,6 +894,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/avgMoodNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4.5"
