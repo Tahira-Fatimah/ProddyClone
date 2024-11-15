@@ -36,8 +36,6 @@ public class AllHabitsFragment extends Fragment {
     public AllHabitsFragment() {
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +77,11 @@ public class AllHabitsFragment extends Fragment {
         if (isRecyclerViewVisible) {
             recyclerView.animate()
                     .alpha(0f)
-                    .setDuration(600)
+                    .setDuration(100)
                     .withEndAction(() -> recyclerView.setVisibility(View.GONE))
                     .start();
 
-            completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowUp, null);
+            completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowDown, null);
         } else {
             recyclerView.setAlpha(0f);
             recyclerView.setVisibility(View.VISIBLE);
@@ -92,16 +90,10 @@ public class AllHabitsFragment extends Fragment {
                     .setDuration(600)
                     .start();
 
-            if(completionStatus != null){
-                completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowDown, null);
-//
-            }
-            else{
-                System.out.println(" completin status is null");
-            }
+            completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowUp, null);
+
         }
 
-        // Toggle the state
         isRecyclerViewVisible = !isRecyclerViewVisible;
     }
 

@@ -69,7 +69,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#333333" />
+                    android:textColor="@color/light_purple" />
 
             </LinearLayout>
 
