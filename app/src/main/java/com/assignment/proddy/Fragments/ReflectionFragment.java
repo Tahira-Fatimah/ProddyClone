@@ -50,7 +50,7 @@ public class ReflectionFragment extends Fragment {
         TextView thoughtsView = view.findViewById(R.id.thoughts);
         GridLayout feelingsGridView = view.findViewById(R.id.feelingsGrid);
         GridLayout activitiesGridView = view.findViewById(R.id.activitiesGrid);
-        LinearLayout allBarsView = view.findViewById(R.id.Allbars);
+        LinearLayout allBarsView = view.findViewById(R.id.allBars);
         TextView avgMoodTextView = view.findViewById(R.id.avgMoodText);
         ImageView avgMoodEmojiView = view.findViewById(R.id.avgMoodEmoji);
         TextView avgMoodNumView = view.findViewById(R.id.avgMoodNum);
@@ -180,10 +180,7 @@ public class ReflectionFragment extends Fragment {
         daylinearLayout.addView(bar);
         daylinearLayout.addView(text);
 
-        for(int i=0; i<7; i++){
-            allBarsView.addView(daylinearLayout);
-        }
-
+        allBarsView.addView(daylinearLayout);
 
 
 // AVERAGE MOOD
