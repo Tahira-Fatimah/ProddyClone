@@ -59,20 +59,21 @@
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TODAY"
-        android:fontFamily="@font/ibx_medium"
-        android:textColor="@color/font_dark_purple"
-        android:layout_marginVertical="10dp"
-        android:textSize="13sp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="TODAY"-->
+<!--        android:fontFamily="@font/ibx_medium"-->
+<!--        android:textColor="@color/font_dark_purple"-->
+<!--        android:layout_marginVertical="10dp"-->
+<!--        android:textSize="13sp" />-->
 
 
     <LinearLayout
         android:id="@+id/completedToday"
         android:layout_width="match_parent"
         android:layout_height="225dp"
+        android:visibility="gone"
         android:background="@drawable/rounded_background_1"
         android:backgroundTint="@color/light_purple"
         android:orientation="vertical">
@@ -101,20 +102,51 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/completion_status"
-        android:text="1 COMPLETED TODAY"
-        android:layout_marginVertical="20dp"
-        android:fontFamily="@font/ibx_medium"
-        android:textSize="13sp"
-        android:textColor="@color/font_dark_purple"/>
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:visibility="visible"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TODAY"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/ibx_medium"
+            android:textSize="13sp"
+            android:textColor="@color/font_dark_purple"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/habit_incomplete_recycler_view"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/habit_recycler_view"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/completion_status"
+            android:text="1 COMPLETED TODAY"
+            android:layout_marginVertical="20dp"
+            android:fontFamily="@font/ibx_medium"
+            android:textSize="13sp"
+            android:drawableEnd="@drawable/arrow_up"
+            android:textColor="@color/font_dark_purple"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:id="@+id/habit_recycler_view"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

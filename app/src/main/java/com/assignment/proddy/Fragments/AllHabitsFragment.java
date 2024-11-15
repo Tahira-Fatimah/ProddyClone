@@ -1,19 +1,21 @@
 package com.assignment.proddy.Fragments;
 
-import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.assignment.proddy.Adapters.HabitListAdapter;
+import com.assignment.proddy.Adapters.HabitListCompletedAdapter;
+import com.assignment.proddy.Adapters.HabitListIncompleteAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.HabitType;
 import com.assignment.proddy.R;
@@ -25,6 +27,12 @@ import java.util.List;
 
 public class AllHabitsFragment extends Fragment {
 
+    private boolean isRecyclerViewVisible = false;
+    RecyclerView recyclerView;
+    TextView completionStatus;
+    Drawable arrowUp ;
+    Drawable arrowDown;
+
     public AllHabitsFragment() {
     }
 
@@ -33,64 +41,68 @@ public class AllHabitsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getContext() != null) {
+            arrowUp = ResourcesCompat.getDrawable(getResources(), R.drawable.arrow_up, null);
+            arrowDown = ResourcesCompat.getDrawable(getResources(), R.drawable.arrow_down, null);
+        }
 
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_habits, container, false);
+        completionStatus = view.findViewById(R.id.completion_status);
+        RecyclerView habitListIncompleteRecycleView = view.findViewById(R.id.habit_incomplete_recycler_view);
+        recyclerView = view.findViewById(R.id.habit_recycler_view);
 
-        RecyclerView recyclerView = view.findViewById(R.id.habit_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        habitListIncompleteRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<Habit> habits = new ArrayList<>();
-
         habits.add(new Habit("Morning Exercise", "To stay fit and healthy", "Daily", HabitType.FUN, 1, Time.valueOf("06:30:00")));
         habits.add(new Habit("Morning Walk", "To stay fit and healthy", "Daily", HabitType.PRODUCTIVITY, 1, Time.valueOf("06:30:00")));
         habits.add(new Habit("Morning Pills", "To stay fit and healthy", "Daily", HabitType.HEALTH, 1, Time.valueOf("06:30:00")));
 
-        HabitListAdapter adapter = new HabitListAdapter(getContext(), habits);
+        HabitListCompletedAdapter adapter = new HabitListCompletedAdapter(getContext(), habits);
+        HabitListIncompleteAdapter habitListIncompleteAdapter = new HabitListIncompleteAdapter(getContext(), habits);
+
+        habitListIncompleteRecycleView.setAdapter(habitListIncompleteAdapter);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false; // We don't want move events in this case
-            }
+        completionStatus.setOnClickListener(v -> toggleRecyclerViewVisibility());
 
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                HabitListAdapter.MyViewHolder holder = (HabitListAdapter.MyViewHolder) viewHolder;
-
-                if (direction == ItemTouchHelper.LEFT) {
-                    holder.swipeTick.setVisibility(View.VISIBLE);
-                    holder.swipeEdit.setVisibility(View.GONE);
-                } else if (direction == ItemTouchHelper.RIGHT) {
-                    holder.swipeEdit.setVisibility(View.VISIBLE);
-                    holder.swipeTick.setVisibility(View.GONE);
-                }
-
-                // Reset item after showing buttons (can also hide buttons based on action)
-                recyclerView.getAdapter().notifyItemChanged(viewHolder.getAdapterPosition());
-            }
-
-            @Override
-            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                View itemView = viewHolder.itemView;
-
-                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                    // Fade out the content as it is swiped
-                    float alpha = 1.0f - Math.abs(dX) / (float) itemView.getWidth();
-                    itemView.setAlpha(alpha);
-                    itemView.setTranslationX(dX);
-                } else {
-                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                }
-            }
-        });
-
-        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return view;
     }
+
+    private void toggleRecyclerViewVisibility() {
+        if (isRecyclerViewVisible) {
+            recyclerView.animate()
+                    .alpha(0f)
+                    .setDuration(600)
+                    .withEndAction(() -> recyclerView.setVisibility(View.GONE))
+                    .start();
+
+            completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowUp, null);
+        } else {
+            recyclerView.setAlpha(0f);
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.animate()
+                    .alpha(1f)
+                    .setDuration(600)
+                    .start();
+
+            if(completionStatus != null){
+                completionStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, arrowDown, null);
+//
+            }
+            else{
+                System.out.println(" completin status is null");
+            }
+        }
+
+        // Toggle the state
+        isRecyclerViewVisible = !isRecyclerViewVisible;
+    }
+
 }

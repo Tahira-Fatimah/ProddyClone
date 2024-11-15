@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,38 +14,20 @@ import com.assignment.proddy.R;
 
 import java.util.List;
 
-public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.MyViewHolder> {
+public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCompletedAdapter.MyViewHolder> {
 
     private Context context;
     private List<Habit> habits;
 
-    public HabitListAdapter(Context context, List<Habit> habits) {
+    public HabitListCompletedAdapter(Context context, List<Habit> habits) {
         this.context = context;
         this.habits = habits;
-    }
-
-    // ViewHolder class
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView timeTextView;
-        public ImageView iconImageView;
-        public TextView titleTextView;
-        public ImageView swipeTick;
-        public ImageView swipeEdit;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            timeTextView = itemView.findViewById(R.id.time);
-            iconImageView = itemView.findViewById(R.id.image_icon);
-            titleTextView = itemView.findViewById(R.id.title);
-            swipeTick = itemView.findViewById(R.id.swipe_tick);
-            swipeEdit = itemView.findViewById(R.id.swipe_edit);
-
-        }
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate the habit item layout
         View view = LayoutInflater.from(context).inflate(R.layout.habit_list_completed_item, parent, false);
         return new MyViewHolder(view);
     }
@@ -54,6 +35,8 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Habit habit = habits.get(position);
+
+        // Bind data to the views
         holder.timeTextView.setText(habit.getReminderTime().toString());
         holder.titleTextView.setText(habit.getName());
     }
@@ -61,5 +44,17 @@ public class HabitListAdapter extends RecyclerView.Adapter<HabitListAdapter.MyVi
     @Override
     public int getItemCount() {
         return habits.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView timeTextView;
+        public TextView titleTextView;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+
+            timeTextView = itemView.findViewById(R.id.time);
+            titleTextView = itemView.findViewById(R.id.title);
+        }
     }
 }

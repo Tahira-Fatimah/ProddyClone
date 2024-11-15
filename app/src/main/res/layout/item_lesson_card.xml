@@ -1,0 +1,37 @@
+<!-- res/layout/item_lesson_card.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_background_1"
+    android:elevation="8dp"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mindfulness" />
+
+    <TextView
+        android:id="@+id/cardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lesson Title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/cardSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lesson Description"
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:textColor="#808080" />
+
+</LinearLayout>
