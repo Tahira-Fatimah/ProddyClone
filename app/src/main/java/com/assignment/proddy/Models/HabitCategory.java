@@ -1,14 +1,14 @@
 package com.assignment.proddy.Models;
 
-import android.graphics.drawable.Drawable;
+import com.assignment.proddy.Entity.habit.HabitType;
 
 public class HabitCategory {
     int drawable;
-    String categoryName;
+    HabitType habitType;
 
-    public HabitCategory(int drawable, String categoryName) {
+    public HabitCategory(int drawable, HabitType categoryName) {
         this.drawable = drawable;
-        this.categoryName = categoryName;
+        this.habitType = categoryName;
     }
 
     public int getdrawable() {
@@ -19,11 +19,11 @@ public class HabitCategory {
         this.drawable = drawable;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public HabitType getHabitType() {
+        return habitType;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setHabitType(HabitType habitType) {
+        this.habitType = habitType;
     }
 }

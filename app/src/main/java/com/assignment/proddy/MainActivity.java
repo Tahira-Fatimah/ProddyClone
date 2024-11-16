@@ -1,25 +1,17 @@
 package com.assignment.proddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 //import com.assignment.proddy.Fragments.AllHabitsFragment;
 //import com.assignment.proddy.Fragments.insights;
 
-import com.assignment.proddy.Adapters.LessonPagerAdapter;
-import com.assignment.proddy.Entity.Lesson;
-import com.assignment.proddy.Fragments.AllHabitsFragment;
-
-import java.util.Arrays;
-import java.util.List;
-
-import com.assignment.proddy.Fragments.CreateHabit2;
-import com.assignment.proddy.Fragments.ReflectionFragment;
-import com.assignment.proddy.Fragments.insights;
+import com.assignment.proddy.Activities.CreateHabit;
+import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
+import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +20,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new AllHabitsFragment());
-        transaction.commit();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, new CreateHabit5());
+//        transaction.commit();
+//
+        Intent intent = new Intent(this, CreateHabit.class);
+        startActivity(intent);
     }
 }
 

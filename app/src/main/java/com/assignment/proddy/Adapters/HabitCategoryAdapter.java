@@ -34,7 +34,7 @@ public class HabitCategoryAdapter extends RecyclerView.Adapter<HabitCategoryAdap
         HabitCategory habitCategory = habitCategories.get(circularPosition);
 
         holder.habitImage.setImageResource(habitCategory.getdrawable());
-        holder.habitName.setText(habitCategory.getCategoryName());
+        holder.habitName.setText(habitCategory.getHabitType().getDisplayName());
     }
 
     @Override

@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 import com.assignment.proddy.Entity.user.User;
 
 import java.sql.Time;
-
+import java.util.List;
 
 @Entity(tableName = "habit",
         foreignKeys = @ForeignKey(
@@ -32,6 +32,8 @@ public class Habit {
 
     private String  schedule;
 
+    private List<String> habitDays;
+
     @TypeConverters(HabitTypeConverter.class)
     private HabitType habitType;
 
@@ -52,6 +54,14 @@ public class Habit {
 
     public void setReminderTime(Time reminderTime) {
         this.reminderTime = reminderTime;
+    }
+
+    public List<String> getHabitDays() {
+        return habitDays;
+    }
+
+    public void setHabitDays(List<String> habitDays) {
+        this.habitDays = habitDays;
     }
 
     public int getId() {
