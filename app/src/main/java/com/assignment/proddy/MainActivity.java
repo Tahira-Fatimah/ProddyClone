@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentTransaction;
 //import com.assignment.proddy.Fragments.insights;
 
 import com.assignment.proddy.Activities.CreateHabit;
+import com.assignment.proddy.Entity.user.InsertUser;
+import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
 
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
+
 
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 //        transaction.replace(R.id.fragment_container, new CreateHabit5());
@@ -27,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateHabit.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("Back in parenttttttttt");
+    }
+
 }
 
 

@@ -34,11 +34,14 @@ public class CreateHabit4 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
-
         reasonEditText = view.findViewById(R.id.editTextReason);
         characterCountTextView = view.findViewById(R.id.characterCountTextView);
 
         characterCountTextView.setText("0/300");
+        setReasonEditText();
+    }
+
+    private void setReasonEditText(){
         reasonEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {

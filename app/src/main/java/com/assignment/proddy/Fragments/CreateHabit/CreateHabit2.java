@@ -17,6 +17,7 @@ import com.assignment.proddy.Entity.habit.HabitType;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
+import com.assignment.proddy.Utils.StringUtils;
 import com.assignment.proddy.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ import java.util.List;
 public class CreateHabit2 extends Fragment {
 
     HabitSharedViewModel habitSharedViewModel;
+    ViewPager2 habitCategoryViewPager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,20 +41,13 @@ public class CreateHabit2 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
+        habitCategoryViewPager = view.findViewById(R.id.habitCategoryViewPager);
+        defineHabitTypeViewPager();
 
+    }
 
-        ViewPager2 habitCategoryViewPager = view.findViewById(R.id.habitCategoryViewPager);
-        List<HabitCategory> habitCategories = new ArrayList<>(Arrays.asList(
-                new HabitCategory(R.drawable.health, HabitType.HEALTH),
-                new HabitCategory(R.drawable.mindfulness, HabitType.MINDFULNESS),
-                new HabitCategory(R.drawable.productivity, HabitType.PRODUCTIVITY),
-                new HabitCategory(R.drawable.fun, HabitType.FUN),
-                new HabitCategory(R.drawable.relationships, HabitType.RELATIONSHIPS),
-                new HabitCategory(R.drawable.finances, HabitType.FINANCES),
-                new HabitCategory(R.drawable.learning, HabitType.LEARNING)
-        ));
-
-
+    private void defineHabitTypeViewPager(){
+        List<HabitCategory> habitCategories = StringUtils.getHabitCategories();
         HabitCategoryAdapter habitCategoryAdapter = new HabitCategoryAdapter(habitCategories);
         habitCategoryViewPager.setAdapter(habitCategoryAdapter);
         habitCategoryViewPager.setOffscreenPageLimit(3);
@@ -61,12 +57,9 @@ public class CreateHabit2 extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-
                 HabitCategory selectedCategory = habitCategories.get(position % habitCategories.size());
                 habitSharedViewModel.setHabitType(selectedCategory.getHabitType());
             }
         });
-
-
     }
 }

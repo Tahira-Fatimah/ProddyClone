@@ -5,7 +5,7 @@ import androidx.room.TypeConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HabitTypeConverter {
+public class HabitDaysConverter {
 
     @TypeConverter
     public static String fromList(List<String> habitDays) {

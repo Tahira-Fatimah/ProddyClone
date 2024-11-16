@@ -30,7 +30,7 @@ public class Habit {
 
     private String reason;
 
-    private String  schedule;
+//    private String schedule;
 
     private List<String> habitDays;
 
@@ -39,13 +39,14 @@ public class Habit {
 
     private Time reminderTime;
 
-    public Habit(String name, String reason, String schedule, HabitType habitType, int userId, Time reminderTime) {
+    public Habit(String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
         this.name = name;
         this.reason = reason;
-        this.schedule = schedule;
+//        this.schedule = schedule;
         this.habitType = habitType;
         this.userId = userId;
         this.reminderTime=reminderTime;
+        this.habitDays = habitDays;
     }
 
     public Time getReminderTime() {
@@ -88,13 +89,13 @@ public class Habit {
         this.reason = reason;
     }
 
-    public String getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
-    }
+//    public String getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(String schedule) {
+//        this.schedule = schedule;
+//    }
 
     public HabitType getHabitType() {
         return habitType;
@@ -119,7 +120,6 @@ public class Habit {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", reason='" + reason + '\'' +
-                ", schedule=" + schedule +
                 ", habitType=" + habitType +
                 '}';
     }

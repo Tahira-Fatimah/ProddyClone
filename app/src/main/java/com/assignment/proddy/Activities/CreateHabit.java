@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habit.asyncTasks.InsertHabit;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit1;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit3;
@@ -36,10 +38,11 @@ import java.util.List;
 public class CreateHabit extends AppCompatActivity{
 
     Button continueBtn;
-    ImageView backBtn;
+    ImageView backBtn, cancelBtn;
     HabitSharedViewModel habitSharedViewModel;
     NavigationViewModel navigationViewModel;
     private int currentFragmentIndex = 0;
+    List<ImageView> doneList;
 
     private Fragment[] fragments = {
             new CreateHabit1(),
@@ -55,28 +58,48 @@ public class CreateHabit extends AppCompatActivity{
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_habit);
 
+        doneList = Arrays.asList(
+                findViewById(R.id.done1),
+                findViewById(R.id.done2),
+                findViewById(R.id.done3),
+                findViewById(R.id.done4),
+                findViewById(R.id.done5)
+        );
+
+        backBtn = findViewById(R.id.backBtn);
+        continueBtn = findViewById(R.id.continueBtn);
+        cancelBtn = findViewById(R.id.cancel);
         navigationViewModel = new ViewModelProvider(this).get(NavigationViewModel.class);
         habitSharedViewModel = new ViewModelProvider(this).get(HabitSharedViewModel.class);
 
+        observeSharedViewModel();
+        fillFragment(fragments[0], true);
+        defineBackBtn();
+        defineContinueBtn();
+//        defineCancelBtn();
+
+
+    }
+
+    private void observeSharedViewModel(){
         navigationViewModel.getNavigateToNextFragment().observe(this, shouldNavigate -> {
             if (shouldNavigate != null && shouldNavigate) {
                 goToNextFragment();
                 navigationViewModel.resetNavigation();
             }
         });
+    }
 
-        fillFragment(fragments[0], true);
-
-        continueBtn = findViewById(R.id.continueBtn);
-        backBtn = findViewById(R.id.backBtn);
-
+    private void defineContinueBtn(){
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToNextFragment();
             }
         });
+    }
 
+    private void defineBackBtn(){
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +107,15 @@ public class CreateHabit extends AppCompatActivity{
             }
         });
     }
+
+//    private void defineCancelBtn(){
+//        cancelBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//    }
 
     private void goToNextFragment() {
         if(habitNameValidation()){
@@ -97,8 +129,16 @@ public class CreateHabit extends AppCompatActivity{
                 if(habitDaysValidation()){
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
+                Habit habit = new Habit(habitSharedViewModel.getHabitName().getValue(),
+                        habitSharedViewModel.getHabitMotivationMessage().getValue(),
+                        habitSharedViewModel.getHabitType().getValue(),
+                        1,
+                        habitSharedViewModel.getReminderTime().getValue(),
+                        habitSharedViewModel.getHabitDays().getValue());
+                new InsertHabit(this).execute(habit);
                 finish();
             } else {
+                updateNextIndicator();
                 currentFragmentIndex++;
                 fillFragment(fragments[currentFragmentIndex], true);
             }
@@ -115,10 +155,10 @@ public class CreateHabit extends AppCompatActivity{
             finish();
         } else {
             currentFragmentIndex--;
+            updatePreviousIndicator();
             fillFragment(fragments[currentFragmentIndex], false);
         }
     }
-
 
     private void fillFragment(Fragment fragment, boolean isNext) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -149,4 +189,15 @@ public class CreateHabit extends AppCompatActivity{
         return habitDays == null || habitDays.isEmpty();
     }
 
+    private void updateNextIndicator() {
+        if (currentFragmentIndex < doneList.size()) {
+            doneList.get(currentFragmentIndex).setImageResource(R.drawable.check_circle_green);
+        }
+    }
+
+    private void updatePreviousIndicator() {
+        if (currentFragmentIndex < doneList.size()) {
+            doneList.get(currentFragmentIndex).setImageResource(R.drawable.check_circle_grey);
+        }
+    }
 }

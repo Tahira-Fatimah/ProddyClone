@@ -16,6 +16,15 @@ public class HabitSharedViewModel extends ViewModel {
     private final MutableLiveData<String> habitMotivationMessage = new MutableLiveData<>();
     private final MutableLiveData<List<String>> habitDays = new MutableLiveData<List<String>>();
     private final MutableLiveData<Time> reminderTime = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> dontRemindMe = new MutableLiveData<>(Boolean.FALSE);
+
+    public LiveData<Boolean> getDontRemindMe(){
+        return this.dontRemindMe;
+    }
+
+    public void setDontRemindMe(Boolean dontRemindMe){
+        this.dontRemindMe.setValue(dontRemindMe);
+    }
 
     public LiveData<HabitType> getHabitType() {
         return habitType;
@@ -49,8 +58,8 @@ public class HabitSharedViewModel extends ViewModel {
         return habitName;
     }
 
-    public void setReminderTime(int hour, int minute, String amPm, boolean dontRemindMe) {
-        if(dontRemindMe){
+    public void setReminderTime(int hour, int minute, String amPm) {
+        if(Boolean.TRUE.equals(dontRemindMe.getValue())){
             reminderTime.setValue(null);
         }
         else{

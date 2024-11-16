@@ -24,11 +24,13 @@ import com.assignment.proddy.Listener.CreateHabitInteractionListener;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 
+import org.w3c.dom.Text;
+
 public class CreateHabit1 extends Fragment {
 
     private HabitSharedViewModel habitSharedViewModel;
     private EditText habitNameEditText;
-
+    private TextView charCount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +43,13 @@ public class CreateHabit1 extends Fragment {
 
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
         habitNameEditText = view.findViewById(R.id.habitNameEditText);
-        TextView charCount = view.findViewById(R.id.charCount);
+        charCount = view.findViewById(R.id.charCount);
 
+        defineEditText();
+
+    }
+
+    private void defineEditText(){
         habitNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -57,8 +64,6 @@ public class CreateHabit1 extends Fragment {
             @Override
             public void afterTextChanged(Editable s) { }
         });
-
-
     }
 
 }

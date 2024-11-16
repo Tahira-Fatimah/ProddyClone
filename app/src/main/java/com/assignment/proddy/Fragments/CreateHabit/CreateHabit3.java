@@ -28,6 +28,8 @@ public class CreateHabit3 extends Fragment {
     private LinearLayout customDaysLayout;
     HabitSharedViewModel habitSharedViewModel;
     NavigationViewModel navigationViewModel;
+    Button everydayButton, customDaysButton;
+    TextView inBetweenOr;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,17 +51,16 @@ public class CreateHabit3 extends Fragment {
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
         navigationViewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
 
-        Button customDaysButton = view.findViewById(R.id.customDaysButton);
-        Button everydayButton = view.findViewById(R.id.everydayButton);
-        TextView inBetweenOr = view.findViewById(R.id.inBetweenOr);
+        customDaysButton = view.findViewById(R.id.customDaysButton);
+        everydayButton = view.findViewById(R.id.everydayButton);
+        inBetweenOr = view.findViewById(R.id.inBetweenOr);
 
-        customDaysButton.setOnClickListener(v -> {
-            everydayButton.setVisibility(View.GONE);
-            customDaysButton.setVisibility(View.GONE);
-            customDaysLayout.setVisibility(View.VISIBLE);
-            inBetweenOr.setVisibility(View.GONE);
-        });
+        defineDayButtons(view);
+        defineEverydayBtn();
+        defineCustomDaysBtn();
+    }
 
+    private void defineDayButtons(View view){
         setDayButtonListener(view, R.id.monday);
         setDayButtonListener(view, R.id.tuesday);
         setDayButtonListener(view, R.id.wednesday);
@@ -67,13 +68,25 @@ public class CreateHabit3 extends Fragment {
         setDayButtonListener(view, R.id.friday);
         setDayButtonListener(view, R.id.saturday);
         setDayButtonListener(view, R.id.sunday);
+    }
 
+    private void defineEverydayBtn(){
         everydayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 navigationViewModel.triggerNavigation();
             }
+        });
+    }
+
+    private void defineCustomDaysBtn(){
+
+        customDaysButton.setOnClickListener(v -> {
+            everydayButton.setVisibility(View.GONE);
+            customDaysButton.setVisibility(View.GONE);
+            customDaysLayout.setVisibility(View.VISIBLE);
+            inBetweenOr.setVisibility(View.GONE);
         });
     }
 

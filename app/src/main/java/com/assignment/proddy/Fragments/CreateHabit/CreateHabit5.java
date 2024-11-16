@@ -7,24 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aigestudio.wheelpicker.WheelPicker;
-import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 import com.assignment.proddy.SharedViewModel.NavigationViewModel;
 import com.assignment.proddy.Utils.IntegerUtils;
 import com.assignment.proddy.Utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateHabit5 extends Fragment {
@@ -32,9 +26,9 @@ public class CreateHabit5 extends Fragment {
     Integer selectedHour;
     Integer selectedMin;
     String time;
-    Boolean dontRemindMe = false;
     HabitSharedViewModel habitSharedViewModel;
     NavigationViewModel navigationViewModel;
+    TextView dontReminTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +42,31 @@ public class CreateHabit5 extends Fragment {
 
         navigationViewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
+
+        defineHourWheelPicker(view);
+        defineMinWheelPicker(view);
+        defineTimeWheelPicker(view);
+        updateReminderTime();
+
+        dontReminTextView = view.findViewById(R.id.dontRemindMe);
+        defineDontRemindTextView();
+
+
+    }
+
+    private void defineDontRemindTextView(){
+        dontReminTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                habitSharedViewModel.setDontRemindMe(Boolean.TRUE);
+                updateReminderTime();
+                navigationViewModel.triggerNavigation();
+
+            }
+        });
+    }
+
+    private void defineHourWheelPicker(View view){
         WheelPicker hourWheelPicker = view.findViewById(R.id.hourWheelPicker);
         List<Integer> hourData = IntegerUtils.getHourData();
         selectedHour = hourData.get(0);
@@ -60,7 +79,9 @@ public class CreateHabit5 extends Fragment {
                 updateReminderTime();
             }
         });
+    }
 
+    private void defineMinWheelPicker(View view){
         WheelPicker minWheelPicker = view.findViewById(R.id.minWheelPicker);
         List<Integer> minData = IntegerUtils.getMinData();
         selectedMin = minData.get(0);
@@ -72,6 +93,9 @@ public class CreateHabit5 extends Fragment {
                 updateReminderTime();
             }
         });
+    }
+
+    private void defineTimeWheelPicker(View view){
 
         WheelPicker timeWheelPicker = view.findViewById(R.id.timeWheelPicker);
         List<String> timeData = StringUtils.getTimeData();
@@ -84,21 +108,11 @@ public class CreateHabit5 extends Fragment {
                 updateReminderTime();
             }
         });
-
-        TextView textView = view.findViewById(R.id.dontRemindMe);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dontRemindMe = true;
-                navigationViewModel.triggerNavigation();
-            }
-        });
-
     }
 
     private void updateReminderTime() {
         if (selectedHour != null && selectedMin != null && time != null) {
-            habitSharedViewModel.setReminderTime(selectedHour, selectedMin, time, dontRemindMe);
+            habitSharedViewModel.setReminderTime(selectedHour, selectedMin, time);
         }
     }
 }
