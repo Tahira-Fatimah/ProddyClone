@@ -24,22 +24,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lessons);
+        setContentView(R.layout.activity_main);
 
-        ViewPager2 viewPager = findViewById(R.id.viewPager);
-        List<Lesson> lessons = getLessons();
-        LessonPagerAdapter adapter = new LessonPagerAdapter(lessons);
-        viewPager.setAdapter(adapter);
+//        ViewPager2 viewPager = findViewById(R.id.viewPager);
+//        List<Lesson> lessons = getLessons();
+//        LessonPagerAdapter adapter = new LessonPagerAdapter(lessons);
+//        viewPager.setAdapter(adapter);
+//
+//        // Apply zoom-out page transformer for pop-out effect
+//        viewPager.setOffscreenPageLimit(3);
+//        viewPager.setPageTransformer(new ZoomOutPageTransformer());
 
-        // Apply zoom-out page transformer for pop-out effect
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.setPageTransformer(new ZoomOutPageTransformer());
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new AllHabitsFragment());
+        transaction.commit();
     }
 //
 
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.fragment_container, new ReflectionFragment());
-//        transaction.commit();
+
 
 
 //        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
