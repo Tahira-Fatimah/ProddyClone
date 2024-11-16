@@ -49,17 +49,23 @@ public class HabitSharedViewModel extends ViewModel {
         return habitName;
     }
 
-    public void setReminderTime(int hour, int minute, String amPm) {
-        int finalHour = hour;
+    public void setReminderTime(int hour, int minute, String amPm, boolean dontRemindMe) {
+        if(dontRemindMe){
+            reminderTime.setValue(null);
+        }
+        else{
+            int finalHour = hour;
 
-        if ("PM".equals(amPm) && hour != 12) {
-            finalHour += 12;
-        } else if ("AM".equals(amPm) && hour == 12) {
-            finalHour = 0;
+            if ("PM".equals(amPm) && hour != 12) {
+                finalHour += 12;
+            } else if ("AM".equals(amPm) && hour == 12) {
+                finalHour = 0;
+            }
+
+            Time reminder = new Time(finalHour, minute, 0);
+            reminderTime.setValue(reminder);
         }
 
-        Time reminder = new Time(finalHour, minute, 0);
-        reminderTime.setValue(reminder);
     }
 
     public LiveData<Time> getReminderTime() {

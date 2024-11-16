@@ -126,14 +126,19 @@
                 android:textColor="@color/create_habit_your_habit" />
 
             <!-- Continue Button -->
-            <Button
-                android:layout_width="135dp"
-                android:layout_height="38dp"
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/white"
+                android:background="@drawable/rounded_background_3"
                 android:backgroundTint="@color/create_habit_cancel_button"
                 android:textSize="12sp"
-                android:text="Continue" />
+                android:id="@+id/dontRemindMe"
+                android:clickable="true"
+                android:gravity="center"
+                android:focusable="true"
+            android:text="Don't remind me" />
 
         </LinearLayout>
     </FrameLayout>

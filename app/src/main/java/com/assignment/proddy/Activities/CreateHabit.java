@@ -41,7 +41,6 @@ public class CreateHabit extends AppCompatActivity{
     NavigationViewModel navigationViewModel;
     private int currentFragmentIndex = 0;
 
-
     private Fragment[] fragments = {
             new CreateHabit1(),
             new CreateHabit2(),
@@ -138,28 +137,6 @@ public class CreateHabit extends AppCompatActivity{
 
         transaction.replace(R.id.createHabitPageContainer, fragment);
         transaction.commitAllowingStateLoss();
-    }
-
-
-    private void showCustomAlertDialog() {
-        View dialogView = LayoutInflater.from(this)
-                .inflate(R.layout.enter_habit_name_custom_dialog, null);
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.BottomDialogAnimation)
-                .setView(dialogView)
-                .setCancelable(false)
-                .create();
-
-        if (alertDialog.getWindow() != null) {
-            alertDialog.getWindow().setGravity(Gravity.BOTTOM);
-            alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            alertDialog.getWindow().getAttributes().windowAnimations = R.style.BottomDialogAnimation;
-        }
-
-        Button okButton = dialogView.findViewById(R.id.okButton);
-        okButton.setOnClickListener(v -> alertDialog.dismiss());
-
-        alertDialog.show();
     }
 
     private boolean habitNameValidation() {

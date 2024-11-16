@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.aigestudio.wheelpicker.widgets.WheelDatePicker;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
+import com.assignment.proddy.SharedViewModel.NavigationViewModel;
 import com.assignment.proddy.Utils.IntegerUtils;
 import com.assignment.proddy.Utils.StringUtils;
 
@@ -30,7 +32,10 @@ public class CreateHabit5 extends Fragment {
     Integer selectedHour;
     Integer selectedMin;
     String time;
+    Boolean dontRemindMe = false;
     HabitSharedViewModel habitSharedViewModel;
+    NavigationViewModel navigationViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class CreateHabit5 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        navigationViewModel = new ViewModelProvider(requireActivity()).get(NavigationViewModel.class);
         habitSharedViewModel = new ViewModelProvider(requireActivity()).get(HabitSharedViewModel.class);
         WheelPicker hourWheelPicker = view.findViewById(R.id.hourWheelPicker);
         List<Integer> hourData = IntegerUtils.getHourData();
@@ -79,11 +85,20 @@ public class CreateHabit5 extends Fragment {
             }
         });
 
+        TextView textView = view.findViewById(R.id.dontRemindMe);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dontRemindMe = true;
+                navigationViewModel.triggerNavigation();
+            }
+        });
+
     }
 
     private void updateReminderTime() {
         if (selectedHour != null && selectedMin != null && time != null) {
-            habitSharedViewModel.setReminderTime(selectedHour, selectedMin, time);
+            habitSharedViewModel.setReminderTime(selectedHour, selectedMin, time, dontRemindMe);
         }
     }
 }
