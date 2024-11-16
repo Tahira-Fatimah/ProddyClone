@@ -3,6 +3,7 @@ package com.assignment.proddy.Entity.habitStep;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "habit_step",
@@ -12,7 +13,8 @@ import androidx.room.PrimaryKey;
                 childColumns = "habitId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
-        )
+        ),
+        indices = @Index(value = "habitId")
 )
 public class HabitStep {
     @PrimaryKey(autoGenerate = true)

@@ -37,14 +37,6 @@ public class Habit {
 
     private Time reminderTime;
 
-    public Time getReminderTime() {
-        return reminderTime;
-    }
-
-    public void setReminderTime(Time reminderTime) {
-        this.reminderTime = reminderTime;
-    }
-
     public Habit(String name, String reason, String schedule, HabitType habitType, int userId, Time reminderTime) {
         this.name = name;
         this.reason = reason;
@@ -52,6 +44,14 @@ public class Habit {
         this.habitType = habitType;
         this.userId = userId;
         this.reminderTime=reminderTime;
+    }
+
+    public Time getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(Time reminderTime) {
+        this.reminderTime = reminderTime;
     }
 
     public int getId() {

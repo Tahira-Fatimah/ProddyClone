@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new CreateHabit2());
+        transaction.replace(R.id.fragment_container, new AllHabitsFragment());
         transaction.commit();
     }
 }

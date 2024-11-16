@@ -10,17 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 import com.assignment.proddy.R;
 
 import java.util.List;
 
 public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIncompleteAdapter.MyViewHolder>{
     private Context context;
-    private List<Habit> habits;
+    private List<HabitWithTrackers> habitsWithTrackers;
 
-    public HabitListIncompleteAdapter(Context context, List<Habit> habits) {
+    public HabitListIncompleteAdapter(Context context, List<HabitWithTrackers> habitsWithTrackers) {
         this.context = context;
-        this.habits = habits;
+        this.habitsWithTrackers = habitsWithTrackers;
     }
 
     @NonNull
@@ -33,16 +34,16 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
 
     @Override
     public void onBindViewHolder(@NonNull HabitListIncompleteAdapter.MyViewHolder holder, int position) {
-        Habit habit = habits.get(position);
+        HabitWithTrackers habitWithTrackers = habitsWithTrackers.get(position);
 
         // Bind data to the views
-        holder.timeTextView.setText(habit.getReminderTime().toString());
-        holder.titleTextView.setText(habit.getName());
+        holder.timeTextView.setText(habitWithTrackers.getHabit().getReminderTime().toString());
+        holder.titleTextView.setText(habitWithTrackers.getHabit().getName());
     }
 
     @Override
     public int getItemCount() {
-        return habits.size();
+        return habitsWithTrackers.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
