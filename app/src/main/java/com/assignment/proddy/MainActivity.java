@@ -16,6 +16,8 @@ import com.assignment.proddy.Fragments.AllHabitsFragment;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.assignment.proddy.Fragments.CreateHabit2;
 import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
 
@@ -26,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new CreateHabit2());
+        transaction.commit();
+    }
+}
+
+
 //        ViewPager2 viewPager = findViewById(R.id.viewPager);
 //        List<Lesson> lessons = getLessons();
 //        LessonPagerAdapter adapter = new LessonPagerAdapter(lessons);
@@ -34,14 +43,12 @@ public class MainActivity extends AppCompatActivity {
 //        // Apply zoom-out page transformer for pop-out effect
 //        viewPager.setOffscreenPageLimit(3);
 //        viewPager.setPageTransformer(new ZoomOutPageTransformer());
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new AllHabitsFragment());
-        transaction.commit();
-    }
+//    }
 //
 
-
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, new ReflectionFragment());
+//        transaction.commit();
 
 
 //        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
@@ -55,15 +62,14 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 //
-    private List<Lesson> getLessons() {
-        // Generate or fetch a list of lessons
-        return Arrays.asList(
-                new Lesson(R.drawable.mindfulness, "Tiny Habits", "Why easy is better than difficult"),
-                new Lesson(R.drawable.learning, "Mindset", "Building a growth mindset"),
-                new Lesson(R.drawable.health, "Mindset", "Building a growth mindset")
+//    private List<Lesson> getLessons() {
+//        // Generate or fetch a list of lessons
+//        return Arrays.asList(
+//                new Lesson(R.drawable.mindfulness, "Tiny Habits", "Why easy is better than difficult"),
+//                new Lesson(R.drawable.learning, "Mindset", "Building a growth mindset"),
+//                new Lesson(R.drawable.health, "Mindset", "Building a growth mindset")
+//
+//                // Add more lessons as needed
+//        );
+//    }
 
-                // Add more lessons as needed
-        );
-    }
-
-}

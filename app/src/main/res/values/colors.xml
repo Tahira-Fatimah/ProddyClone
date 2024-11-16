@@ -163,6 +163,14 @@
     <color name="create_habit_days_button">#291740</color>
 
 
+    <color name="login_continue_with_google_font">#757575</color>
+    <color name="login_continue_with_email_font">#FFDAA7</color>
+
+    <color name="signin_with_google_bg">#4285F4</color>
+    <color name="signin_edit_text_bg">#DED0F5</color>
+
+
+
 
 
 
