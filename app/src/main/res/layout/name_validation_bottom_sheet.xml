@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@drawable/control_tab_bg">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:paddingTop="60dp"
+           android:paddingBottom="50dp"
+           android:gravity="center"
+           android:orientation="vertical">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="20sp"
+               android:text="Please enter a valid name for your habit"/>
+
+           <Button
+               android:id="@+id/name_validation_btn"
+               android:layout_width="250dp"
+               android:layout_height="60dp"
+               android:layout_marginTop="60dp"
+               android:backgroundTint="@color/reflection_date_font_purple"
+               android:text="OK"
+               android:textSize="20sp"
+               android:textColor="@color/white"/>
+
+       </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>
