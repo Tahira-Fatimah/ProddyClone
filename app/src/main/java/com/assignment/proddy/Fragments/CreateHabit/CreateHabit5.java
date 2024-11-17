@@ -71,7 +71,6 @@ public class CreateHabit5 extends Fragment {
         List<Integer> hourData = IntegerUtils.getHourData();
         selectedHour = hourData.get(0);
         hourWheelPicker.setData(hourData);
-        hourWheelPicker.setIndicator(true);
         hourWheelPicker.setOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
