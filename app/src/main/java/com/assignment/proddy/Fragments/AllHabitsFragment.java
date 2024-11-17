@@ -171,7 +171,6 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     @Override
     public void onCompletedHabitsRetrieved(List<HabitWithTrackers> habitsWithTrackers) {
         HabitListCompletedAdapter adapter = new HabitListCompletedAdapter(getContext(), habitsWithTrackers);
-        Toast.makeText(requireContext(), "date "+ today.toString(), Toast.LENGTH_LONG).show();
         Toast.makeText(requireContext(), "size "+ habitsWithTrackers.size(), Toast.LENGTH_LONG).show();
         recyclerView.setAdapter(adapter);
     }

@@ -30,14 +30,15 @@ public interface HabitDao {
 
     @Query("SELECT * FROM habit h " +
             "JOIN habit_tracker ht ON h.id = ht.habitId " +
-            "WHERE ht.status = 0 AND DATE(ht.date) = DATE(:today) AND h.userId = :userId")
+            "WHERE ht.status = 0 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch') AND h.userId = :userId")
     public List<HabitWithTrackers> getIncompleteHabits(int userId, Date today);
 
     @Query("SELECT * FROM habit h " +
             "JOIN habit_tracker ht ON h.id = ht.habitId " +
-            "WHERE ht.status = 1 AND DATE(ht.date) = DATE(:today) AND h.userId = :userId")
+            "WHERE ht.status = 1 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch')  AND h.userId = :userId ")
     public List<HabitWithTrackers> getCompletedHabits(int userId, Date today);
 
     @Query("SELECT * FROM habit")
     public List<Habit> getHabits();
 }
+
