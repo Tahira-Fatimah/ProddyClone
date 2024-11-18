@@ -169,9 +169,8 @@
     <color name="signin_with_google_bg">#4285F4</color>
     <color name="signin_edit_text_bg">#DED0F5</color>
 
-
-
-
+    <color name="control_tab_unselected">#BDC2D1</color>
+    <color name="control_tab_selected">#000</color>
 
 
 

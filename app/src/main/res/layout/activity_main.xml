@@ -9,43 +9,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-<!--    <androidx.viewpager2.widget.ViewPager2-->
-<!--        android:id="@+id/viewPager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_above="@id/tabLayout" />-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/controlTabViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/controltabLayout" />
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        app:tabIndicatorColor="@color/black"-->
-<!--        app:tabTextColor="@android:color/black"-->
-<!--        app:tabSelectedTextColor="@color/black"-->
-<!--        app:tabMode="fixed"-->
-<!--        app:tabGravity="fill">-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Tab 1"/>-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/controltabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/control_tab_bg"
+        app:tabIndicatorHeight="0dp"
+        app:tabTextColor="@color/control_tab_unselected"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/ControlTabTextStyle"
+        app:tabMode="fixed"
+        app:tabGravity="fill">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uE9CC"/>
 
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Tab 2"/>-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Tab 3"/>-->
-
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Tab 4"/>-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uE9DD"/>
 
 
-<!--    </com.google.android.material.tabs.TabLayout>-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uE945"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uE980"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uE981"/>
+
+
+    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>

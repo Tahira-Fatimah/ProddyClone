@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.Proddy" parent="Base.Theme.Proddy" />
+
+
+    <style name="ControlTabTextStyle" parent="TextAppearance.Design.Tab"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:name="fontFamily" name="android:fontFamily">@font/evaicons</item>
+        <item android:name="android:textSize" name="android:textSize">35sp</item>
+        <item android:name="android:textColor" name="android:color">#000000</item>
+    </style>
 </resources>
