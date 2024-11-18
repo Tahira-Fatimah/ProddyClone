@@ -2,8 +2,13 @@ package com.assignment.proddy.Entity.habitTracker;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
+import com.assignment.proddy.Converters.Converters;
+import com.assignment.proddy.Converters.DateTypeConverter;
 import com.assignment.proddy.Entity.habit.Habit;
 
 import java.util.Date;
@@ -15,7 +20,8 @@ import java.util.Date;
                 childColumns = "habitId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
-        )
+        ),
+        indices = @Index(value = "habitId")
 )
 public class HabitTracker {
     @PrimaryKey(autoGenerate = true)
@@ -23,6 +29,7 @@ public class HabitTracker {
 
     private int habitId;
 
+    @TypeConverters({DateTypeConverter.class})
     private Date date;
 
     private Boolean status;

@@ -1,219 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/habit_create_bg"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="20dp"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="80dp"
+    android:background="@drawable/habit_card"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    android:backgroundTint="@color/reflection_bg">
 
-    <FrameLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Put in a name for your habit"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:textColor="@color/create_habit_prompt"
+        />
+
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/pattern"
-            android:scaleY="4"
-            android:scaleX="4"
-            app:tint="@color/reflection_bg_pattern" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="\uE9bf"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:padding="16dp"
-                    android:textColor="@color/light_purple"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="18dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="30dp"
-                        android:layout_columnWeight="15"
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_background_general_habits"
-                        android:backgroundTint="@color/habit_light_purple"
-                        android:text="\uE9CC"
-                        android:textSize="18sp"
-                        android:textColor="@color/accent_material_light" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="30dp"
-                        android:layout_columnWeight="15"
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_background_general_habits"
-                        android:backgroundTint="@color/habit_light_purple"
-                        android:text="\uE9CC"
-                        android:textSize="18sp"
-                        android:textColor="@color/light_purple" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="30dp"
-                        android:layout_columnWeight="15"
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_background_general_habits"
-                        android:backgroundTint="@color/habit_light_purple"
-                        android:text="\uE9CC"
-                        android:textSize="18sp"
-                        android:textColor="@color/light_purple" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="30dp"
-                        android:layout_columnWeight="15"
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_background_general_habits"
-                        android:backgroundTint="@color/habit_light_purple"
-                        android:text="\uE9CC"
-                        android:textSize="18sp"
-                        android:textColor="@color/light_purple" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="30dp"
-                        android:layout_columnWeight="15"
-                        android:layout_marginHorizontal="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/rounded_background_general_habits"
-                        android:backgroundTint="@color/habit_light_purple"
-                        android:text="\uE9CC"
-                        android:textSize="18sp"
-                        android:textColor="@color/light_purple" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+        android:layout_height="70dp"
+        android:id="@+id/habitNameEditText"
+        android:paddingHorizontal="10dp"
+        android:hint="Your Habit..."
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_background_2"
+        android:backgroundTint="@color/create_habit_text_bg"
+        android:textColorHint="@color/create_habit_your_habit"/>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="5"
-                android:paddingHorizontal="20dp"
-                android:background="@drawable/habit_card"
-                android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/40"
+            android:id="@+id/charCount"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/create_habit_prompt"
+            />
+
+    </RelativeLayout>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Put in a name for your habit"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:padding="16dp"
-                    android:textColor="@color/create_habit_prompt"
-                    />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:paddingHorizontal="10dp"
-                    android:hint="Your Habit..."
-                    android:textStyle="bold"
-                    android:background="@drawable/rounded_background_2"
-                    android:backgroundTint="@color/create_habit_text_bg"
-                    android:textColorHint="@color/create_habit_your_habit"/>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0/40"
-                        android:textSize="16sp"
-                        android:layout_marginTop="8dp"
-                        android:layout_alignParentEnd="true"
-                        android:textColor="@color/create_habit_prompt"
-                        />
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start off by making your habit very easy to achieve. By doing this yout won't get burned out and give up."
-                    android:textSize="16sp"
-                    android:textFontWeight="900"
-                    android:textColor="@color/create_habit_your_habit"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:paddingHorizontal="25dp"
-                android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="\uE9bf"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:gravity="start"
-                        android:textColor="@color/light_purple"
-                        />
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/create_habit_continue_button_font"
-                        android:backgroundTint="@color/create_habit_continue_button"
-                        android:textSize="18sp"
-                        android:text="Continue"/>
-
-                </LinearLayout>
-
-
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start off by making your habit very easy to achieve. By doing this yout won't get burned out and give up."
+        android:textSize="16sp"
+        android:textFontWeight="900"
+        android:textColor="@color/create_habit_your_habit"
+        />
 
 </LinearLayout>
+
+

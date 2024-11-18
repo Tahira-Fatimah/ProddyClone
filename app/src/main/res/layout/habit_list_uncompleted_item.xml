@@ -14,6 +14,7 @@
         android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/markCompleted"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:text="\uEA93"
@@ -24,7 +25,9 @@
             android:background="@drawable/circle_button_dark_bg"
             android:foregroundTint="@color/circle_button_dark_bg"
             android:gravity="center"
-            android:padding="0dp" />
+            android:padding="0dp"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </LinearLayout>
 
@@ -37,6 +40,7 @@
         android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/edit"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:text="\uE9C6"

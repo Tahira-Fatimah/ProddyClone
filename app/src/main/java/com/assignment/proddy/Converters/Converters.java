@@ -1,6 +1,8 @@
 package com.assignment.proddy.Converters;
 
 import androidx.room.TypeConverter;
+
+import java.sql.Date;
 import java.sql.Time;
 
 public class Converters {
@@ -14,4 +16,5 @@ public class Converters {
     public static Long timeToTimestamp(Time time) {
         return time == null ? null : time.getTime();
     }
+
 }

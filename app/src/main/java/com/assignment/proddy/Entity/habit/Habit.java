@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 import com.assignment.proddy.Entity.user.User;
 
 import java.sql.Time;
-
+import java.util.List;
 
 @Entity(tableName = "habit",
         foreignKeys = @ForeignKey(
@@ -30,12 +30,24 @@ public class Habit {
 
     private String reason;
 
-    private String  schedule;
+//    private String schedule;
+
+    private List<String> habitDays;
 
     @TypeConverters(HabitTypeConverter.class)
     private HabitType habitType;
 
     private Time reminderTime;
+
+    public Habit(String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
+        this.name = name;
+        this.reason = reason;
+//        this.schedule = schedule;
+        this.habitType = habitType;
+        this.userId = userId;
+        this.reminderTime=reminderTime;
+        this.habitDays = habitDays;
+    }
 
     public Time getReminderTime() {
         return reminderTime;
@@ -45,13 +57,12 @@ public class Habit {
         this.reminderTime = reminderTime;
     }
 
-    public Habit(String name, String reason, String schedule, HabitType habitType, int userId, Time reminderTime) {
-        this.name = name;
-        this.reason = reason;
-        this.schedule = schedule;
-        this.habitType = habitType;
-        this.userId = userId;
-        this.reminderTime=reminderTime;
+    public List<String> getHabitDays() {
+        return habitDays;
+    }
+
+    public void setHabitDays(List<String> habitDays) {
+        this.habitDays = habitDays;
     }
 
     public int getId() {
@@ -78,13 +89,13 @@ public class Habit {
         this.reason = reason;
     }
 
-    public String getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
-    }
+//    public String getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(String schedule) {
+//        this.schedule = schedule;
+//    }
 
     public HabitType getHabitType() {
         return habitType;
@@ -109,7 +120,6 @@ public class Habit {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", reason='" + reason + '\'' +
-                ", schedule=" + schedule +
                 ", habitType=" + habitType +
                 '}';
     }

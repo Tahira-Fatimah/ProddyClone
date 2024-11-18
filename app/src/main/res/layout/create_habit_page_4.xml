@@ -56,7 +56,9 @@
                 android:layout_height="150dp"
                 android:paddingHorizontal="10dp"
                 android:hint="Because..."
+                android:id="@+id/editTextReason"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:background="@drawable/rounded_background_2"
                 android:backgroundTint="@color/create_habit_text_bg"
                 android:textColorHint="@color/create_habit_your_habit"/>
@@ -70,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0/300"
+                    android:id="@+id/characterCountTextView"
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"
                     android:layout_alignParentEnd="true"

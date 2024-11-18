@@ -1,5 +1,6 @@
 package com.assignment.proddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +10,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 //import com.assignment.proddy.Fragments.AllHabitsFragment;
 //import com.assignment.proddy.Fragments.insights;
 
+import com.assignment.proddy.Activities.CreateHabit;
+import com.assignment.proddy.Entity.user.InsertUser;
+import com.assignment.proddy.Entity.user.User;
+import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
+import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
 import com.assignment.proddy.Adapters.ControlTabViewPagerAdaper;
 import com.assignment.proddy.Adapters.LessonPagerAdapter;
 import com.assignment.proddy.Adapters.ViewPagerAdapter;
@@ -37,7 +41,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
 
+
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, new CreateHabit5());
+//        transaction.commit();
+//
+        Intent intent = new Intent(this, CreateHabit.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("Back in parenttttttttt");
         ViewPager2 viewPager = findViewById(R.id.controlTabViewPager);
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         TabLayout.Tab tabplus = tabLayout.getTabAt(2); // Tab at position 1
@@ -78,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attach();
     }
+
 }
 
 //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

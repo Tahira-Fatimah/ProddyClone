@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:background="@drawable/habit_create_bg"
+    android:backgroundTint="@color/reflection_bg">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pattern"
+            android:scaleY="4"
+            android:scaleX="4"
+            app:tint="@color/reflection_bg_pattern" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/cancel"
+                    android:src="@drawable/close"
+                    app:tint="@color/light_purple"
+                    android:padding="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginVertical="10dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="18dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:id="@+id/done1"
+                        android:layout_columnWeight="15"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/rounded_background_general_habits"
+                        android:backgroundTint="@color/habit_light_purple"
+                        android:src="@drawable/check_circle_grey"
+                         />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:id="@+id/done2"
+                        android:layout_columnWeight="15"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/rounded_background_general_habits"
+                        android:backgroundTint="@color/habit_light_purple"
+                        android:src="@drawable/check_circle_grey"
+                        />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:id="@+id/done3"
+                        android:layout_columnWeight="15"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/rounded_background_general_habits"
+                        android:backgroundTint="@color/habit_light_purple"
+                        android:src="@drawable/check_circle_grey"
+                        />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:id="@+id/done4"
+                        android:layout_columnWeight="15"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/rounded_background_general_habits"
+                        android:backgroundTint="@color/habit_light_purple"
+                        android:src="@drawable/check_circle_grey"
+                        />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="30dp"
+                        android:id="@+id/done5"
+                        android:layout_columnWeight="15"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/rounded_background_general_habits"
+                        android:backgroundTint="@color/habit_light_purple"
+                        android:src="@drawable/check_circle_grey"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:id="@+id/createHabitPageContainer"
+                android:layout_height="0dp"
+                android:layout_weight="4"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingHorizontal="25dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/arrow_back"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    app:tint="@color/light_grey"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/backBtn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/create_habit_continue_button_font"
+                    android:backgroundTint="@color/create_habit_continue_button"
+                    android:textSize="18sp"
+                    android:id="@+id/continueBtn"
+                    android:text="Continue"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>
