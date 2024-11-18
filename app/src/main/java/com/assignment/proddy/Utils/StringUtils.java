@@ -33,4 +33,19 @@ public class StringUtils {
 
         return habitCategories;
     }
+
+    public static List<String> getHourData(){
+        List<String> hourData = new ArrayList<>();
+        for (int i = 1; i <= 12; i++)
+            hourData.add(String.format("%02d", i));
+        return hourData;
+    }
+
+    public static List<String> getMinData(){
+        List<String> minData = new ArrayList<>();
+        for (int i = 0; i <= 60; i++)
+            minData.add(String.format("%02d", i));
+
+        return minData;
+    }
 }

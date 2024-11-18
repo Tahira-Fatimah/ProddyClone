@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 //import com.assignment.proddy.Fragments.AllHabitsFragment;
 //import com.assignment.proddy.Fragments.insights;
@@ -19,9 +20,7 @@ import com.assignment.proddy.Entity.user.InsertUser;
 import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
-import com.assignment.proddy.Adapters.ControlTabViewPagerAdaper;
 import com.assignment.proddy.Adapters.LessonPagerAdapter;
-import com.assignment.proddy.Adapters.ViewPagerAdapter;
 import com.assignment.proddy.Entity.Lesson;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
 
@@ -29,11 +28,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.assignment.proddy.Fragments.ControlTabBottomSheet;
-import com.assignment.proddy.Fragments.CreateHabit2;
+import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,63 +39,135 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
+
+        TabLayout tabLayout = findViewById(R.id.controltabLayout);
+        inflateTabs(tabLayout);
+        setTabLayoutOnClickListener(tabLayout);
+
+    }
+
+    void inflateTabs(TabLayout tabLayout){
+        View plusButtonView = LayoutInflater.from(this).inflate(R.layout.control_tab_plus, null);
+        Button button = plusButtonView.findViewById(R.id.control_tab_plus_button);
+        button.setOnClickListener(v -> {
+            ControlTabBottomSheet bottomDrawerFragment = new ControlTabBottomSheet();
+            bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
+        });
+        button.setText("\uE945");
+
+        tabLayout.addTab(tabLayout.newTab().setText("\uE9CC"));
+        tabLayout.addTab(tabLayout.newTab().setText("\uE9DD"));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(plusButtonView));
+        tabLayout.addTab(tabLayout.newTab().setText("\uE980"));
+        tabLayout.addTab(tabLayout.newTab().setText("\uE981"));
+
+        TabLayout.Tab tabplus = tabLayout.getTabAt(2);
+        if (tabplus != null) {
+            View tabView = tabplus.view;
+            tabView.setClickable(false);
+            tabView.setEnabled(false);
+        }
+    }
+
+    void setTabLayoutOnClickListener(TabLayout tabLayout){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                Fragment fragment;
+
+                switch (position) {
+                    case 0:
+                        fragment = new AllHabitsFragment();
+                        break;
+                    case 1:
+                        fragment = new insights();
+                        break;
+                    case 3:
+                        fragment = new ReflectionFragment();
+                        break;
+                    case 4:
+                        fragment = new ReflectionFragment();
+                        break;
+                    default:
+                        fragment = new AllHabitsFragment();
+                }
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container_main, fragment)
+                        .commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+    }
+}
+
+//        TabLayout.Tab tabplus = tabLayout.getTabAt(2); // Tab at position 1
+//        if (tabplus != null) {
+//            View tabView = tabplus.view;
+//            tabView.setClickable(false);
+//            tabView.setEnabled(false);
+//        }
+
+//        ControlTabViewPagerAdaper adapter = new ControlTabViewPagerAdaper(this);
+//        viewPager.setAdapter(adapter);
+
+//        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+//            if (position == 2) { // Third tab
+//                View customView = LayoutInflater.from(this).inflate(R.layout.control_tab_plus, null);
+//                Button button = customView.findViewById(R.id.control_tab_plus_button);
+//                button.setText("\uE945"); // Customize as needed
+//                button.setOnClickListener(v -> {
+//                    ControlTabBottomSheet bottomDrawerFragment = new ControlTabBottomSheet();
+//                    bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
+//                });
+//                tab.setCustomView(customView);
+//            } else {
+//                switch (position) {
+//                    case 0:
+//                        tab.setText("\uE9CC");
+//                        break;
+//                    case 1:
+//                        tab.setText("\uE9DD");
+//                        break;
+//                    case 3:
+//                        tab.setText("\uE980");
+//                        break;
+//                    case 4:
+//                        tab.setText("\uE981");
+//                        break;
+//                }
+//            }
+//        }).attach();
+//    }
+//}
+
+//        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
 
 
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 //        transaction.replace(R.id.fragment_container, new CreateHabit5());
 //        transaction.commit();
 //
-        Intent intent = new Intent(this, CreateHabit.class);
-        startActivity(intent);
-    }
+//        Intent intent = new Intent(this, CreateHabit.class);
+//        startActivity(intent);
+//    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        System.out.println("Back in parenttttttttt");
-        ViewPager2 viewPager = findViewById(R.id.controlTabViewPager);
-        TabLayout tabLayout = findViewById(R.id.controltabLayout);
-        TabLayout.Tab tabplus = tabLayout.getTabAt(2); // Tab at position 1
-        if (tabplus != null) {
-            View tabView = tabplus.view;
-            tabView.setClickable(false);
-            tabView.setEnabled(false);
-        }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        System.out.println("Back in parenttttttttt");
+//    }
 
-        ControlTabViewPagerAdaper adapter = new ControlTabViewPagerAdaper(this);
-        viewPager.setAdapter(adapter);
-
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            if (position == 2) { // Third tab
-                View customView = LayoutInflater.from(this).inflate(R.layout.control_tab_plus, null);
-                Button button = customView.findViewById(R.id.control_tab_plus_button);
-                button.setText("\uE945"); // Customize as needed
-                button.setOnClickListener(v -> {
-                    ControlTabBottomSheet bottomDrawerFragment = new ControlTabBottomSheet();
-                    bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
-                });
-                tab.setCustomView(customView);
-            } else {
-                switch (position) {
-                    case 0:
-                        tab.setText("\uE9CC");
-                        break;
-                    case 1:
-                        tab.setText("\uE9DD");
-                        break;
-                    case 3:
-                        tab.setText("\uE980");
-                        break;
-                    case 4:
-                        tab.setText("\uE981");
-                        break;
-                }
-            }
-        }).attach();
-    }
-
-}
+//}
 
 //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 //        transaction.replace(R.id.fragment_container, new CreateHabit2());

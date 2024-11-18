@@ -4,16 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/controlTabViewPager"
+    <FrameLayout
+        android:id="@+id/container_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/controltabLayout" />
+        android:layout_marginBottom="100dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/controltabLayout"
@@ -26,34 +21,7 @@
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/ControlTabTextStyle"
         app:tabMode="fixed"
-        app:tabGravity="fill">
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\uE9CC"/>
+        app:tabGravity="fill"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\uE9DD"/>
-
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\uE945"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\uE980"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="\uE981"/>
-
-
-    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>

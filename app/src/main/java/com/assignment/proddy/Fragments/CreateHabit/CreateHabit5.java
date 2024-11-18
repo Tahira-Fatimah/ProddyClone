@@ -23,8 +23,8 @@ import java.util.List;
 
 public class CreateHabit5 extends Fragment {
 
-    Integer selectedHour;
-    Integer selectedMin;
+    String selectedHour;
+    String selectedMin;
     String time;
     HabitSharedViewModel habitSharedViewModel;
     NavigationViewModel navigationViewModel;
@@ -68,13 +68,13 @@ public class CreateHabit5 extends Fragment {
 
     private void defineHourWheelPicker(View view){
         WheelPicker hourWheelPicker = view.findViewById(R.id.hourWheelPicker);
-        List<Integer> hourData = IntegerUtils.getHourData();
+        List<String> hourData = StringUtils.getHourData();
         selectedHour = hourData.get(0);
         hourWheelPicker.setData(hourData);
         hourWheelPicker.setOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
-                selectedHour = (Integer) data;
+                selectedHour = (String) data;
                 updateReminderTime();
             }
         });
@@ -82,13 +82,13 @@ public class CreateHabit5 extends Fragment {
 
     private void defineMinWheelPicker(View view){
         WheelPicker minWheelPicker = view.findViewById(R.id.minWheelPicker);
-        List<Integer> minData = IntegerUtils.getMinData();
+        List<String> minData = StringUtils.getMinData();
         selectedMin = minData.get(0);
         minWheelPicker.setData(minData);
         minWheelPicker.setOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
-                selectedMin = (Integer) data;
+                selectedMin = (String) data;
                 updateReminderTime();
             }
         });
@@ -111,7 +111,7 @@ public class CreateHabit5 extends Fragment {
 
     private void updateReminderTime() {
         if (selectedHour != null && selectedMin != null && time != null) {
-            habitSharedViewModel.setReminderTime(selectedHour, selectedMin, time);
+            habitSharedViewModel.setReminderTime(Integer.parseInt(selectedHour), Integer.parseInt(selectedMin), time);
         }
     }
 }
