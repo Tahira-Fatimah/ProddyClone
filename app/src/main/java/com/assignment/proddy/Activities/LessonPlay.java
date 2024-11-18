@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.transition.Fade;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,12 +28,15 @@ import com.assignment.proddy.Entity.Lesson;
 import com.assignment.proddy.R;
 
 public class LessonPlay extends AppCompatActivity {
+    //back F690
+    //next F699
     private MediaPlayer mediaPlayer;
     TextView lessonTitle, lessonSubtitle;
-    ImageView lessonIcon;
+    ImageView lessonIcon, lessonPlayBackButton;
     TextView playButton;
     LinearLayout lessonPlayRootLayout;
     LinearLayout playbackControls;
+    ImageView previousButton, nextButton;
     CardView lessonCard;
     SeekBar seekBar;
     Runnable updateSeekBar;
@@ -55,6 +59,9 @@ public class LessonPlay extends AppCompatActivity {
         initViews();
         setValues(lesson);
         definePlayButton();
+        defineLessonPlayBackButton();
+        defineNextButton();
+        definePrevButton();
 
         ViewCompat.setTransitionName(lessonCard, "lessonImageTransition");
         mediaPlayer = MediaPlayer.create(this, lesson.getLessonAudio());
@@ -105,6 +112,9 @@ public class LessonPlay extends AppCompatActivity {
         playButton = findViewById(R.id.playButton);
         playbackControls = findViewById(R.id.playbackControls);
         lessonPlayRootLayout = findViewById(R.id.lessonPlayRootLayout);
+        lessonPlayBackButton = findViewById(R.id.lessonPlayBackButton);
+        previousButton = findViewById(R.id.previousButton);
+        nextButton = findViewById(R.id.nextButton);
     }
 
     private void setValues(Lesson lesson){
@@ -132,6 +142,15 @@ public class LessonPlay extends AppCompatActivity {
         });
     }
 
+    private void defineLessonPlayBackButton(){
+        lessonPlayBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     private void defineHandlerForRunnable(){
         updateSeekBar = new Runnable() {
             @Override
@@ -142,7 +161,6 @@ public class LessonPlay extends AppCompatActivity {
                 handler.postDelayed(this, 250);
             }
         };
-
         handler.post(updateSeekBar);
     }
 
@@ -166,5 +184,29 @@ public class LessonPlay extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void definePrevButton(){
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer != null) {
+                    int newPosition = mediaPlayer.getCurrentPosition() - 5000;
+                    mediaPlayer.seekTo(Math.max(newPosition, 0));
+                }
+            }
+        });
+    }
+
+    private void defineNextButton(){
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mediaPlayer != null){
+                    int newPosition = mediaPlayer.getCurrentPosition() + 5000;
+                    mediaPlayer.seekTo(Math.min(newPosition, mediaPlayer.getDuration()));
+                }
+            }
+        });
     }
 }

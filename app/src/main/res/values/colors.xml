@@ -218,6 +218,8 @@
 
     <color name="indicator_dot_color">#CDC7D4</color>
     <color name="lesson_play_pause">#FFDAA7</color>
+    <color name="lesson_play_arrow_back">#C3CEC0</color>
+
 
 
 

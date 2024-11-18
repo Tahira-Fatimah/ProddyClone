@@ -9,11 +9,13 @@
     android:paddingVertical="30dp">
 
     <ImageView
-        android:id="@+id/backButton"
+        android:id="@+id/lessonPlayBackButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/close" />
+        android:layout_marginLeft="5dp"
+        app:tint="@color/lesson_play_arrow_back"
+        android:src="@drawable/back_ios" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
@@ -91,8 +93,7 @@
                     android:id="@+id/previousButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="6dp"
-                    android:src="@drawable/replay"
+                    android:src="@drawable/five_sec_back"
                     app:tint="@color/lesson_play_pause"
                     android:layout_weight="1"
                     android:layout_gravity="center" />
@@ -115,8 +116,7 @@
                     android:id="@+id/nextButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:padding="6dp"
-                    android:src="@drawable/replay1"
+                    android:src="@drawable/five_sec_next"
                     app:tint="@color/lesson_play_pause"
                     android:layout_weight="1"
                     android:layout_gravity="center" />
