@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/circle_background"
+        android:id="@+id/background_circle"
+        android:layout_gravity="top|end"
+        android:translationX="80dp"
+        android:translationY="-60dp"
+        android:contentDescription="Background Circle"
+        app:tint="@color/reflection_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingVertical="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingHorizontal="25dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/headingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lessons"
+                android:textSize="35sp"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:id="@+id/gridIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/grid"
+                app:tint="@color/white"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/lessonsViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="48dp"
+            android:paddingEnd="48dp"
+            android:clipToPadding="false"
+            android:clipChildren="false" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/dotsIndicator"
+            android:layout_marginBottom="-60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            app:dotsColor="@color/indicator_dot_color"
+            app:selectedDotColor="@color/reflection_bg"
+            app:dotsSize="15dp"
+            app:dotsSpacing="5dp" />
+
+
+    </LinearLayout>
+</FrameLayout>

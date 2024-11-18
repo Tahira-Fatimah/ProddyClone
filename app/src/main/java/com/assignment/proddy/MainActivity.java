@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 //import com.assignment.proddy.Fragments.insights;
 
 import com.assignment.proddy.Activities.CreateHabit;
+//import com.assignment.proddy.Activities.Lessons;
 import com.assignment.proddy.Entity.user.InsertUser;
 import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
@@ -29,6 +30,7 @@ import java.util.List;
 
 import com.assignment.proddy.Fragments.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
+import com.assignment.proddy.Fragments.LessonsFragment;
 import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
 import com.google.android.material.tabs.TabLayout;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);
         setTabLayoutOnClickListener(tabLayout);
+//        Intent intent = new Intent(this, Lessons.class);
+//        startActivity(intent);
 
     }
 
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ReflectionFragment();
                         break;
                     case 4:
-                        fragment = new ReflectionFragment();
+                        fragment = new LessonsFragment();
                         break;
                     default:
                         fragment = new AllHabitsFragment();

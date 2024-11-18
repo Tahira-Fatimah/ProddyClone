@@ -175,6 +175,49 @@
     <color name="control_tab_selected">#000</color>
 
 
+    <color name="lesson1_text_bg_color">#1A5001</color>
+    <color name="lesson1_subtitle">#889D82</color>
+    <color name="lesson1_circle_color">#58754F</color>
+    <color name="lesson1_grid_color">#113A04</color>
+
+    <color name="lesson2_text_bg_color">#6C5179</color>
+    <color name="lesson2_subtitle">#B6A8BC</color>
+    <color name="lesson2_circle_color">#9885A1</color>
+    <color name="lesson2_grid_color">#6C5179</color>
+
+
+    <color name="lesson3_text_bg_color">#1A5001</color>
+    <color name="lesson3_subtitle">#889D82</color>
+    <color name="lesson3_circle_color">#698CA9</color>
+    <color name="lesson3_grid_color">#1C5B84</color>
+
+
+    <color name="lesson4_text_bg_color">#674E31</color>
+    <color name="lesson4_subtitle">#B5A99C</color>
+    <color name="lesson4_circle_color">#94836E</color>
+    <color name="lesson4_grid_color">#674E31</color>
+
+
+    <color name="lesson5_text_bg_color">#1A5001</color>
+    <color name="lesson5_subtitle">#889D82</color>
+    <color name="lesson5_circle_color">#876965</color>
+    <color name="lesson5_grid_color">#542924</color>
+
+
+    <color name="lesson6_text_bg_color">#261227</color>
+    <color name="lesson6_subtitle">#938993</color>
+    <color name="lesson6_circle_color">#675967</color>
+    <color name="lesson6_grid_color">#261227</color>
+
+
+    <color name="lesson7_text_bg_color">#1A5001</color>
+    <color name="lesson7_subtitle">#889D82</color>
+    <color name="lesson7_circle_color">#A0B3D5</color>
+    <color name="lesson7_grid_color">#7793C3</color>
+
+
+    <color name="indicator_dot_color">#CDC7D4</color>
+    <color name="lesson_play_pause">#FFDAA7</color>
 
 
 
