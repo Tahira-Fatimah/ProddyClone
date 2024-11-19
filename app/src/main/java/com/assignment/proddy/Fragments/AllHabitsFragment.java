@@ -3,6 +3,7 @@ package com.assignment.proddy.Fragments;
 import static java.lang.Math.abs;
 
 import android.annotation.SuppressLint;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -10,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -77,12 +80,6 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
         completedHabitListRecyclerView.setAdapter(habitListCompletedAdapter);
         incompleteHabitListRecyclerView.setAdapter(habitListIncompleteAdapter);
 
-
-        GestureDetector gestureDetector = getGestureDetector();
-        incompleteHabitListRecyclerView.setOnTouchListener((v, event) ->
-                gestureDetector.onTouchEvent(event)
-        );
-
         return view;
     }
 
@@ -129,36 +126,4 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
         isRecyclerViewVisible = !isRecyclerViewVisible;
     }
 
-    private GestureDetector getGestureDetector(){
-        return new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                if (Math.abs(velocityX) > Math.abs(velocityY)) {
-                    View item_content = incompleteHabitListRecyclerView.findViewById(R.id.item_content);
-                    View right_button = incompleteHabitListRecyclerView.findViewById(R.id.swipe_left_background);
-                    View left_button = incompleteHabitListRecyclerView.findViewById(R.id.swipe_right_background);
-                    float item_content_translation = item_content.getTranslationX();
-
-                    if (velocityX > 0) {
-                        if (item_content_translation != 0 && item_content_translation != 300) {
-                            item_content.animate().translationX(0).setDuration(300).start();
-                            right_button.animate().translationX(270).setDuration(300).start();
-                        } else if(item_content_translation == 0){
-                            left_button.animate().translationX(0).setDuration(300).start();
-                            item_content.animate().translationX(300).setDuration(300).start();
-                        }
-                    } else {
-                        if (item_content_translation != 0 && item_content_translation != -300) {
-                            item_content.animate().translationX(0).setDuration(300).start();
-                            left_button.animate().translationX(-270).setDuration(300).start();
-                        } else if (item_content_translation == 0){
-                            right_button.animate().translationX(0).setDuration(300).start();
-                            item_content.animate().translationX(-300).setDuration(300).start();
-                        }
-                    }
-                }
-                return super.onFling(e1, e2, velocityX, velocityY);
-            }
-        });
-    }
 }

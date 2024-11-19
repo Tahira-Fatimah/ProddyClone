@@ -133,7 +133,7 @@ public class CreateHabit extends AppCompatActivity{
                         habitSharedViewModel.getHabitType().getValue(),
                         loggedInUserID,
                         habitSharedViewModel.getReminderTime().getValue(),
-                        habitSharedViewModel.getHabitDays().getValue());
+                        habitSharedViewModel.getHabitDays().getValue(),1);
                 new InsertHabit(this).execute(habit);
                 finish();
                 overridePendingTransition(0,android.R.anim.fade_out);
