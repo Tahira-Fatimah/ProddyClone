@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -19,10 +21,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.HabitCategoryAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habit.asyncTasks.UpdateHabit;
 import com.assignment.proddy.Fragments.BottomSheets.DeleteHabitBottomSheet;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
+import com.assignment.proddy.SharedViewModel.HabitSingleton;
 import com.assignment.proddy.Utils.StringUtils;
 import com.assignment.proddy.ZoomOutPageTransformer;
 
@@ -32,10 +36,10 @@ public class EditHabit extends AppCompatActivity {
 
     ViewPager2 habitTypeViewPager;
     TextView deleteHabitBtn, saveChangesBtn, createReminder, editReminderTime, charCount;
-    ImageView closeBtn, noReminder;
+    ImageView closeBtn;
+    AppCompatButton noReminder;
     EditText habitNameEdit, habitReasonEdit;
     LinearLayout reminderTime, reminderLayoutInitial, reminderLayoutCreateReminder;
-    HabitSharedViewModel habitSharedViewModel;
     Habit habit;
     TextView [] daysTextViews;
     List<String> allDays = StringUtils.getAllDays();
@@ -46,10 +50,11 @@ public class EditHabit extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_edit_habit);
         habit = (Habit) getIntent().getSerializableExtra("Habit");
+        Log.d("HabitInEdit", "Habit " + habit.toString());
+        HabitSingleton.getInstance().setHabitDetails(habit.getId(), habit.getUserId(), habit.getName(), habit.getReason(), habit.getHabitDays(), habit.getHabitType(), habit.getReminderTime());
+
         initViews();
         defineValues();
-        initViewHolder();
-        defineViewModelValues();
         defineViewPager();
         defineDeleteHabitBtn();
         defineNoReminder();
@@ -57,7 +62,20 @@ public class EditHabit extends AppCompatActivity {
         defineEditHabitNameView();
         defineReminderTime();
         defineAllDaysButtons();
+        defineSaveChangeBtn();
+        defineCloseBtn();
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        System.out.println("Habit " + HabitSingleton.getInstance().toString());
+        actionsOnResume();
+    }
+
+    private void actionsOnResume(){
+        editReminderTime.setText(HabitSingleton.getInstance().getReminderTime().toString());
 
     }
 
@@ -98,13 +116,6 @@ public class EditHabit extends AppCompatActivity {
         }
     }
 
-    private void initViewHolder(){
-        habitSharedViewModel = new ViewModelProvider(
-                this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
-        ).get(HabitSharedViewModel.class);
-    }
-
     private void defineViewPager(){
         List<HabitCategory> habitCategories = StringUtils.getHabitCategories();
         HabitCategoryAdapter habitCategoryAdapter = new HabitCategoryAdapter(habitCategories, R.layout.edit_habit_habit_type_item);
@@ -112,15 +123,27 @@ public class EditHabit extends AppCompatActivity {
         habitTypeViewPager.setPageTransformer(new ZoomOutPageTransformer());
         habitTypeViewPager.setOffscreenPageLimit(3);
         habitTypeViewPager.setCurrentItem(StringUtils.getHabitCategoryIndex(habit.getHabitType()));
+        habitTypeViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                HabitCategory selectedCategory = habitCategories.get(position % habitCategories.size());
+                HabitSingleton.getInstance().setHabitType(selectedCategory.getHabitType());
+            }
+        });
     }
 
     private void defineSaveChangeBtn(){
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String habitName = habitNameEdit.getText().toString();
-                String habitReason = habitReasonEdit.getText().toString();
-
+                habit.setName(habitNameEdit.getText().toString());
+                habit.setReason(habitReasonEdit.getText().toString());
+                habit.setReminderTime(HabitSingleton.getInstance().getReminderTime());
+                habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
+                habit.setHabitType(HabitSingleton.getInstance().getHabitType());
+                Log.d("EditHabit", "Updated Habit: " + habit.toString());
+                new UpdateHabit(EditHabit.this).execute(habit);
             }
         });
     }
@@ -193,13 +216,6 @@ public class EditHabit extends AppCompatActivity {
         });
     }
 
-    private void defineViewModelValues(){
-        habitSharedViewModel.setHabitName(habit.getName());
-        habitSharedViewModel.setHabitMotivationMessage(habit.getReason());
-        habitSharedViewModel.setHabitDays(habit.getHabitDays());
-        habitSharedViewModel.setHabitType(habit.getHabitType());
-    }
-
     private void defineAllDaysButtons(){
         for(int i = 0; i <daysTextViews.length; i++){
             defineDayButton(daysTextViews[i]);
@@ -211,7 +227,7 @@ public class EditHabit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String day = ((TextView) v).getText().toString();
-                List<String> selectedDays = habitSharedViewModel.getHabitDays().getValue();
+                List<String> selectedDays = HabitSingleton.getInstance().getHabitDays();
 
                 if(selectedDays.contains(day)){
                     selectedDays.remove(day);
@@ -224,9 +240,10 @@ public class EditHabit extends AppCompatActivity {
                     textView.setTextColor(getResources().getColor(R.color.white));
                 }
 
-                habitSharedViewModel.setHabitDays(selectedDays);
-                System.out.println("Selected day  " + habitSharedViewModel.getHabitDays().getValue());
+                HabitSingleton.getInstance().setHabitDays(selectedDays);
+                System.out.println("Selected day  " + HabitSingleton.getInstance().getHabitDays());
             }
         });
     }
+
 }

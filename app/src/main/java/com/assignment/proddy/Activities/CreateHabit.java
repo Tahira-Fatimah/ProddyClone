@@ -27,6 +27,7 @@ import com.assignment.proddy.Utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateHabit extends AppCompatActivity{
 
@@ -123,7 +124,7 @@ public class CreateHabit extends AppCompatActivity{
                 if(habitDaysValidation()){
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
-                Habit habit = new Habit(habitSharedViewModel.getHabitName().getValue(),
+                Habit habit = new Habit(UUID.randomUUID(), habitSharedViewModel.getHabitName().getValue(),
                         habitSharedViewModel.getHabitMotivationMessage().getValue(),
                         habitSharedViewModel.getHabitType().getValue(),
                         1,

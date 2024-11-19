@@ -108,25 +108,40 @@
                         android:paddingLeft="15dp"
                         android:layout_gravity="center_vertical" />
 
-                    <ImageView
+                    <TextView
                         android:id="@+id/iv_notification_icon"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:layout_height="30dp"
+                        android:textSize="25sp"
+                        android:textColor="@color/reflection_bg"
                         android:padding="3dp"
-                        android:src="@drawable/bell" />
+                        android:fontFamily="@font/evaicons"
+                        android:text="\uE9D9"/>
                 </LinearLayout>
 
 
-                <ImageView
-                    android:id="@+id/noReminder"
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="40dp"
-                    android:src="@drawable/bell_off"
-                    android:paddingRight="-20dp"
-                    android:layout_marginStart="8dp" />
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/noReminder"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/circular_background"
+                        android:backgroundTint="@color/edit_habit_no_reminder_bg"
+                        android:fontFamily="@font/evaicons"
+                        android:text="\uEAC9"
+                        android:textSize="20sp"
+                        android:textColor="@color/edit_habit_no_reminder_font"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -350,6 +365,8 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="21sp"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_gravity="bottom"
         android:layout_marginVertical="50dp"
         android:layout_marginHorizontal="20dp" />
