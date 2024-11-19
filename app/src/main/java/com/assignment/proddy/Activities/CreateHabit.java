@@ -76,7 +76,7 @@ public class CreateHabit extends AppCompatActivity{
         fillFragment(fragments[0], true);
         defineBackBtn();
         defineContinueBtn();
-//        defineCancelBtn();
+        defineCancelBtn();
 
 
     }
@@ -108,14 +108,15 @@ public class CreateHabit extends AppCompatActivity{
         });
     }
 
-//    private void defineCancelBtn(){
-//        cancelBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-//    }
+    private void defineCancelBtn(){
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(0,android.R.anim.fade_out);
+            }
+        });
+    }
 
     private void goToNextFragment() {
         if(habitNameValidation()){
@@ -137,6 +138,7 @@ public class CreateHabit extends AppCompatActivity{
                         habitSharedViewModel.getHabitDays().getValue());
                 new InsertHabit(this).execute(habit);
                 finish();
+                overridePendingTransition(0,android.R.anim.fade_out);
             } else {
                 updateNextIndicator();
                 currentFragmentIndex++;
@@ -150,9 +152,10 @@ public class CreateHabit extends AppCompatActivity{
 
     private void goToPreviousFragment() {
         if (currentFragmentIndex == 0) {
-            Intent intent = new Intent(CreateHabit.this, LoginActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(CreateHabit.this, LoginActivity.class);
+//            startActivity(intent);
             finish();
+            overridePendingTransition(0,android.R.anim.fade_out);
         } else {
             currentFragmentIndex--;
             updatePreviousIndicator();

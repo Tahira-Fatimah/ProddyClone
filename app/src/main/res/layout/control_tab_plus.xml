@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/control_tab_plus_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/reflection_date_font_purple"
+        android:background="@drawable/rounded_background_1"
+        android:textColor="@color/light_purple"
+        android:text="\uE945"
+        android:fontFamily="@font/evaicons"
+        android:textFontWeight="900"
+        android:textSize="28sp"/>
+</LinearLayout>
