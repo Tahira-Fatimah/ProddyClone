@@ -4,9 +4,6 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.assignment.proddy.Converters.Converters;
-import com.assignment.proddy.Converters.DateTypeConverter;
-
 public class ProddyDatabaseClient {
     public ProddyDatabase proddyDatabase;
     private Context context;

@@ -1,4 +1,4 @@
-package com.assignment.proddy.Fragments;
+package com.assignment.proddy.Fragments.BottomSheets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

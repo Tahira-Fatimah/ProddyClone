@@ -1,0 +1,135 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingHorizontal="45dp"
+    android:paddingTop="100dp"
+    android:paddingBottom="80dp"
+    android:background="@drawable/edit_habit_bg"
+    android:backgroundTint="@color/reflection_bg">
+
+    <TextView
+        android:id="@+id/setReminder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Set a reminder"
+        android:textAlignment="center"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp" />
+
+    <LinearLayout
+        android:id="@+id/wheelPickerContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/rounded_background_1"
+        android:backgroundTint="@color/edit_habit_set_reminder"
+        android:paddingVertical="40dp"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/setReminder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="55dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <com.aigestudio.wheelpicker.WheelPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    app:wheel_item_text_color="@color/font_light_yellow"
+                    android:id="@+id/hourWheelPicker"
+                    app:wheel_selected_item_text_color="@color/font_light_yellow"
+                    app:wheel_item_text_size="20dp"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true" />
+
+                <com.aigestudio.wheelpicker.WheelPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    app:wheel_item_text_color="@color/font_light_yellow"
+                    android:id="@+id/minWheelPicker"
+                    app:wheel_selected_item_text_color="@color/font_light_yellow"
+                    app:wheel_item_text_size="20dp"
+                    app:wheel_curved="true"
+                    app:wheel_cyclic="true" />
+
+                <com.aigestudio.wheelpicker.WheelPicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:wheel_item_text_color="@color/font_light_yellow"
+                    android:id="@+id/timeWheelPicker"
+                    app:wheel_selected_item_text_color="@color/font_light_yellow"
+                    app:wheel_item_text_size="20dp"
+                    app:wheel_curved="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/selection_background" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Divider Text -->
+    <TextView
+        android:id="@+id/orText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/wheelPickerContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp" />
+
+    <!-- Don't Remind Me Button -->
+    <TextView
+        android:id="@+id/dontRemindMe"
+        android:layout_width="200dp"
+        android:layout_height="37dp"
+        android:background="@drawable/rounded_background_3"
+        android:backgroundTint="@color/create_habit_cancel_button"
+        android:text="Don't remind me"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/orText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <!-- Confirm Button -->
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Confirm"
+        android:backgroundTint="@color/create_habit_continue_button"
+        android:textColor="@color/create_habit_continue_button_font"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

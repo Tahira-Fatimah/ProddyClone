@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Models.HabitCategory;
@@ -16,14 +17,16 @@ import java.util.List;
 public class HabitCategoryAdapter extends RecyclerView.Adapter<HabitCategoryAdapter.HabitViewHolder> {
 
     private List<HabitCategory> habitCategories;
+    private int layoutResource;
 
-    public HabitCategoryAdapter(List<HabitCategory> habitList) {
+    public HabitCategoryAdapter(List<HabitCategory> habitList, @LayoutRes int layoutResource) {
         this.habitCategories = habitList;
+        this.layoutResource = layoutResource;
     }
 
     @Override
     public HabitViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.habit_category_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutResource, parent, false);
         return new HabitViewHolder(view);
     }
 

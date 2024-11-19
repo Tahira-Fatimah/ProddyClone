@@ -6,33 +6,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager2.widget.ViewPager2;
 
 //import com.assignment.proddy.Fragments.AllHabitsFragment;
 //import com.assignment.proddy.Fragments.insights;
 
-import com.assignment.proddy.Activities.CreateHabit;
+//import com.assignment.proddy.Activities.Lessons;
+import com.assignment.proddy.Activities.EditHabit;
+import com.assignment.proddy.Dao.HabitDao;
+import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;
+import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habit.HabitType;
+import com.assignment.proddy.Entity.habit.asyncTasks.InsertHabit;
 import com.assignment.proddy.Entity.user.InsertUser;
 import com.assignment.proddy.Entity.user.User;
-import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
-import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
-import com.assignment.proddy.Adapters.LessonPagerAdapter;
-import com.assignment.proddy.Entity.Lesson;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.assignment.proddy.Fragments.ControlTabBottomSheet;
-import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
+import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
+import com.assignment.proddy.Fragments.LessonsFragment;
 import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
+import com.assignment.proddy.Utils.StringUtils;
 import com.google.android.material.tabs.TabLayout;
+
+import java.sql.Time;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ReflectionFragment();
                         break;
                     case 4:
-                        fragment = new ReflectionFragment();
+                        fragment = new LessonsFragment();
                         break;
                     default:
                         fragment = new AllHabitsFragment();
