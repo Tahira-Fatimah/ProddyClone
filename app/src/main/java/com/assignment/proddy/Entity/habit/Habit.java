@@ -23,7 +23,7 @@ import java.util.UUID;
         )
 )
 public class Habit implements Serializable {
-    @PrimaryKey
+//    @PrimaryKey
     @NonNull private UUID id;
     private int userId;
 
@@ -40,7 +40,7 @@ public class Habit implements Serializable {
 
     private Time reminderTime;
 
-    public Habit(UUID id, String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
+    public Habit(@NonNull UUID id, String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
         this.name = name;
         this.reason = reason;
 //        this.schedule = schedule;
@@ -67,11 +67,12 @@ public class Habit implements Serializable {
         this.habitDays = habitDays;
     }
 
+    @NonNull
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(@NonNull UUID id) {
         this.id = id;
     }
 

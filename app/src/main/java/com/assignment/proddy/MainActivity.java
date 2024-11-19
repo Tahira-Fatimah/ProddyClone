@@ -44,19 +44,21 @@ public class MainActivity extends AppCompatActivity {
 
         storeUserInfo();
 
+
+        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
+        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
+        new InsertHabit(getApplicationContext()).execute(habit);
+
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);
         setTabLayoutOnClickListener(tabLayout);
 //        TabLayout tabLayout = findViewById(R.id.controltabLayout);
 //        inflateTabs(tabLayout);
 //        setTabLayoutOnClickListener(tabLayout);
-        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
-        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
-        new InsertHabit(getApplicationContext()).execute(habit);
-        Log.d("HabitMain", "Habit " + habit.toString());
-        Intent intent = new Intent(this, EditHabit.class);
-        intent.putExtra("Habit",habit);
-        startActivity(intent);
+//        Log.d("HabitMain", "Habit " + habit.toString());
+//        Intent intent = new Intent(this, EditHabit.class);
+//        intent.putExtra("Habit",habit);
+//        startActivity(intent);
 
     }
 
