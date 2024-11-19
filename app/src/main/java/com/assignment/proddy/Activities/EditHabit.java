@@ -75,7 +75,15 @@ public class EditHabit extends AppCompatActivity {
     }
 
     private void actionsOnResume(){
-        editReminderTime.setText(HabitSingleton.getInstance().getReminderTime().toString());
+        if(HabitSingleton.getInstance().getReminderTime() == null){
+            reminderLayoutInitial.setVisibility(View.GONE);
+            reminderLayoutCreateReminder.setVisibility(View.VISIBLE);
+        }
+        else{
+            editReminderTime.setText(HabitSingleton.getInstance().getReminderTime().toString());
+            reminderLayoutInitial.setVisibility(View.VISIBLE);
+            reminderLayoutCreateReminder.setVisibility(View.GONE);
+        }
 
     }
 
