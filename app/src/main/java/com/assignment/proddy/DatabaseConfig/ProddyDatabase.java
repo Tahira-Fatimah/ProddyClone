@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.assignment.proddy.Converters.Converters;
+import com.assignment.proddy.Converters.TimeConverter;
 import com.assignment.proddy.Converters.HabitDaysConverter;
 import com.assignment.proddy.Converters.DateTypeConverter;
 import com.assignment.proddy.Dao.HabitDao;
@@ -18,7 +18,7 @@ import com.assignment.proddy.Entity.user.User;
 
 
 @Database(entities = {User.class, Habit.class, HabitStep.class, HabitTracker.class}, version = 1)
-@TypeConverters({Converters.class, DateTypeConverter.class, HabitDaysConverter.class})
+@TypeConverters({TimeConverter.class, DateTypeConverter.class, HabitDaysConverter.class})
 public abstract class ProddyDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();

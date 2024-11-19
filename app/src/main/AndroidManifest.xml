@@ -19,6 +19,12 @@
             android:name=".Activities.Settings"
             android:exported="false" />
         <activity
+            android:name=".Activities.SetReminder"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.EditHabit"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LessonPlay"
             android:exported="false" />
         <activity

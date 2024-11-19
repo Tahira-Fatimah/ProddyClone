@@ -4,10 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
-import com.assignment.proddy.Converters.Converters;
 import com.assignment.proddy.Converters.DateTypeConverter;
 import com.assignment.proddy.Entity.habit.Habit;
 

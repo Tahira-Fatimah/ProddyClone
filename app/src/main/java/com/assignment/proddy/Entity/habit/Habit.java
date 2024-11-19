@@ -8,6 +8,7 @@ import androidx.room.TypeConverters;
 
 import com.assignment.proddy.Entity.user.User;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
                 onUpdate = ForeignKey.CASCADE
         )
 )
-public class Habit {
+public class Habit implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
