@@ -1,5 +1,7 @@
 package com.assignment.proddy.ObjectMapping;
 
+import android.util.Log;
+
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -25,6 +27,13 @@ public class HabitWithTrackers {
 
     public Habit getHabit() {
         return habit;
+    }
+
+    public Boolean getHabitWithTracker(){
+        if(habitTrackers.isEmpty() || habitTrackers.contains(null)){
+            return false;
+        }
+        return true;
     }
 
     public void setHabit(Habit habit) {

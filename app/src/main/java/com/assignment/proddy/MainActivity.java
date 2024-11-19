@@ -1,6 +1,7 @@
 package com.assignment.proddy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        storeUserInfo();
+
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);
         setTabLayoutOnClickListener(tabLayout);
 
+    }
+
+    void storeUserInfo(){
+        SharedPreferences userInfo = getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = userInfo.edit();
+
+        editor.putInt("userId", 1);
+        editor.putString("userName", "UserOne");
+        editor.putBoolean("isLoggedIn", true);
+        editor.apply();
     }
 
     void inflateTabs(TabLayout tabLayout){

@@ -2,9 +2,12 @@ package com.assignment.proddy.Adapters;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,17 +19,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.DrawableUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIncompleteAdapter.MyViewHolder>{
     private Context context;
-    private List<HabitWithTrackers> habitsWithTrackers;
+    private List<Habit> habits;
 
-    public HabitListIncompleteAdapter(Context context, List<HabitWithTrackers> habitsWithTrackers) {
+    public HabitListIncompleteAdapter(Context context, List<Habit> habits) {
         this.context = context;
-        this.habitsWithTrackers = habitsWithTrackers;
+        if(habits == null){
+            habits = new ArrayList<>();
+        }
+        this.habits = habits;
     }
+
+    public void addHabit(Habit habit){
+        this.habits.add(habit);
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -38,22 +52,17 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
 
     @Override
     public void onBindViewHolder(@NonNull HabitListIncompleteAdapter.MyViewHolder holder, int position) {
-        HabitWithTrackers habitWithTrackers = habitsWithTrackers.get(position);
+        Habit habit = habits.get(position);
 
         // Bind data to the views
-        holder.timeTextView.setText(habitWithTrackers.getHabit().getReminderTime().toString());
-        holder.titleTextView.setText(habitWithTrackers.getHabit().getName());
-
-        holder.markCompletedView.setOnClickListener(v->{
-            if (holder.swipeLeftBgView.getVisibility()==View.VISIBLE) {
-                Log.d("HabitAdapter", "Mark Completed clicked at position: " + position);
-            }
-        });
+        holder.timeTextView.setText(habit.getReminderTime().toString().substring(0, 5));
+        holder.titleTextView.setText(habit.getName());
+        holder.iconView.setImageResource(DrawableUtils.getHabitDrawable(habit.getHabitType()));
     }
 
     @Override
     public int getItemCount() {
-        return habitsWithTrackers.size();
+        return habits.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -61,8 +70,7 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         public TextView titleTextView;
         public androidx.appcompat.widget.AppCompatButton editView;
         public androidx.appcompat.widget.AppCompatButton markCompletedView;
-        public LinearLayout swipeLeftBgView;
-
+        public ImageView iconView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -71,8 +79,16 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
             titleTextView = itemView.findViewById(R.id.title);
             editView = itemView.findViewById(R.id.edit);
             markCompletedView = itemView.findViewById(R.id.markCompleted);
-            swipeLeftBgView = itemView.findViewById(R.id.swipe_left_background);
+            iconView = itemView.findViewById(R.id.image_icon);
 
+
+            editView.setOnClickListener(v -> {
+                Toast.makeText(v.getContext(), "Edit Button Pressed", Toast.LENGTH_SHORT).show();
+            });
+
+            markCompletedView.setOnClickListener(v -> {
+                Toast.makeText(v.getContext(), "Completed Button Pressed", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

@@ -1,7 +1,10 @@
 package com.assignment.proddy.Activities;
 
+import static java.lang.Integer.parseInt;
+
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,6 +33,7 @@ import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 import com.assignment.proddy.SharedViewModel.NavigationViewModel;
 import com.assignment.proddy.Utils.StringUtils;
+import com.assignment.proddy.Utils.AuthUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,15 +129,15 @@ public class CreateHabit extends AppCompatActivity{
         }
         else{
             if (currentFragmentIndex == fragments.length - 1) {
-                Intent intent = new Intent(CreateHabit.this, LoginActivity.class);
-                startActivity(intent);
                 if(habitDaysValidation()){
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
+
+                int loggedInUserID = AuthUtils.getLoggedInUser(this);
                 Habit habit = new Habit(habitSharedViewModel.getHabitName().getValue(),
                         habitSharedViewModel.getHabitMotivationMessage().getValue(),
                         habitSharedViewModel.getHabitType().getValue(),
-                        1,
+                        loggedInUserID,
                         habitSharedViewModel.getReminderTime().getValue(),
                         habitSharedViewModel.getHabitDays().getValue());
                 new InsertHabit(this).execute(habit);
@@ -152,8 +156,6 @@ public class CreateHabit extends AppCompatActivity{
 
     private void goToPreviousFragment() {
         if (currentFragmentIndex == 0) {
-//            Intent intent = new Intent(CreateHabit.this, LoginActivity.class);
-//            startActivity(intent);
             finish();
             overridePendingTransition(0,android.R.anim.fade_out);
         } else {

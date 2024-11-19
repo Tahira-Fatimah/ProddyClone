@@ -13,16 +13,25 @@ import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 import com.assignment.proddy.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCompletedAdapter.MyViewHolder> {
 
     private Context context;
-    private List<HabitWithTrackers> habitsWithTrackers;
+    private List<Habit> habits;
 
-    public HabitListCompletedAdapter(Context context, List<HabitWithTrackers> habitsWithTrackers) {
+    public HabitListCompletedAdapter(Context context, List<Habit> habits) {
         this.context = context;
-        this.habitsWithTrackers = habitsWithTrackers;
+        if(habits == null){
+            habits = new ArrayList<Habit>();
+        }
+        this.habits = habits;
+    }
+
+    public void addHabit(Habit habit){
+        this.habits.add(habit);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,16 +44,16 @@ public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCom
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        HabitWithTrackers habitWithTrackers = habitsWithTrackers.get(position);
+        Habit habit = habits.get(position);
 
         // Bind data to the views
-        holder.timeTextView.setText(habitWithTrackers.getHabit().getReminderTime().toString());
-        holder.titleTextView.setText(habitWithTrackers.getHabit().getName());
+        holder.timeTextView.setText(habit.getReminderTime().toString());
+        holder.titleTextView.setText(habit.getName());
     }
 
     @Override
     public int getItemCount() {
-        return habitsWithTrackers.size();
+        return habits.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

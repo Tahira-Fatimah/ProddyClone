@@ -38,7 +38,9 @@ public interface HabitDao {
             "WHERE ht.status = 1 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch')  AND h.userId = :userId ")
     public List<HabitWithTrackers> getCompletedHabits(int userId, Date today);
 
-    @Query("SELECT * FROM habit")
-    public List<Habit> getHabits();
+    @Query("SELECT * FROM habit h LEFT JOIN habit_tracker ht ON h.id = ht.habitId " +
+            "WHERE userId = :userId " +
+            "AND (date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch') OR ht.date IS NULL)")
+    public List<HabitWithTrackers> getHabits(int userId, Date today);
 }
 

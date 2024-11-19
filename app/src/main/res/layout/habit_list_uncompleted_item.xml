@@ -5,16 +5,18 @@
     android:layout_marginVertical="8dp"
     android:elevation="8dp">
 
-    <!-- Swipe Left Background -->
+
     <LinearLayout
-        android:id="@+id/swipe_left_background"
+        android:id="@+id/swipe_right_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical|start"
+        android:layout_marginStart="20dp"
+        android:translationX="-280dp"
         android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/markCompleted"
+            android:id="@+id/edit"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:text="\uEA93"
@@ -31,16 +33,17 @@
 
     </LinearLayout>
 
-    <!-- Swipe Right Background -->
     <LinearLayout
-        android:id="@+id/swipe_right_background"
+        android:id="@+id/swipe_left_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical|end"
+        android:layout_marginEnd="20dp"
+        android:translationX="280dp"
         android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/edit"
+            android:id="@+id/markCompleted"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:text="\uE9C6"
@@ -56,7 +59,7 @@
 
     </LinearLayout>
 
-<!--    &lt;!&ndash; Main List Item Content &ndash;&gt;-->
+    <!--    &lt;!&ndash; Main List Item Content &ndash;&gt;-->
     <LinearLayout
         android:id="@+id/item_content"
         android:layout_width="match_parent"
@@ -74,6 +77,7 @@
             android:layout_marginLeft="2dp"
             android:textStyle="bold"
             android:text="09:13"
+            android:layout_marginStart="8dp"
             android:textSize="12sp"
             android:textColor="@color/font_dark_purple" />
 
@@ -111,5 +115,7 @@
 
         </RelativeLayout>
     </LinearLayout>
+
+
 
 </FrameLayout>
