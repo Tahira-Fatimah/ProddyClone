@@ -171,6 +171,17 @@
     <color name="signin_with_google_bg">#4285F4</color>
     <color name="signin_edit_text_bg">#DED0F5</color>
 
+    <color name="settings_bg_grey">#F8F8F8</color>
+    <color name="settings_delete_acc_btn_red">#D22F2F</color>
+    <color name="settings_star_bg">#654562</color>
+    <color name="settings_icons_bg_purple">#E3DAF8</color>
+    <color name="settings_delete_bg">#E16464</color>
+
+
+
+
+
+
 
 
 
