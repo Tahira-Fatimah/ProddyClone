@@ -23,6 +23,7 @@ import com.assignment.proddy.Adapters.HabitCategoryAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.asyncTasks.UpdateHabit;
 import com.assignment.proddy.Fragments.BottomSheets.DeleteHabitBottomSheet;
+import com.assignment.proddy.Fragments.BottomSheets.NameValidationBottomSheet;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
@@ -145,13 +146,19 @@ public class EditHabit extends AppCompatActivity {
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                habit.setName(habitNameEdit.getText().toString());
-                habit.setReason(habitReasonEdit.getText().toString());
-                habit.setReminderTime(HabitSingleton.getInstance().getReminderTime());
-                habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
-                habit.setHabitType(HabitSingleton.getInstance().getHabitType());
-                Log.d("EditHabit", "Updated Habit: " + habit.toString());
-                new UpdateHabit(EditHabit.this).execute(habit);
+                if(habitNameEdit.getText().toString().isEmpty()){
+                    NameValidationBottomSheet bottomDrawerFragment = new NameValidationBottomSheet();
+                    bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
+                }
+                else{
+                    habit.setName(habitNameEdit.getText().toString());
+                    habit.setReason(habitReasonEdit.getText().toString());
+                    habit.setReminderTime(HabitSingleton.getInstance().getReminderTime());
+                    habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
+                    habit.setHabitType(HabitSingleton.getInstance().getHabitType());
+                    Log.d("EditHabit", "Updated Habit: " + habit.toString());
+                    new UpdateHabit(EditHabit.this).execute(habit);
+                }
             }
         });
     }
@@ -253,5 +260,7 @@ public class EditHabit extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
