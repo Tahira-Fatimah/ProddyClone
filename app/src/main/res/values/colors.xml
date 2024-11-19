@@ -243,8 +243,8 @@
     <color name="edit_habit_set_reminder">#4D2F174E</color>
     <color name="edit_habit_days_selected_bg">#A389E8</color>
     <color name="edit_habit_days_unselected_bg">#EBEBEB</color>
-
-
+    <color name="edit_habit_no_reminder_bg">#FDD835</color>
+    <color name="edit_habit_no_reminder_font">#F57F17</color>
 
 
 

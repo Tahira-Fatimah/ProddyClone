@@ -11,6 +11,7 @@ import com.assignment.proddy.Entity.user.User;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
+import java.util.UUID;
 
 @Entity(tableName = "habit",
         foreignKeys = @ForeignKey(
@@ -22,9 +23,8 @@ import java.util.List;
         )
 )
 public class Habit implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
+    @PrimaryKey
+    @NonNull private UUID id;
     private int userId;
 
     private String name;
@@ -40,10 +40,11 @@ public class Habit implements Serializable {
 
     private Time reminderTime;
 
-    public Habit(String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
+    public Habit(UUID id, String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
         this.name = name;
         this.reason = reason;
 //        this.schedule = schedule;
+        this.id = id;
         this.habitType = habitType;
         this.userId = userId;
         this.reminderTime=reminderTime;
@@ -66,11 +67,11 @@ public class Habit implements Serializable {
         this.habitDays = habitDays;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

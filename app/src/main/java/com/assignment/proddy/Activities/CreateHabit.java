@@ -32,6 +32,7 @@ import com.assignment.proddy.Utils.AuthUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateHabit extends AppCompatActivity{
 
@@ -128,12 +129,12 @@ public class CreateHabit extends AppCompatActivity{
                 }
 
                 int loggedInUserID = AuthUtils.getLoggedInUser(this);
-                Habit habit = new Habit(habitSharedViewModel.getHabitName().getValue(),
+                Habit habit = new Habit(UUID.randomUUID(),habitSharedViewModel.getHabitName().getValue(),
                         habitSharedViewModel.getHabitMotivationMessage().getValue(),
                         habitSharedViewModel.getHabitType().getValue(),
                         loggedInUserID,
                         habitSharedViewModel.getReminderTime().getValue(),
-                        habitSharedViewModel.getHabitDays().getValue(),1);
+                        habitSharedViewModel.getHabitDays().getValue());
                 new InsertHabit(this).execute(habit);
                 finish();
                 overridePendingTransition(0,android.R.anim.fade_out);

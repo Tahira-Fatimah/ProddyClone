@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
+import com.assignment.proddy.SharedViewModel.HabitSingleton;
 import com.assignment.proddy.Utils.StringUtils;
 
+import java.sql.Time;
 import java.util.List;
 
 public class SetReminder extends AppCompatActivity {
@@ -26,7 +28,7 @@ public class SetReminder extends AppCompatActivity {
     String selectedMin;
     String time;
     TextView dontReminTextView, confirmBtn;
-    HabitSharedViewModel habitSharedViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +39,8 @@ public class SetReminder extends AppCompatActivity {
         setHourWheelPicker();
         setMinWheelPicker();
         setTimeWheelPicker();
-        habitSharedViewModel = new ViewModelProvider(
-                this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())
-        ).get(HabitSharedViewModel.class);
+        defineDontRemindMe();
+        defineConfirmBtn();
     }
 
     private void initViews(){
@@ -59,7 +59,6 @@ public class SetReminder extends AppCompatActivity {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
                 selectedMin = (String) data;
-                updateReminderTime();
             }
         });
     }
@@ -72,7 +71,6 @@ public class SetReminder extends AppCompatActivity {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
                 selectedHour = (String) data;
-                updateReminderTime();
             }
         });
     }
@@ -85,14 +83,13 @@ public class SetReminder extends AppCompatActivity {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
                 time = (String) data;
-                updateReminderTime();
             }
         });
     }
 
     private void updateReminderTime() {
         if (selectedHour != null && selectedMin != null && time != null) {
-            habitSharedViewModel.setReminderTime(Integer.parseInt(selectedHour), Integer.parseInt(selectedMin), time);
+            setReminderTime(Integer.parseInt(selectedHour), Integer.parseInt(selectedMin), time);
         }
     }
 
@@ -100,6 +97,7 @@ public class SetReminder extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateReminderTime();
                 finish();
             }
         });
@@ -109,10 +107,22 @@ public class SetReminder extends AppCompatActivity {
         dontReminTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                habitSharedViewModel.setDontRemindMe(Boolean.TRUE);
-                updateReminderTime();
+                HabitSingleton.getInstance().setReminderTime(null);
                 finish();
             }
         });
+    }
+
+    public void setReminderTime(int hour, int minute, String amPm) {
+        int finalHour = hour;
+
+        if ("PM".equals(amPm) && hour != 12) {
+            finalHour += 12;
+        } else if ("AM".equals(amPm) && hour == 12) {
+            finalHour = 0;
+        }
+
+        Time reminder = new Time(finalHour, minute, 0);
+        HabitSingleton.getInstance().setReminderTime(reminder);
     }
 }
