@@ -21,6 +21,7 @@ import com.assignment.proddy.Adapters.HabitCategoryAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.asyncTasks.UpdateHabit;
 import com.assignment.proddy.Fragments.BottomSheets.DeleteHabitBottomSheet;
+import com.assignment.proddy.Fragments.BottomSheets.NameValidationBottomSheet;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSingleton;
@@ -144,15 +145,21 @@ public class EditHabit extends AppCompatActivity {
             public void onClick(View v) {
                 saveChangesBtn.setClickable(false);
                 saveChangesBtn.setEnabled(false);
-                habit.setHabitName(habitNameEdit.getText().toString());
-                habit.setHabitReason(habitReasonEdit.getText().toString());
-                habit.setHabitReminderTime(HabitSingleton.getInstance().getReminderTime());
-                habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
-                habit.setHabitType(HabitSingleton.getInstance().getHabitType());
-                Log.d("EditHabit", "Updated Habit: " + habit.toString());
-                new UpdateHabit(EditHabit.this).execute(habit);
-                finish();
-                overridePendingTransition(0,android.R.anim.fade_out);
+                if(habitNameEdit.getText().toString().isEmpty()){
+                    NameValidationBottomSheet bottomDrawerFragment = new NameValidationBottomSheet();
+                    bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
+                }
+                else{
+                    habit.setHabitName(habitNameEdit.getText().toString());
+                    habit.setHabitReason(habitReasonEdit.getText().toString());
+                    habit.setHabitReminderTime(HabitSingleton.getInstance().getReminderTime());
+                    habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
+                    habit.setHabitType(HabitSingleton.getInstance().getHabitType());
+                    Log.d("EditHabit", "Updated Habit: " + habit.toString());
+                    new UpdateHabit(EditHabit.this).execute(habit);
+                    finish();
+                    overridePendingTransition(0,android.R.anim.fade_out);
+                }
             }
         });
     }
@@ -258,5 +265,7 @@ public class EditHabit extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
