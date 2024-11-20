@@ -1,5 +1,9 @@
 package com.assignment.proddy.SharedViewModel;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,7 +13,7 @@ import com.assignment.proddy.Entity.habit.HabitType;
 import java.sql.Time;
 import java.util.List;
 
-public class HabitSharedViewModel extends ViewModel {
+public class HabitSharedViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> habitName = new MutableLiveData<>();
     private final MutableLiveData<HabitType> habitType = new MutableLiveData<>();
@@ -17,6 +21,10 @@ public class HabitSharedViewModel extends ViewModel {
     private final MutableLiveData<List<String>> habitDays = new MutableLiveData<List<String>>();
     private final MutableLiveData<Time> reminderTime = new MutableLiveData<>();
     private final MutableLiveData<Boolean> dontRemindMe = new MutableLiveData<>(Boolean.FALSE);
+
+    public HabitSharedViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public LiveData<Boolean> getDontRemindMe(){
         return this.dontRemindMe;

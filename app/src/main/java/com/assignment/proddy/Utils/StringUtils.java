@@ -67,4 +67,14 @@ public class StringUtils {
 
         return minData;
     }
+
+    public static int getHabitCategoryIndex(HabitType habitType) {
+        List<HabitCategory> habitCategories = StringUtils.getHabitCategories();
+        for (int i = 0; i < habitCategories.size(); i++) {
+            if (habitCategories.get(i).getHabitType() == habitType) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

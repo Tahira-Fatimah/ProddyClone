@@ -1,0 +1,29 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_background_5"
+    android:backgroundTint="@color/edit_habit_edit_habit_stack_bg"
+    android:padding="10dp"
+    android:layout_marginHorizontal="15dp"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/categoryImage"
+        android:src="@drawable/mindfulness"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/categoryName"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/reflection_bg"
+        android:text="Health"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

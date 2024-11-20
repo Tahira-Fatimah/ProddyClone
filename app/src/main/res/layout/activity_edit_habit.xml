@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/edit_habit_bg"
+        android:backgroundTint="@color/edit_habit_bg"
+        android:paddingHorizontal="25dp"
+        android:paddingTop="80dp"
+        android:paddingBottom="110dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"> <!-- Add bottom padding to avoid overlap with Save Changes button -->
+
+            <!-- Habit Name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NAME"
+                android:textColor="@color/reflection_bg"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:paddingBottom="4dp" />
+
+            <EditText
+                android:id="@+id/edit_habit_name"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@drawable/rounded_background_5"
+                android:backgroundTint="@color/edit_habit_edit_text_bg"
+                android:maxLength="40"
+                android:text="habit"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/reflection_bg"
+                android:padding="8dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="20dp">
+                <TextView
+                    android:id="@+id/edit_habit_name_char_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/40"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <!-- Delete Habit Button -->
+            <TextView
+                android:id="@+id/btn_delete_habit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Delete Habit"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/edit_habit_delete_habit_font"
+                android:background="@drawable/rounded_background_5"
+                android:backgroundTint="@color/edit_habit_delete_habit"
+                android:layout_marginBottom="25dp" />
+
+            <!-- Reminder Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUR REMINDER"
+                android:textColor="@color/reflection_bg"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:paddingBottom="4dp" />
+
+            <LinearLayout
+                android:id="@+id/reminderLayoutInitial"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/edit_habit_reminder_time"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_background_5"
+                    android:backgroundTint="@color/edit_habit_edit_text_bg"
+                    android:layout_weight="2">
+                    <TextView
+                        android:id="@+id/edit_reminder_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="14:37"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:textColor="@color/reflection_bg"
+                        android:paddingLeft="15dp"
+                        android:layout_gravity="center_vertical" />
+
+                    <TextView
+                        android:id="@+id/iv_notification_icon"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_height="30dp"
+                        android:textSize="25sp"
+                        android:textColor="@color/reflection_bg"
+                        android:padding="3dp"
+                        android:fontFamily="@font/evaicons"
+                        android:text="\uE9D9"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/noReminder"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/circular_background"
+                        android:backgroundTint="@color/edit_habit_no_reminder_bg"
+                        android:fontFamily="@font/evaicons"
+                        android:text="\uEAC9"
+                        android:textSize="20sp"
+                        android:textColor="@color/edit_habit_no_reminder_font"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/reminderLayoutCreateReminder"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/createReminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Create Reminder"
+                    android:background="@drawable/rounded_background_5"
+                    android:backgroundTint="@color/edit_habit_create_reminder_bg"
+                    android:gravity="center"
+                    android:textColor="@color/reflection_bg"
+                    android:textStyle="bold"
+                    android:textSize="19sp"/>
+            </LinearLayout>
+
+            <!-- Reason Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUR REASON"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/reflection_bg" />
+
+            <EditText
+                android:id="@+id/edit_habit_reason"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/rounded_background_5"
+                android:backgroundTint="@color/edit_habit_edit_text_bg"
+                android:hint="Enter your reason"
+                android:gravity="start|top"
+                android:maxLength="280"
+                android:layout_marginBottom="20dp"
+                android:padding="8dp" />
+
+            <!-- Edit Habit Stack -->
+            <TextView
+                android:id="@+id/btn_edit_stack"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Edit habit stack"
+                android:background="@drawable/rounded_background_5"
+                android:backgroundTint="@color/edit_habit_edit_habit_stack_bg"
+                android:textColor="@color/edit_habit_edit_habit_stack_font"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginVertical="8dp" />
+
+            <!-- Days of the Week -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Monday"
+                    android:id="@+id/monday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Tuesday"
+                    android:id="@+id/tuesday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Wednesday"
+                    android:id="@+id/wednesday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Thursday"
+                    android:id="@+id/thursday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Friday"
+                    android:id="@+id/friday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Saturday"
+                    android:id="@+id/saturday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="100dp"
+                android:layout_marginVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="Sunday"
+                    android:id="@+id/sunday"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_background_3"
+                    android:backgroundTint="@color/edit_habit_days_unselected_bg"
+                    android:textColor="@color/reflection_bg"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_margin="4dp" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:paddingHorizontal="30dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/habitEditHabitTypeViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/rounded_background_5"
+                    android:backgroundTint="@color/edit_habit_edit_text_bg"
+                    android:paddingLeft="60dp"
+                    android:paddingEnd="60dp"
+                    android:paddingVertical="10dp"
+                    android:clipToPadding="false"
+                    android:clipChildren="false"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/close"
+        android:layout_gravity="end|top"
+        android:layout_margin="30dp" />
+
+    <TextView
+        android:id="@+id/btn_save_changes"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="SAVE CHANGES"
+        android:background="@drawable/rounded_background_3"
+        android:backgroundTint="@color/edit_habit_save_changes_button_bg"
+        android:textColor="@color/edit_habit_save_changes_button_font"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="bottom"
+        android:layout_marginVertical="50dp"
+        android:layout_marginHorizontal="20dp" />
+
+</FrameLayout>

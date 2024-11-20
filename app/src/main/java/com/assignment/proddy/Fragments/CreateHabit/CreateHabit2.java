@@ -48,7 +48,7 @@ public class CreateHabit2 extends Fragment {
 
     private void defineHabitTypeViewPager(){
         List<HabitCategory> habitCategories = StringUtils.getHabitCategories();
-        HabitCategoryAdapter habitCategoryAdapter = new HabitCategoryAdapter(habitCategories);
+        HabitCategoryAdapter habitCategoryAdapter = new HabitCategoryAdapter(habitCategories, R.layout.habit_category_item);
         habitCategoryViewPager.setAdapter(habitCategoryAdapter);
         habitCategoryViewPager.setOffscreenPageLimit(3);
         habitCategoryViewPager.setPageTransformer(new ZoomOutPageTransformer());

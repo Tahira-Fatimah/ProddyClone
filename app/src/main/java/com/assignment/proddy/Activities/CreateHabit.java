@@ -1,12 +1,8 @@
 package com.assignment.proddy.Activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -23,17 +19,15 @@ import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit3;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit4;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit5;
-import com.assignment.proddy.Fragments.NameValidationBottomSheet;
-import com.assignment.proddy.Listener.CreateHabitInteractionListener;
-import com.assignment.proddy.MainActivity;
+import com.assignment.proddy.Fragments.BottomSheets.NameValidationBottomSheet;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 import com.assignment.proddy.SharedViewModel.NavigationViewModel;
 import com.assignment.proddy.Utils.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateHabit extends AppCompatActivity{
 
@@ -130,7 +124,7 @@ public class CreateHabit extends AppCompatActivity{
                 if(habitDaysValidation()){
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
-                Habit habit = new Habit(habitSharedViewModel.getHabitName().getValue(),
+                Habit habit = new Habit(UUID.randomUUID(), habitSharedViewModel.getHabitName().getValue(),
                         habitSharedViewModel.getHabitMotivationMessage().getValue(),
                         habitSharedViewModel.getHabitType().getValue(),
                         1,

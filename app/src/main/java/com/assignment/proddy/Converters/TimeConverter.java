@@ -2,10 +2,9 @@ package com.assignment.proddy.Converters;
 
 import androidx.room.TypeConverter;
 
-import java.sql.Date;
 import java.sql.Time;
 
-public class Converters {
+public class TimeConverter {
 
     @TypeConverter
     public static Time fromTimestamp(Long value) {
