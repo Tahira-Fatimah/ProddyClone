@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements onCompletedHabits
 
         AuthUtils.storeUserInfo(this);
 
-
 //        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
 //        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
 //        new InsertHabit(getApplicationContext()).execute(habit);

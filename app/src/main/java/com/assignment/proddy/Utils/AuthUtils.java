@@ -11,7 +11,7 @@ public class AuthUtils {
         SharedPreferences userInfo = context.getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = userInfo.edit();
 
-        editor.putString("userId", "93BF1B3B-F5CE-44F6-A22A-B74EB554426B");
+        editor.putString("userId", "1D3ED9A1-A65B-4423-8B54-90A07D6764E9");
         editor.putString("userName", "UserOne");
         editor.putBoolean("isLoggedIn", true);
         editor.apply();
