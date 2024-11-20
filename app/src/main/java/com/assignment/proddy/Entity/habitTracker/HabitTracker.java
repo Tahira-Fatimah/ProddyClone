@@ -1,5 +1,8 @@
 package com.assignment.proddy.Entity.habitTracker;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -10,64 +13,68 @@ import com.assignment.proddy.Converters.DateTypeConverter;
 import com.assignment.proddy.Entity.habit.Habit;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(tableName = "habit_tracker",
         foreignKeys = @ForeignKey(
                 entity = Habit.class,
-                parentColumns = "id",
-                childColumns = "habitId",
+                parentColumns = "habitId",
+                childColumns = "habitTracker_HabitId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
         ),
-        indices = @Index(value = "habitId")
+        indices = @Index(value = "habitTracker_HabitId")
 )
 public class HabitTracker {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull private UUID habitTrackerId;
 
-    private int habitId;
+    private UUID habitTracker_HabitId;
 
     @TypeConverters({DateTypeConverter.class})
-    private Date date;
+    private Date habitTrackerDate;
 
-    private Boolean status;
+    private Boolean habitTrackerStatus;
 
-    public HabitTracker(int habitId, Date date, Boolean status) {
-        this.habitId = habitId;
-        this.date = date;
-        this.status = status;
+    public HabitTracker(@NonNull UUID habitTrackerId, UUID habitTracker_HabitId, Date habitTrackerDate, Boolean habitTrackerStatus) {
+        Log.d("HabitTracker CONSTRUCTOR",String.valueOf(habitTrackerId)+String.valueOf(habitTracker_HabitId));
+        this.habitTrackerId = habitTrackerId;
+        this.habitTracker_HabitId = habitTracker_HabitId;
+        this.habitTrackerDate = habitTrackerDate;
+        this.habitTrackerStatus = habitTrackerStatus;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getHabitTrackerDate() {
+        return habitTrackerDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setHabitTrackerDate(Date habitTrackerDate) {
+        this.habitTrackerDate = habitTrackerDate;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Boolean getHabitTrackerStatus() {
+        return habitTrackerStatus;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setHabitTrackerStatus(Boolean habitTrackerStatus) {
+        this.habitTrackerStatus = habitTrackerStatus;
     }
 
-    public int getId() {
-        return id;
+    @NonNull
+    public UUID getHabitTrackerId() {
+        return habitTrackerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHabitTrackerId(@NonNull UUID habitTrackerId) {
+        this.habitTrackerId = habitTrackerId;
     }
 
-    public int getHabitId() {
-        return habitId;
+    public UUID getHabitTracker_HabitId() {
+        return habitTracker_HabitId;
     }
 
-    public void setHabitId(int habitId) {
-        this.habitId = habitId;
+    public void setHabitTracker_HabitId(UUID habitTracker_HabitId) {
+        this.habitTracker_HabitId = habitTracker_HabitId;
     }
 
 

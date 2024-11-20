@@ -19,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class DeleteHabitBottomSheet extends BottomSheetDialogFragment {
 
     private Habit habit;
+    TextView deleteButtonFromAvtivity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -33,8 +34,20 @@ public class DeleteHabitBottomSheet extends BottomSheetDialogFragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        deleteButtonFromAvtivity.setClickable(true);
+        deleteButtonFromAvtivity.setEnabled(true);
+        super.onDestroyView();
+
+    }
+
     public void setHabit(Habit habit){
         this.habit = habit;
+    }
+
+    public void setDeleteButtonFromAvtivity(TextView deleteButtonFromAvtivity) {
+        this.deleteButtonFromAvtivity = deleteButtonFromAvtivity;
     }
 
     private void deleteHabit(){

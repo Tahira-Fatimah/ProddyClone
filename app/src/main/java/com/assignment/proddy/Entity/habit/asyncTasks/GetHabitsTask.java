@@ -11,15 +11,16 @@ import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class GetHabitsTask extends AsyncTask<Void, Void, List<HabitWithTrackers> >{
 
     private Context context;
     onHabitsRetrievedListener listener;
     Date today;
-    int userID;
+    UUID userID;
 
-    public GetHabitsTask(Context context, onHabitsRetrievedListener listener, Date today, int userID){
+    public GetHabitsTask(Context context, onHabitsRetrievedListener listener, Date today, UUID userID){
         this.context = context;
         this.listener = listener;
         this.today = today;

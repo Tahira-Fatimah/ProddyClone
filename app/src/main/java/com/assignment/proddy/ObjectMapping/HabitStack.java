@@ -13,8 +13,8 @@ public class HabitStack {
     private Habit habit;
 
     @Relation(
-            parentColumn = "id",
-            entityColumn = "habitId"
+            parentColumn = "habitId",
+            entityColumn = "habitStep_HabitId"
     )
 
     private List<HabitStep> habitSteps;

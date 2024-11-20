@@ -21,6 +21,6 @@ public interface HabitTrackerDao {
     @Update
     public Void update(HabitTracker habitTracker);
 
-    @Query("UPDATE habit_tracker SET status=1 WHERE id=:id")
+    @Query("UPDATE habit_tracker SET habitTrackerStatus=1 WHERE habitTrackerId=:id")
     public Void markCompleted(int id);
 }

@@ -10,15 +10,16 @@ import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class GetIncompleteHabitsTask extends AsyncTask<Void, Void, List<HabitWithTrackers>> {
 
     private Context context;
     onIncompleteHabitsRetrievedListener listener;
-    private int userId;
+    private UUID userId;
     private Date today;
 
-    public GetIncompleteHabitsTask(Context context, onIncompleteHabitsRetrievedListener listener, int userId, Date today){
+    public GetIncompleteHabitsTask(Context context, onIncompleteHabitsRetrievedListener listener, UUID userId, Date today){
         this.context = context;
         this.listener = listener;
         this.userId = userId;
@@ -28,7 +29,7 @@ public class GetIncompleteHabitsTask extends AsyncTask<Void, Void, List<HabitWit
     @Override
     protected List<HabitWithTrackers> doInBackground(Void... voids) {
         HabitDao habitDao = ProddyDatabaseClient.getInstance(context).proddyDatabase.habitDao();
-        return habitDao.getIncompleteHabits(userId, today);
+        return habitDao.getHabits(userId,today);
     }
 
     @Override

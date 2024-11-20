@@ -6,96 +6,102 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.assignment.proddy.Entity.habit.Habit;
+
+import java.util.UUID;
+
 @Entity(tableName = "habit_step",
         foreignKeys = @ForeignKey(
-                entity = HabitStep.class,
-                parentColumns = "id",
-                childColumns = "habitId",
+                entity = Habit.class,
+                parentColumns = "habitId",
+                childColumns = "habitStep_HabitId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
         ),
-        indices = @Index(value = "habitId")
+        indices = @Index(value = "habitStep_HabitId")
 )
 public class HabitStep {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull private UUID habitStepId;
 
-    private int habitId;
+    private UUID habitStep_HabitId;
 
-    private int stepNum;
+    private int habitStepNum;
 
-    private String description;
+    private String habitStepDescription;
 
-    private int time;
+    private int habitStepTime;
 
-    private String emoji;
+    private String habitStepEmoji;
 
-    public HabitStep(int habitId, int stepNum, String description, int time, String emoji) {
-        this.habitId = habitId;
-        this.stepNum = stepNum;
-        this.description = description;
-        this.time = time;
-        this.emoji = emoji;
+    public HabitStep(@NonNull UUID habitStepId, UUID habitStep_HabitId, int habitStepNum, String habitStepDescription, int habitStepTime, String habitStepEmoji) {
+        this.habitStepId = habitStepId;
+        this.habitStep_HabitId = habitStep_HabitId;
+        this.habitStepNum = habitStepNum;
+        this.habitStepDescription = habitStepDescription;
+        this.habitStepTime = habitStepTime;
+        this.habitStepEmoji = habitStepEmoji;
     }
 
-    public int getId() {
-        return id;
+    @NonNull
+    public UUID getHabitStepId() {
+        return habitStepId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHabitStepId(@NonNull UUID habitStepId) {
+        this.habitStepId = habitStepId;
     }
 
-    public int getHabitId() {
-        return habitId;
+    public UUID getHabitStep_HabitId() {
+        return habitStep_HabitId;
     }
 
-    public void setHabitId(int habitId) {
-        this.habitId = habitId;
+    public void setHabitStep_HabitId(UUID habitStep_HabitId) {
+        this.habitStep_HabitId = habitStep_HabitId;
     }
 
-    public int getStepNum() {
-        return stepNum;
+    public int getHabitStepNum() {
+        return habitStepNum;
     }
 
-    public void setStepNum(int stepNum) {
-        this.stepNum = stepNum;
+    public void setHabitStepNum(int habitStepNum) {
+        this.habitStepNum = habitStepNum;
     }
 
-    public String getDescription() {
-        return description;
+    public String getHabitStepDescription() {
+        return habitStepDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setHabitStepDescription(String habitStepDescription) {
+        this.habitStepDescription = habitStepDescription;
     }
 
-    public int getTime() {
-        return time;
+    public int getHabitStepTime() {
+        return habitStepTime;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setHabitStepTime(int habitStepTime) {
+        this.habitStepTime = habitStepTime;
     }
 
-    public String getEmoji() {
-        return emoji;
+    public String getHabitStepEmoji() {
+        return habitStepEmoji;
     }
 
-    public void setEmoji(String emoji) {
-        this.emoji = emoji;
+    public void setHabitStepEmoji(String habitStepEmoji) {
+        this.habitStepEmoji = habitStepEmoji;
     }
 
 
     @NonNull
     public String toString() {
         return "HabitStep{" +
-                "id=" + id +
-                ", habitId=" + habitId +
-                ", stepNum=" + stepNum +
-                ", description='" + description + '\'' +
-                ", time=" + time +
-                ", emoji='" + emoji + '\'' +
+                "id=" + habitStepId +
+                ", habitId=" + habitStep_HabitId +
+                ", stepNum=" + habitStepNum +
+                ", description='" + habitStepDescription + '\'' +
+                ", time=" + habitStepTime +
+                ", emoji='" + habitStepEmoji + '\'' +
                 '}';
     }
 

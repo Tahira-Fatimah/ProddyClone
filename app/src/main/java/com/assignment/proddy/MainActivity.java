@@ -20,7 +20,11 @@ import com.assignment.proddy.Dao.HabitDao;
 import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.HabitType;
+import com.assignment.proddy.Entity.habit.asyncTasks.GetCompletedHabitsTask;
 import com.assignment.proddy.Entity.habit.asyncTasks.InsertHabit;
+import com.assignment.proddy.Entity.habit.asyncTasks.onCompletedHabitsRetrievedListener;
+import com.assignment.proddy.Entity.habitTracker.HabitTracker;
+import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
 import com.assignment.proddy.Entity.user.InsertUser;
 import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
@@ -29,25 +33,34 @@ import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.LessonsFragment;
 import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.insights;
+import com.assignment.proddy.Utils.AuthUtils;
 import com.assignment.proddy.Utils.StringUtils;
 import com.google.android.material.tabs.TabLayout;
 
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onCompletedHabitsRetrievedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        storeUserInfo();
+        AuthUtils.storeUserInfo(this);
 
 
-        new InsertUser(getApplicationContext()).execute(new User("1234", "Fatimah", "123"));
-        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
-        new InsertHabit(getApplicationContext()).execute(habit);
+//        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
+//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
+//        new InsertHabit(getApplicationContext()).execute(habit);
+//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
+//                Calendar.getInstance().getTime(),
+//                true));
+//        new GetCompletedHabitsTask(this, this,"good habit").execute();
 
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);
@@ -60,16 +73,6 @@ public class MainActivity extends AppCompatActivity {
 //        intent.putExtra("Habit",habit);
 //        startActivity(intent);
 
-    }
-
-    void storeUserInfo(){
-        SharedPreferences userInfo = getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = userInfo.edit();
-
-        editor.putInt("userId", 1);
-        editor.putString("userName", "UserOne");
-        editor.putBoolean("isLoggedIn", true);
-        editor.apply();
     }
 
     void inflateTabs(TabLayout tabLayout){
@@ -133,5 +136,10 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+    }
+
+    @Override
+    public void onCompletedHabitsRetrieved(Habit habitsWithTrackers) {
+        Log.d("habittttttt",habitsWithTrackers.toString());
     }
 }

@@ -36,6 +36,7 @@ import com.assignment.proddy.Utils.AuthUtils;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 
 public class AllHabitsFragment extends Fragment implements onHabitsRetrievedListener{
@@ -86,16 +87,19 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new GetHabitsTask(requireContext(), this,today,AuthUtils.getLoggedInUser(getContext()))
+        new GetHabitsTask(requireContext(), this,today, UUID.fromString(AuthUtils.getLoggedInUser(getContext())))
                 .execute();
     }
 
     @Override
     public void onHabitsRetrieved(List<HabitWithTrackers> habitsWithTrackers) {
         for (HabitWithTrackers habitWithTrackers : habitsWithTrackers){
+
             if(habitWithTrackers.getHabitWithTracker()){
+                Log.d("habitid", habitWithTrackers.getHabit().toString());
                 habitListCompletedAdapter.addHabit(habitWithTrackers.getHabit());
             } else {
+                Log.d("habittrackerid", habitWithTrackers.getHabit().toString());
                 habitListIncompleteAdapter.addHabit(habitWithTrackers.getHabit());
             }
         }

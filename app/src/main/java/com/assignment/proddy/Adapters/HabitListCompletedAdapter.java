@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Entity.habit.Habit;
-import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 import com.assignment.proddy.R;
 
 import java.util.ArrayList;
@@ -47,8 +46,8 @@ public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCom
         Habit habit = habits.get(position);
 
         // Bind data to the views
-        holder.timeTextView.setText(habit.getReminderTime().toString());
-        holder.titleTextView.setText(habit.getName());
+        holder.timeTextView.setText(habit.getHabitReminderTime().toString());
+        holder.titleTextView.setText(habit.getHabitName());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.assignment.proddy.Entity.habitStreak;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -7,72 +8,75 @@ import androidx.room.PrimaryKey;
 import com.assignment.proddy.Entity.habit.Habit;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Entity(tableName = "habit_streak",
         foreignKeys = @ForeignKey(
                 entity = Habit.class,
-                parentColumns = "id",
-                childColumns = "habitId",
+                parentColumns = "habitId",
+                childColumns = "habitStreak_HabitId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
         )
 )
 public class HabitStreak {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull private UUID habitStreakId;
 
-    private int habitId;
+    private UUID habitStreak_HabitId;
 
-    private int crrStreak;
+    private int habitStreakCrrStreak;
 
-    private int maxStreak;
+    private int habitStreakMaxStreak;
 
-    private Date lastCompletedDate;
+    private Date habitStreakLastCompletedDate;
 
-    public int getId() {
-        return id;
+    @NonNull
+    public UUID getHabitStreakId() {
+        return habitStreakId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHabitStreakId(@NonNull UUID habitStreakId) {
+        this.habitStreakId = habitStreakId;
     }
 
-    public Date getLastCompletedDate() {
-        return lastCompletedDate;
+    public Date getHabitStreakLastCompletedDate() {
+        return habitStreakLastCompletedDate;
     }
 
-    public void setLastCompletedDate(Date lastCompletedDate) {
-        this.lastCompletedDate = lastCompletedDate;
+    public void setHabitStreakLastCompletedDate(Date habitStreakLastCompletedDate) {
+        this.habitStreakLastCompletedDate = habitStreakLastCompletedDate;
     }
 
-    public int getHabitId() {
-        return habitId;
+    public UUID getHabitStreak_HabitId() {
+        return habitStreak_HabitId;
     }
 
-    public void setHabitId(int habitId) {
-        this.habitId = habitId;
+    public void setHabitStreak_HabitId(UUID habitStreak_HabitId) {
+        this.habitStreak_HabitId = habitStreak_HabitId;
     }
 
-    public int getMaxStreak() {
-        return maxStreak;
+    public int getHabitStreakMaxStreak() {
+        return habitStreakMaxStreak;
     }
 
-    public void setMaxStreak(int maxStreak) {
-        this.maxStreak = maxStreak;
+    public void setHabitStreakMaxStreak(int habitStreakMaxStreak) {
+        this.habitStreakMaxStreak = habitStreakMaxStreak;
     }
 
-    public int getCrrStreak() {
-        return crrStreak;
+    public int getHabitStreakCrrStreak() {
+        return habitStreakCrrStreak;
     }
 
-    public void setCrrStreak(int crrStreak) {
-        this.crrStreak = crrStreak;
+    public void setHabitStreakCrrStreak(int habitStreakCrrStreak) {
+        this.habitStreakCrrStreak = habitStreakCrrStreak;
     }
 
-    public HabitStreak(int habitId, int crrStreak, int maxStreak, Date lastCompletedDate) {
-        this.habitId = habitId;
-        this.crrStreak = crrStreak;
-        this.maxStreak = maxStreak;
-        this.lastCompletedDate = lastCompletedDate;
+    public HabitStreak(UUID habitStreakId, UUID habitStreak_HabitId, int habitStreakCrrStreak, int habitStreakMaxStreak, Date habitStreakLastCompletedDate) {
+        this.habitStreakId = habitStreakId;
+        this.habitStreak_HabitId = habitStreak_HabitId;
+        this.habitStreakCrrStreak = habitStreakCrrStreak;
+        this.habitStreakMaxStreak = habitStreakMaxStreak;
+        this.habitStreakLastCompletedDate = habitStreakLastCompletedDate;
     }
 }

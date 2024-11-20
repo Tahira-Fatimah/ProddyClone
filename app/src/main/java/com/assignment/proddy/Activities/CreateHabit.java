@@ -128,11 +128,13 @@ public class CreateHabit extends AppCompatActivity{
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
 
-                int loggedInUserID = AuthUtils.getLoggedInUser(this);
+                continueBtn.setClickable(false);
+                continueBtn.setEnabled(false);
+//                UUID loggedInUserID = AuthUtils.getLoggedInUser(this);
                 Habit habit = new Habit(UUID.randomUUID(),habitSharedViewModel.getHabitName().getValue(),
                         habitSharedViewModel.getHabitMotivationMessage().getValue(),
                         habitSharedViewModel.getHabitType().getValue(),
-                        loggedInUserID,
+                        UUID.fromString(AuthUtils.getLoggedInUser(this)),
                         habitSharedViewModel.getReminderTime().getValue(),
                         habitSharedViewModel.getHabitDays().getValue());
                 new InsertHabit(this).execute(habit);

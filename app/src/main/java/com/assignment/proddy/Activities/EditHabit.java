@@ -15,8 +15,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.HabitCategoryAdapter;
@@ -25,7 +23,6 @@ import com.assignment.proddy.Entity.habit.asyncTasks.UpdateHabit;
 import com.assignment.proddy.Fragments.BottomSheets.DeleteHabitBottomSheet;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
-import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 import com.assignment.proddy.SharedViewModel.HabitSingleton;
 import com.assignment.proddy.Utils.StringUtils;
 import com.assignment.proddy.ZoomOutPageTransformer;
@@ -51,7 +48,7 @@ public class EditHabit extends AppCompatActivity {
         setContentView(R.layout.activity_edit_habit);
         habit = (Habit) getIntent().getSerializableExtra("Habit");
         Log.d("HabitInEdit", "Habit " + habit.toString());
-        HabitSingleton.getInstance().setHabitDetails(habit.getId(), habit.getUserId(), habit.getName(), habit.getReason(), habit.getHabitDays(), habit.getHabitType(), habit.getReminderTime());
+        HabitSingleton.getInstance().setHabitDetails(habit.getHabitId(), habit.getHabit_UserId(), habit.getHabitName(), habit.getHabitReason(), habit.getHabitDays(), habit.getHabitType(), habit.getHabitReminderTime());
 
         initViews();
         defineValues();
@@ -113,10 +110,10 @@ public class EditHabit extends AppCompatActivity {
     }
 
     private void defineValues(){
-        habitNameEdit.setText(habit.getName());
-        habitReasonEdit.setText(habit.getReason());
-        editReminderTime.setText(habit.getReminderTime().toString());
-        charCount.setText(habit.getName().length()+ "/40");
+        habitNameEdit.setText(habit.getHabitName());
+        habitReasonEdit.setText(habit.getHabitReason());
+        editReminderTime.setText(habit.getHabitReminderTime().toString());
+        charCount.setText(habit.getHabitName().length()+ "/40");
         for(int i=0; i<habit.getHabitDays().size(); i++){
            int index = allDays.indexOf(habit.getHabitDays().get(i));
             daysTextViews[index].setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.edit_habit_days_selected_bg));
@@ -145,13 +142,17 @@ public class EditHabit extends AppCompatActivity {
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                habit.setName(habitNameEdit.getText().toString());
-                habit.setReason(habitReasonEdit.getText().toString());
-                habit.setReminderTime(HabitSingleton.getInstance().getReminderTime());
+                saveChangesBtn.setClickable(false);
+                saveChangesBtn.setEnabled(false);
+                habit.setHabitName(habitNameEdit.getText().toString());
+                habit.setHabitReason(habitReasonEdit.getText().toString());
+                habit.setHabitReminderTime(HabitSingleton.getInstance().getReminderTime());
                 habit.setHabitDays(HabitSingleton.getInstance().getHabitDays());
                 habit.setHabitType(HabitSingleton.getInstance().getHabitType());
                 Log.d("EditHabit", "Updated Habit: " + habit.toString());
                 new UpdateHabit(EditHabit.this).execute(habit);
+                finish();
+                overridePendingTransition(0,android.R.anim.fade_out);
             }
         });
     }
@@ -160,8 +161,11 @@ public class EditHabit extends AppCompatActivity {
         deleteHabitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                deleteHabitBtn.setClickable(false);
+                deleteHabitBtn.setEnabled(false);
                 DeleteHabitBottomSheet bottomDrawerFragment = new DeleteHabitBottomSheet();
                 bottomDrawerFragment.setHabit(habit);
+                bottomDrawerFragment.setDeleteButtonFromAvtivity(deleteHabitBtn);
                 bottomDrawerFragment.show(getSupportFragmentManager(), bottomDrawerFragment.getTag());
             }
         });
@@ -172,6 +176,7 @@ public class EditHabit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(0,android.R.anim.fade_out);
             }
         });
     }

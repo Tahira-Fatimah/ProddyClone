@@ -1,62 +1,67 @@
 package com.assignment.proddy.Entity.user;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.UUID;
+
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 
-@Entity(tableName = "user", indices = {@Index(value = "email", unique = true)})
+@Entity(tableName = "user", indices = {@Index(value = "userEmail", unique = true)})
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull private UUID userId;
 
 //    @NotBlank(message = "Name cannot be blank")
-    private String name;
+    private String userName;
 
 //    @Email(message = "Email should be valid")
-    private String email;
+    private String userEmail;
 
-    private String password;
+    private String userPassword;
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(@NonNull UUID userId) {
+        this.userId = userId;
     }
 
-    public int getId() {
-        return id;
+    @NonNull
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public User(@NonNull UUID userId, String userName, String userEmail, String userPassword) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userId = userId;
     }
 }

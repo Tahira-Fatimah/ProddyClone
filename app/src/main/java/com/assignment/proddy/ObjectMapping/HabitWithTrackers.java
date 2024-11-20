@@ -15,12 +15,13 @@ public class HabitWithTrackers {
     private Habit habit;
 
     @Relation(
-            parentColumn = "id",
-            entityColumn = "habitId"
+            parentColumn = "habitId",
+            entityColumn = "habitTracker_HabitId"
     )
     private List<HabitTracker> habitTrackers;
 
     public HabitWithTrackers(Habit habit, List<HabitTracker> habitTrackers) {
+        Log.d("HabitWithTrackers CONSTRUCTOR",String.valueOf(habit.getHabitName()));
         this.habit = habit;
         this.habitTrackers = habitTrackers;
     }
@@ -30,6 +31,7 @@ public class HabitWithTrackers {
     }
 
     public Boolean getHabitWithTracker(){
+        Log.d("getHabitWithTrackers",String.valueOf(habitTrackers.size()));
         if(habitTrackers.isEmpty() || habitTrackers.contains(null)){
             return false;
         }

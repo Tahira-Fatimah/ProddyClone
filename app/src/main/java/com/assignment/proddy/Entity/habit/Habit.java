@@ -16,20 +16,21 @@ import java.util.UUID;
 @Entity(tableName = "habit",
         foreignKeys = @ForeignKey(
                 entity = User.class,
-                parentColumns = "id",
-                childColumns = "userId",
+                parentColumns = "userId",
+                childColumns = "habit_UserId",
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE
         )
 )
 public class Habit implements Serializable {
-//    @PrimaryKey
-    @NonNull private UUID id;
-    private int userId;
+    @PrimaryKey
+    @NonNull private UUID habitId;
 
-    private String name;
+    private UUID habit_UserId;
 
-    private String reason;
+    private String habitName;
+
+    private String habitReason;
 
 //    private String schedule;
 
@@ -38,25 +39,25 @@ public class Habit implements Serializable {
     @TypeConverters(HabitTypeConverter.class)
     private HabitType habitType;
 
-    private Time reminderTime;
+    private Time habitReminderTime;
 
-    public Habit(@NonNull UUID id, String name, String reason, HabitType habitType, int userId, Time reminderTime, List<String> habitDays) {
-        this.name = name;
-        this.reason = reason;
+    public Habit(@NonNull UUID habitId, String habitName, String habitReason, HabitType habitType, UUID habit_UserId, Time habitReminderTime, List<String> habitDays) {
+        this.habitName = habitName;
+        this.habitReason = habitReason;
 //        this.schedule = schedule;
-        this.id = id;
+        this.habitId = habitId;
         this.habitType = habitType;
-        this.userId = userId;
-        this.reminderTime=reminderTime;
+        this.habit_UserId = habit_UserId;
+        this.habitReminderTime = habitReminderTime;
         this.habitDays = habitDays;
     }
 
-    public Time getReminderTime() {
-        return reminderTime;
+    public Time getHabitReminderTime() {
+        return habitReminderTime;
     }
 
-    public void setReminderTime(Time reminderTime) {
-        this.reminderTime = reminderTime;
+    public void setHabitReminderTime(Time habitReminderTime) {
+        this.habitReminderTime = habitReminderTime;
     }
 
     public List<String> getHabitDays() {
@@ -68,28 +69,28 @@ public class Habit implements Serializable {
     }
 
     @NonNull
-    public UUID getId() {
-        return id;
+    public UUID getHabitId() {
+        return habitId;
     }
 
-    public void setId(@NonNull UUID id) {
-        this.id = id;
+    public void setHabitId(@NonNull UUID habitId) {
+        this.habitId = habitId;
     }
 
-    public String getName() {
-        return name;
+    public String getHabitName() {
+        return habitName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
     }
 
-    public String getReason() {
-        return reason;
+    public String getHabitReason() {
+        return habitReason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setHabitReason(String habitReason) {
+        this.habitReason = habitReason;
     }
 
 //    public String getSchedule() {
@@ -108,21 +109,21 @@ public class Habit implements Serializable {
         this.habitType = habitType;
     }
 
-    public int getUserId() {
-        return userId;
+    public UUID getHabit_UserId() {
+        return habit_UserId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setHabit_UserId(UUID habit_UserId) {
+        this.habit_UserId = habit_UserId;
     }
 
 //    @Override
     @NonNull
     public String toString() {
         return "Habit{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", reason='" + reason + '\'' +
+                "id=" + habitId +
+                ", name='" + habitName + '\'' +
+                ", reason='" + habitReason + '\'' +
                 ", habitType=" + habitType +
                 '}';
     }

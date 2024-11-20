@@ -4,9 +4,7 @@ import static java.lang.Math.abs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
-import android.view.DragEvent;
-import android.view.GestureDetector;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,14 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.assignment.proddy.Activities.EditHabit;
 import com.assignment.proddy.Entity.habit.Habit;
-import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.DrawableUtils;
-import com.google.android.material.transition.Hold;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +58,8 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         Habit habit = habits.get(position);
 
         // Bind data to the views
-        holder.timeTextView.setText(habit.getReminderTime().toString().substring(0, 5));
-        holder.titleTextView.setText(habit.getName());
+        holder.timeTextView.setText(habit.getHabitReminderTime().toString().substring(0, 5));
+        holder.titleTextView.setText(habit.getHabitName());
         holder.iconView.setImageResource(DrawableUtils.getHabitDrawable(habit.getHabitType()));
         holder.item_content.setOnTouchListener(new View.OnTouchListener() {
             float initialX = 0;
@@ -114,7 +110,9 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
 
 
         holder.editView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Edit Button Pressed for" + String.valueOf(habit.getId()), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, EditHabit.class);
+            intent.putExtra("Habit",habit);
+            context.startActivity(intent);
         });
 
         holder.markCompletedView.setOnClickListener(v -> {

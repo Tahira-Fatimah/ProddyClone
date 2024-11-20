@@ -13,6 +13,7 @@ import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Dao
 public interface HabitDao {
@@ -25,22 +26,20 @@ public interface HabitDao {
     @Update
     public void update(Habit habit);
 
-    @Query("SELECT * FROM habit h JOIN habit_step hs ON h.id = hs.habitId")
+    @Query("SELECT * FROM habit h JOIN habit_step hs ON h.habitId = hs.habitStep_HabitId")
     public List<HabitStack> getHabitStack();
 
-    @Query("SELECT * FROM habit h " +
-            "JOIN habit_tracker ht ON h.id = ht.habitId " +
-            "WHERE ht.status = 0 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch') AND h.userId = :userId")
-    public List<HabitWithTrackers> getIncompleteHabits(int userId, Date today);
+//    @Query("SELECT * FROM habit h " +
+//            "JOIN habit_tracker ht ON h.id = ht.habitId " +
+//            "WHERE ht.status = 0 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch') AND h.userId = :userId")
+//    public List<HabitWithTrackers> getIncompleteHabits(int userId, Date today);
 
-    @Query("SELECT * FROM habit h " +
-            "JOIN habit_tracker ht ON h.id = ht.habitId " +
-            "WHERE ht.status = 1 AND date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch')  AND h.userId = :userId ")
-    public List<HabitWithTrackers> getCompletedHabits(int userId, Date today);
+    @Query("SELECT * FROM habit h WHERE h.habitName = :userId ")
+    public Habit getCompletedHabits(String userId);
 
-    @Query("SELECT * FROM habit h LEFT JOIN habit_tracker ht ON h.id = ht.habitId " +
-            "WHERE userId = :userId " +
-            "AND (date(ht.date/1000, 'unixepoch') = date(:today/1000, 'unixepoch') OR ht.date IS NULL)")
-    public List<HabitWithTrackers> getHabits(int userId, Date today);
+    @Query("SELECT * FROM habit h LEFT JOIN habit_tracker ht ON h.habitId = ht.habitTracker_HabitId " +
+            "WHERE habit_UserId = :userId " +
+            "AND (date(ht.habitTrackerDate/1000, 'unixepoch') = date(:today/1000, 'unixepoch') OR ht.habitTrackerDate IS NULL)")
+    public List<HabitWithTrackers> getHabits(UUID userId, Date today);
 }
 

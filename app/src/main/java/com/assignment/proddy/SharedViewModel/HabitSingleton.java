@@ -11,7 +11,7 @@ public class HabitSingleton {
     private static HabitSingleton instance;
 
     private UUID id;
-    private int userId;
+    private UUID userId;
     private String name;
     private String reason;
     private List<String> habitDays;
@@ -20,7 +20,7 @@ public class HabitSingleton {
 
     private HabitSingleton() {
         id = null;
-        userId = -1;
+        userId = null;
         name = "";
         reason = "";
         habitDays = null;
@@ -43,11 +43,11 @@ public class HabitSingleton {
         this.id = id;
     }
 
-    public int getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
@@ -93,7 +93,7 @@ public class HabitSingleton {
 
     public void clearHabit() {
         this.id = null;
-        this.userId = -1;
+        this.userId = null;
         this.name = "";
         this.reason = "";
         this.habitDays = null;
@@ -101,7 +101,7 @@ public class HabitSingleton {
         this.reminderTime = null;
     }
 
-    public void setHabitDetails(UUID id, int userId, String name, String reason, List<String> habitDays, HabitType habitType, Time reminderTime) {
+    public void setHabitDetails(UUID id, UUID userId, String name, String reason, List<String> habitDays, HabitType habitType, Time reminderTime) {
         this.id = id;
         this.userId = userId;
         this.name = name;
