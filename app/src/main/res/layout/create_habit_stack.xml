@@ -1,0 +1,202 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/habit_create_bg"
+    android:backgroundTint="@color/reflection_bg"
+    >
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/pattern"
+            android:scaleY="4"
+            android:scaleX="4"
+            app:tint="@color/edit_habit_stack_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit your last 5 days"
+                android:textColor="@color/edit_habit_stack_text1"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
+                >
+
+            </TextView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/edit"
+                    android:backgroundTint="@color/edit_habit_stack_side_btns"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    >
+                </ImageView>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="22dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/circular_background"
+                    android:backgroundTint="@color/edit_habit_stack_checkboxes_bg"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginEnd="20dp"
+                            >
+                        </ImageView>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginEnd="20dp"
+                            >
+                        </ImageView>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginEnd="20dp"
+                            >
+                        </ImageView>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/cross_box"
+                            android:backgroundTint="@color/edit_habit_stack_crossbox_red"
+                            android:layout_marginEnd="20dp"
+                            >
+                        </ImageView>
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box"
+                            android:backgroundTint="@color/edit_habit_stack_checkbox_yellow"
+                            >
+                        </ImageView>
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/close"
+                    android:backgroundTint="@color/edit_habit_stack_side_btns"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    >
+                </ImageView>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="habit name here"
+                android:textColor="@color/edit_habit_stack_text2"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/plusbtn"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:background="@drawable/rounded_background_1"
+                android:backgroundTint="@color/edit_habit_stack_plus_btn"
+                >
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/reflection_bg"
+                    android:background="@drawable/add"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tap to create a habit stack"
+                android:textColor="@color/edit_habit_stack_text1"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textSize="16dp"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/edit_habit_stack_side_btns"
+                android:background="@drawable/left"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:backgroundTint="@color/edit_habit_stack_side_btns"
+                android:background="@drawable/right"
+                />
+        </RelativeLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

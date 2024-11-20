@@ -191,6 +191,22 @@
     <color name="settings_icons_bg_purple">#E3DAF8</color>
     <color name="settings_delete_bg">#E16464</color>
 
+    <color name="edit_habit_stack_text1">#9B8EAB</color>
+    <color name="edit_habit_stack_side_btns">#A79BB5</color>
+    <color name="edit_habit_stack_plus_btn">#A389E8</color>
+    <color name="edit_habit_stack_checkboxes_bg">#36175E</color>
+    <color name="edit_habit_stack_crossbox_red">#D4302E</color>
+    <color name="edit_habit_stack_checkbox_yellow">#FFD46A</color>
+    <color name="edit_habit_stack_text2">#E7D8FE</color>
+    <color name="edit_habit_stack_bg">#270B49</color>
+    <color name="light_green">#00E676</color>
+    <color name="edit_habit_stack_dark_card">#130B24</color>
+    <color name="edit_habit_stack_edit_text">#1A132B</color>
+    <color name="edit_habit_stack_dark_card_checkbox">#423C50</color>
+    <color name="edit_habit_stack_dark_card_edit_text_hint">#423D4E</color>
+    <color name="one_minutes">#898592</color>
+    <color name="save_changes">#1B5E20</color>
+
 
 
 
