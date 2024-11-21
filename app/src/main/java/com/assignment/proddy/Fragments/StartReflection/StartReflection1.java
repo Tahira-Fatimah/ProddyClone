@@ -21,6 +21,7 @@ import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSharedViewModel;
 import com.assignment.proddy.SharedViewModel.ReflectionNavigationViewModel;
 import com.assignment.proddy.SharedViewModel.ReflectionSharedViewModel;
+import com.assignment.proddy.Utils.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -59,7 +60,7 @@ public class StartReflection1 extends Fragment {
         reflectionQuoteAuthor = view.findViewById(R.id.reflectionQuoteAuthor);
         closeBtn = view.findViewById(R.id.closeBtn);
         currentDate = view.findViewById(R.id.currentDate);
-        currentDate.setText(getFormattedDate());
+        currentDate.setText(StringUtils.getFormattedDate());
 
     }
 
@@ -104,12 +105,7 @@ public class StartReflection1 extends Fragment {
         });
     }
 
-    private String getFormattedDate(){
-        Date currentDate = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
-        String formattedDate = dateFormat.format(currentDate);
-        return formattedDate;
-    }
+
 
 
 }

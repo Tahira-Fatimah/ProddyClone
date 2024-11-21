@@ -7,8 +7,11 @@ import com.assignment.proddy.Entity.habit.HabitType;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class StringUtils {
@@ -76,6 +79,13 @@ public class StringUtils {
             }
         }
         return -1;
+    }
+
+    public static String getFormattedDate(){
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+        return formattedDate;
     }
 
 }

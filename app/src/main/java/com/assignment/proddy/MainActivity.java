@@ -48,10 +48,11 @@ public class MainActivity extends AppCompatActivity implements onCompletedHabits
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UUID CONSTANT_UUID = UUID.fromString("E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
 
         AuthUtils.storeUserInfo(this);
 
-//        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
+//        new InsertUser(getApplicationContext()).execute(new User(CONSTANT_UUID,"Fatimah", "fatimah@hamna.com","123"));
 //        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
 //        new InsertHabit(getApplicationContext()).execute(habit);
 //        new InsertHabitTrackerTask(this).execute(new HabitTracker(

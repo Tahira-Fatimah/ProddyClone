@@ -19,7 +19,7 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
     private final MutableLiveData<UUID> reflectionId = new MutableLiveData<>();
     private final MutableLiveData<UUID> reflectionUserId = new MutableLiveData<>();
     private final MutableLiveData<List<ReflectionFeelings>> reflectionFeelingsList = new MutableLiveData<>();
-    private final MutableLiveData<Integer> reflectionFeelingRate = new MutableLiveData<>(1);
+    private final MutableLiveData<Integer> reflectionFeelingRate = new MutableLiveData<>(-1);
     private final MutableLiveData<List<ReflectionActivities>> reflectionActivitiesList = new MutableLiveData<>();
     private final MutableLiveData<String> reflectionThoughts = new MutableLiveData<>();
 
