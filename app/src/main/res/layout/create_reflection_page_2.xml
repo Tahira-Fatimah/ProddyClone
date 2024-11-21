@@ -47,7 +47,7 @@
         android:padding="16dp"
         android:text="Proud"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -61,7 +61,8 @@
             android:padding="16dp"
             android:text="Foggy"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
+
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
 
@@ -71,13 +72,13 @@
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:background="@drawable/rounded_background_2"
-            android:backgroundTint="@color/reflection_feeling_bg_light"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
             android:gravity="center"
             android:padding="16dp"
             android:text="Peaceful"
             android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="@color/reflection_feeling_bg_light_font" />
+            android:textSize="15.5sp"
+            android:textColor="@color/white" />
 
 
     <TextView
@@ -91,7 +92,7 @@
             android:padding="16dp"
             android:text="Euphoric"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -105,7 +106,7 @@
             android:padding="16dp"
             android:text="Sad"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -119,7 +120,7 @@
             android:padding="16dp"
             android:text="Happy"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -133,7 +134,7 @@
         android:padding="16dp"
         android:text="Moody"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -147,7 +148,7 @@
         android:padding="16dp"
         android:text="Helpless"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
 
@@ -162,7 +163,7 @@
         android:padding="16dp"
         android:text="Anxious"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -176,7 +177,7 @@
         android:padding="16dp"
         android:text="Grateful"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -190,7 +191,7 @@
         android:padding="16dp"
         android:text="Loved"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -204,7 +205,7 @@
         android:padding="16dp"
         android:text="Angry"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -218,7 +219,7 @@
         android:padding="16dp"
         android:text="Calm"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -232,7 +233,7 @@
         android:padding="16dp"
         android:text="Creative"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -246,7 +247,7 @@
         android:padding="16dp"
         android:text="Distracted"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -260,7 +261,7 @@
         android:padding="16dp"
         android:text="Motivated"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -274,7 +275,7 @@
         android:padding="16dp"
         android:text="Insecure"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -288,7 +289,7 @@
         android:padding="16dp"
         android:text="Nostalgic"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
 

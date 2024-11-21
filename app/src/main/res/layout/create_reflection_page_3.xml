@@ -18,14 +18,17 @@
         android:textSize="35sp"/>
 
     <GridLayout
+        android:id="@+id/activitiesGridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="15dp"
         android:columnCount="3">
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Sports"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -49,8 +52,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Love"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -74,8 +79,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Friends"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -99,8 +106,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Work"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -124,8 +133,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Studying"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -149,8 +160,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Self-Care"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -174,8 +187,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Chores"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -199,7 +214,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
+            android:contentDescription="Nature"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
@@ -224,7 +241,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
+            android:contentDescription="Relaxing"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"

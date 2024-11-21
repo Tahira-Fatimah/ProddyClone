@@ -19,11 +19,15 @@
         android:textSize="26sp"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your note"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/reflectionThoughts"
+        android:padding="10dp"
+        android:hint="Your note..."
+        android:textColorHint="@color/reflection_add_note"
         android:textColor="@color/reflection_add_note"
         android:textSize="18sp"
+        android:gravity="start"
         android:background="@android:color/transparent"
         android:layout_marginTop="10dp"/>
 

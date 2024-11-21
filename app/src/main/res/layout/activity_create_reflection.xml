@@ -1,0 +1,42 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- ViewPager2 for sliding between fragments -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/startReflectionViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.StartReflection" />
+
+    <!-- Floating Action Button at the Bottom-Left -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_left"
+        app:shapeAppearanceOverlay="@style/CustomFabShape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/reflection_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/white"
+        android:contentDescription="Left FAB" />
+
+    <!-- Floating Action Button at the Bottom-Right -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_right"
+        app:shapeAppearanceOverlay="@style/CustomFabShape"
+        android:backgroundTint="@color/light_green"
+        android:contentDescription="Right FAB" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

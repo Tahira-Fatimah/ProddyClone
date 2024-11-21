@@ -8,5 +8,10 @@
     <string name="already_have_account_text"><u>I already have an account</u></string>
     <string name="forgot_password_text"><u>Forgot password?</u></string>
     <string name="edit_habit_delete_message">If you press confirm now, this habit will be deleted and all of it\'s data will be lost</string>
+    <string name="terrible">TERRIBLE</string>
+    <string name="meh">MEH</string>
+    <string name="normal">NORMAL</string>
+    <string name="good">GOOD</string>
+    <string name="awesome">AWESOME</string>
 
 </resources>

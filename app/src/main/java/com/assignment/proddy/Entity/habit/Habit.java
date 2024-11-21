@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.assignment.proddy.Converters.HabitTypeConverter;
 import com.assignment.proddy.Entity.user.User;
 
 import java.io.Serializable;
