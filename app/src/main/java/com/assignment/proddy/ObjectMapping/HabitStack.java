@@ -1,14 +1,17 @@
 package com.assignment.proddy.ObjectMapping;
 
+import android.util.Log;
+
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habitStep.HabitStep;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HabitStack {
+public class HabitStack implements Serializable {
     @Embedded
     private Habit habit;
 
@@ -38,7 +41,7 @@ public class HabitStack {
     public void displayHabitStack(){
         System.out.println(habit.toString());
         for(HabitStep habitStep : habitSteps){
-            System.out.println(habitStep.toString());
+            Log.d("habitSteps", habitStep.toString());
         }
     }
 }

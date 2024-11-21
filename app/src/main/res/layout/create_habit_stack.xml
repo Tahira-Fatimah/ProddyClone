@@ -129,6 +129,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/createStackHabitName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="habit name here"
@@ -148,6 +149,7 @@
             android:gravity="center">
 
             <FrameLayout
+                android:visibility="visible"
                 android:id="@+id/plusbtn"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
@@ -164,6 +166,8 @@
             </FrameLayout>
 
             <TextView
+                android:visibility="visible"
+                android:id="@+id/tapToCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tap to create a habit stack"

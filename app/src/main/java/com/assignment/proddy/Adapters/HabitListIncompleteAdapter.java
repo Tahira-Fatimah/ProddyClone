@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Activities.EditHabit;
+import com.assignment.proddy.Activities.HabitStepsListActivity;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.DrawableUtils;
@@ -117,6 +118,12 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
 
         holder.markCompletedView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), "Completed Button Pressed", Toast.LENGTH_SHORT).show();
+        });
+
+        holder.item_content.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HabitStepsListActivity.class);
+            intent.putExtra("habit", habit);
+            context.startActivity(intent);
         });
 
     }
