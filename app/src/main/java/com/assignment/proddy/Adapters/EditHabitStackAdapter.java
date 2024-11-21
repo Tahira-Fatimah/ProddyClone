@@ -89,6 +89,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
         if (habitSteps.isEmpty()) {
             newStepLayout.setVisibility(View.VISIBLE);
             stepMadeLayout.setVisibility(View.GONE);
+            setEmptyNewStepLayout();
         } else {
 
             stepMadeLayout.setVisibility(View.VISIBLE);
@@ -152,7 +153,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
     }
 
     private void setEmptyNewStepLayout(){
-        newStepNum.setText(habitSteps.size());
+        newStepNum.setText(habitSteps.size()+1);
         newStepTime.setText("0 minutes");
         newStepText.setHint("Step "+ habitSteps.size());
     }
@@ -174,7 +175,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
         String description = newStepText.getText().toString();
         String emoji = newStepEmoji.getText().toString();
         int time = Integer.parseInt(newStepTime.getText().toString().split(" ")[0]);
-        int number = habitSteps.size();
+        int number = habitSteps.size()+1;
 
         HabitStep newHabitStep = new HabitStep(UUID.randomUUID(), habitStep.getHabitStep_HabitId(), number, description, time, emoji);
 //        new insertHabitStepTask(context).insert(newHabitStep);
