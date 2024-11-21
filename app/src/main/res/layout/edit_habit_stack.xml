@@ -57,6 +57,132 @@
                 android:textStyle="bold"
                 android:paddingVertical="8dp" />
 
+            <FrameLayout
+                android:id="@+id/newStepEditHabitStack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_habit_stack_card"
+                android:visibility="visible">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Step Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/newStepNum"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1."
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:fontFamily="sans-serif-medium" />
+
+                        <TextView
+                            android:id="@+id/newStepTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:text="0 minutes"
+                            android:textColor="@color/one_minutes"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Step Input Field -->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/rounded_background_2"
+                        android:backgroundTint="@color/edit_habit_stack_edit_text"
+                        >
+                        <EditText
+                            android:id="@+id/newStepText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Step 1"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/edit_habit_stack_dark_card_edit_text_hint"
+                            android:inputType="text"
+                            android:maxLength="35"
+                            android:background="@null"/>
+
+                    </FrameLayout>
+
+
+                    <!-- Emoji, Slider, and Check Icon -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="20dp">
+
+                        <!-- Emoji -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            >
+                            <EditText
+                                android:id="@+id/newStepEmoji"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="🔥"
+                                android:gravity="center_horizontal"
+                                android:inputType="text"
+                                android:background="@android:color/transparent"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Emoji"
+                                android:layout_marginTop="3dp"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="12sp"
+                                android:textColor="@color/one_minutes"
+                                />
+                        </LinearLayout>
+
+                        <!-- Slider -->
+                        <SeekBar
+                            android:id="@+id/seekbarForTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:layout_marginStart="10dp"
+                            android:thumbTint="@color/white"
+                            android:progressTint="@color/white"
+                            android:layout_gravity="center" />
+
+                    </LinearLayout>
+                    <!-- Check Icon -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        >
+                        <ImageView
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:id="@+id/saveNewStepBtn"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/check_circle_purple"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+
             <ListView
                 android:id="@+id/editHabitStackList"
                 android:layout_width="match_parent"

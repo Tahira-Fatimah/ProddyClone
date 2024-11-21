@@ -5,6 +5,7 @@ import static java.lang.Math.abs;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,12 +73,14 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
                     case MotionEvent.ACTION_DOWN:
                         initialX = event.getRawX();
                         initialTranslation = holder.item_content.getTranslationX();
+
                         break;
 
                     case MotionEvent.ACTION_MOVE:
                         break;
 
                     case MotionEvent.ACTION_UP:
+
                     case MotionEvent.ACTION_CANCEL:
                        float finalX = initialX-event.getRawX();
                        if(abs(finalX) > 100){
@@ -105,7 +108,7 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
                        }
                        break;
                 }
-                return true;
+                return false;
             }
         });
 
@@ -121,6 +124,7 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         });
 
         holder.item_content.setOnClickListener(v -> {
+            Log.d("HabitSelected", habit.toString());
             Intent intent = new Intent(context, HabitStepsListActivity.class);
             intent.putExtra("habit", habit);
             context.startActivity(intent);

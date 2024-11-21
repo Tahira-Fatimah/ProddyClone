@@ -3,6 +3,7 @@ package com.assignment.proddy.Activities;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -97,6 +98,7 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
     private void defineBtnClickListeners(){
         editbtn.setOnClickListener(v->{
             Intent intent = new Intent(HabitStepsListActivity.this, EditHabit.class);
+            intent.putExtra("Habit", habit);
             startActivity(intent);
         });
 
@@ -111,6 +113,7 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
         });
 
         plusbtn.setOnClickListener(v->{
+            Log.d("HabitSTack", "Habit stack");
             Intent intent = new Intent(HabitStepsListActivity.this, EditHabitStack.class);
             intent.putExtra("habitStack", habitStack);
             startActivity(intent);

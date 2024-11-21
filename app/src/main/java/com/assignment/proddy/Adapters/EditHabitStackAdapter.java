@@ -1,9 +1,15 @@
 package com.assignment.proddy.Adapters;
 
+//import static androidx.appcompat.graphics.drawable.DrawableContainerCompat.Api21Impl.getResources;
+
+//import static androidx.appcompat.graphics.drawable.DrawableContainerCompat.Api21Impl.getResources;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import com.assignment.proddy.Entity.habitStep.HabitStep;
 import com.assignment.proddy.R;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +36,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
     private Context context;
     private List<HabitStep> habitSteps;  // List of HabitStep objects
     private LayoutInflater inflater;
+    private Listener listener;
 
     RelativeLayout stepMadeLayout;
     TextView stepText;
@@ -42,16 +50,24 @@ public class EditHabitStackAdapter extends BaseAdapter {
     ImageView saveNewStepBtn;
     SeekBar seekbarForTime;
     HabitStep habitStep;
+    HabitStep updatedHabitStep;
+    int seekBarValue = 0;
 
 
-    public EditHabitStackAdapter(Context context, List<HabitStep> habitSteps) {
+
+    public EditHabitStackAdapter(Context context, List<HabitStep> habitSteps, Listener listener) {
         this.context = context;
         this.habitSteps = habitSteps;
         this.inflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
+
 
     @Override
     public int getCount() {
+//        if (habitSteps.isEmpty()) {
+//            return 1;
+//        }
         return habitSteps.size();
     }
 
@@ -67,6 +83,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int seekBarValue = 0;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.edit_habit_stack_list_item, parent, false);
         }
@@ -84,43 +101,26 @@ public class EditHabitStackAdapter extends BaseAdapter {
         saveNewStepBtn = convertView.findViewById(R.id.saveNewStepBtn);
         seekbarForTime = convertView.findViewById(R.id.seekbarForTime);
 
-        habitStep = habitSteps.get(position);
-
-        if (habitSteps.isEmpty()) {
-            newStepLayout.setVisibility(View.VISIBLE);
-            stepMadeLayout.setVisibility(View.GONE);
-            setEmptyNewStepLayout();
-        } else {
-
-            stepMadeLayout.setVisibility(View.VISIBLE);
-            setStepMadeLayout();
-
-            if (position == 0){
-                newStepLayout.setVisibility(View.VISIBLE);
-                setEmptyNewStepLayout();
-            }
-            else{
-                newStepLayout.setVisibility(View.GONE);
-            }
-        }
+        habitStep = (HabitStep) getItem(position);
+        newStepLayout.setVisibility(View.GONE);
+        stepMadeLayout.setVisibility(View.VISIBLE);
+        setStepMadeLayout(position);
 
         stepMadeLayout.setOnClickListener(v -> {
+            Log.d("Step", "STep made layour clicked");
             newStepLayout.setVisibility(View.VISIBLE);
             stepMadeLayout.setVisibility(View.GONE);
+            newStepLayout.bringToFront();
             setFilledNewStepLayout();
+            listener.onListItemClick();
         });
 
         saveNewStepBtn.setOnClickListener(v -> {
-            if(newStepText.getText().toString() == null || newStepText.getText().toString() == ""){
-                insertNewStep();
-            }
-            else{
-                updateStep();
-            }
+            updateStep();
             newStepLayout.setVisibility(View.GONE);
             stepMadeLayout.setVisibility(View.VISIBLE);
-            setStepMadeLayout();
-
+            listener.onSaveBtnClick(updatedHabitStep);
+            notifyDataSetChanged();
         });
 
         newStepText.addTextChangedListener(new TextWatcher() {
@@ -131,16 +131,16 @@ public class EditHabitStackAdapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 if (!charSequence.toString().trim().isEmpty()) {
+                    System.out.println("Text changing " + String.valueOf(charSequence));
                     saveNewStepBtn.setEnabled(true);
                     saveNewStepBtn.setClickable(true);
                     saveNewStepBtn.setFocusable(true);
-                    saveNewStepBtn.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white)));
-
+                    saveNewStepBtn.setImageResource(R.drawable.check_circle_white);
                 } else {
                     saveNewStepBtn.setEnabled(false);
                     saveNewStepBtn.setClickable(false);
                     saveNewStepBtn.setFocusable(false);
-                    saveNewStepBtn.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.edit_habit_stack_dark_card_checkbox)));
+                    saveNewStepBtn.setImageResource(R.drawable.check_circle_purple);
                 }
             }
 
@@ -152,46 +152,60 @@ public class EditHabitStackAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void setEmptyNewStepLayout(){
-        newStepNum.setText(habitSteps.size()+1);
-        newStepTime.setText("0 minutes");
-        newStepText.setHint("Step "+ habitSteps.size());
-    }
-
     private void setFilledNewStepLayout(){
-        newStepNum.setText(habitStep.getHabitStepNum());
+        newStepNum.setText(String.valueOf(habitStep.getHabitStepNum()));
         newStepText.setText(habitStep.getHabitStepDescription());
         newStepEmoji.setText(habitStep.getHabitStepEmoji());
         newStepTime.setText(habitStep.getHabitStepTime() + " minutes");
     }
 
-    private void setStepMadeLayout(){
+    private void setStepMadeLayout(int position){
+        HabitStep habitStep = habitSteps.get(position);
         stepText.setText(habitStep.getHabitStepDescription());
         stepTime.setText(habitStep.getHabitStepTime() + " minutes");
-        stepNum.setText(habitStep.getHabitStepNum());
+        stepNum.setText(String.valueOf(habitStep.getHabitStepNum()));
     }
 
-    private void insertNewStep(){
-        String description = newStepText.getText().toString();
-        String emoji = newStepEmoji.getText().toString();
-        int time = Integer.parseInt(newStepTime.getText().toString().split(" ")[0]);
-        int number = habitSteps.size()+1;
 
-        HabitStep newHabitStep = new HabitStep(UUID.randomUUID(), habitStep.getHabitStep_HabitId(), number, description, time, emoji);
-//        new insertHabitStepTask(context).insert(newHabitStep);
-        habitSteps.add(newHabitStep);
-        notifyDataSetChanged();
-    }
 
     private void updateStep(){
         String updatedDescription = newStepText.getText().toString();
         String updatedEmoji = newStepEmoji.getText().toString();
         int updatedTime = Integer.parseInt(newStepTime.getText().toString().split(" ")[0]);
 
-        HabitStep updatedHabitStep = new HabitStep(habitStep.getHabitStepId(), habitStep.getHabitStep_HabitId(), habitStep.getHabitStepNum(), updatedDescription, updatedTime, updatedEmoji);
-//        new updateHabitStepTask(context).execute(updatedHabitStep);
+        updatedHabitStep = new HabitStep(habitStep.getHabitStepId(), habitStep.getHabitStep_HabitId(), habitStep.getHabitStepNum(), updatedDescription, seekBarValue, updatedEmoji);
         habitSteps.remove(habitStep);
         habitSteps.add(updatedHabitStep);
-        notifyDataSetChanged();
+
     }
+
+    public interface Listener{
+        void onListItemClick();
+        void onSaveBtnClick(HabitStep habitStep);
+    }
+
+    private void defineSeekBar() {
+        seekbarForTime.setMax(60);
+
+        seekbarForTime.setProgress(seekBarValue);
+
+        seekbarForTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarValue = progress;
+                newStepTime.setText(progress + " minutes");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBarValue = seekBar.getProgress();
+            }
+        });
+
+    }
+
 }

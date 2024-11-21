@@ -26,7 +26,7 @@ public interface HabitDao {
     @Update
     public void update(Habit habit);
 
-    @Query("SELECT * FROM habit h JOIN habit_step hs ON h.habitId = hs.habitStep_HabitId WHERE h.habitId=:habitId")
+    @Query("SELECT * FROM habit WHERE habitId =:habitId")
     public HabitStack getHabitStack(UUID habitId);
 
 //    @Query("SELECT * FROM habit h " +

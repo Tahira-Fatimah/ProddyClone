@@ -1,9 +1,8 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
->
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/newStep"
@@ -37,7 +36,7 @@
                     android:id="@+id/newStepTime"
                     android:layout_width="wrap_content"
                     android:layout_height="22dp"
-                    android:text="1 minutes"
+                    android:text="0 minutes"
                     android:textColor="@color/one_minutes"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -124,9 +123,8 @@
                     android:id="@+id/saveNewStepBtn"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/check_circle"
-                    android:backgroundTint="@color/edit_habit_stack_dark_card_checkbox" />
+                    android:src="@drawable/check_circle_purple"
+                    android:layout_alignParentEnd="true"/>
             </RelativeLayout>
         </LinearLayout>
     </FrameLayout>
