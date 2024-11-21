@@ -1,4 +1,4 @@
-package com.assignment.proddy.Entity;
+package com.assignment.proddy.Entity.habit.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
