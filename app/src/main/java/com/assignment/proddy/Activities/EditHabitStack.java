@@ -63,6 +63,7 @@ public class EditHabitStack extends AppCompatActivity {
         defineSaveBtn();
         defineNewStepTextOnClick();
         defineSeekBar();
+        refreshAdapter();
 //        refreshViews();
 
     }
@@ -107,6 +108,7 @@ public class EditHabitStack extends AppCompatActivity {
                 new UpdateHabitStepTask(this).execute(habitStep);
             }
             habitStack.setHabitSteps(this.habitSteps);
+            finish();
         });
     }
 
@@ -138,7 +140,6 @@ public class EditHabitStack extends AppCompatActivity {
         int number = habitSteps.size() + 1;
 
         HabitStep newHabitStep = new HabitStep(UUID.randomUUID(), habitStack.getHabit().getHabitId(), number, description, time, emoji);
-//        new insertHabitStepTask(context).insert(newHabitStep);
         Log.d("HabitStepInsert", newHabitStep.toString());
         habitSteps.add(newHabitStep);
     }

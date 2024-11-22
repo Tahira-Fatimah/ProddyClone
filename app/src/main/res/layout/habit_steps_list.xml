@@ -71,6 +71,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/day1"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/check_box"
@@ -79,6 +80,7 @@
                             >
                         </ImageView>
                         <ImageView
+                            android:id="@+id/day2"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/check_box"
@@ -87,6 +89,7 @@
                             >
                         </ImageView>
                         <ImageView
+                            android:id="@+id/day3"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/check_box"
@@ -95,6 +98,7 @@
                             >
                         </ImageView>
                         <ImageView
+                            android:id="@+id/day4"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/cross_box"
@@ -103,6 +107,7 @@
                             >
                         </ImageView>
                         <ImageView
+                            android:id="@+id/day5"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:background="@drawable/check_box"

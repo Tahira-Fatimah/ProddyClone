@@ -52,7 +52,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
     HabitStep habitStep;
     HabitStep updatedHabitStep;
     int seekBarValue = 0;
-
+    String updatedDescription;
 
 
     public EditHabitStackAdapter(Context context, List<HabitStep> habitSteps, Listener listener) {
@@ -83,7 +83,6 @@ public class EditHabitStackAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int seekBarValue = 0;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.edit_habit_stack_list_item, parent, false);
         }
@@ -105,6 +104,8 @@ public class EditHabitStackAdapter extends BaseAdapter {
         newStepLayout.setVisibility(View.GONE);
         stepMadeLayout.setVisibility(View.VISIBLE);
         setStepMadeLayout(position);
+        defineSeekBar();
+
 
         stepMadeLayout.setOnClickListener(v -> {
             Log.d("Step", "STep made layour clicked");
@@ -112,15 +113,18 @@ public class EditHabitStackAdapter extends BaseAdapter {
             stepMadeLayout.setVisibility(View.GONE);
             newStepLayout.bringToFront();
             setFilledNewStepLayout();
+            seekBarValue=habitStep.getHabitStepTime();
+            defineSeekBar();
             listener.onListItemClick();
         });
 
         saveNewStepBtn.setOnClickListener(v -> {
-            updateStep();
+            updateStep(position);
+            notifyDataSetChanged();
             newStepLayout.setVisibility(View.GONE);
             stepMadeLayout.setVisibility(View.VISIBLE);
+            setStepMadeLayout(position);
             listener.onSaveBtnClick(updatedHabitStep);
-            notifyDataSetChanged();
         });
 
         newStepText.addTextChangedListener(new TextWatcher() {
@@ -146,6 +150,8 @@ public class EditHabitStackAdapter extends BaseAdapter {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                updatedDescription = editable.toString();
+                System.out.println(updatedDescription);
             }
         });
 
@@ -156,7 +162,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
         newStepNum.setText(String.valueOf(habitStep.getHabitStepNum()));
         newStepText.setText(habitStep.getHabitStepDescription());
         newStepEmoji.setText(habitStep.getHabitStepEmoji());
-        newStepTime.setText(habitStep.getHabitStepTime() + " minutes");
+        seekbarForTime.setProgress(habitStep.getHabitStepTime());
     }
 
     private void setStepMadeLayout(int position){
@@ -168,15 +174,13 @@ public class EditHabitStackAdapter extends BaseAdapter {
 
 
 
-    private void updateStep(){
-        String updatedDescription = newStepText.getText().toString();
+    private void updateStep(int position){
+//        String updatedDescription = newStepText.getText().toString();
         String updatedEmoji = newStepEmoji.getText().toString();
         int updatedTime = Integer.parseInt(newStepTime.getText().toString().split(" ")[0]);
 
-        updatedHabitStep = new HabitStep(habitStep.getHabitStepId(), habitStep.getHabitStep_HabitId(), habitStep.getHabitStepNum(), updatedDescription, seekBarValue, updatedEmoji);
-        habitSteps.remove(habitStep);
-        habitSteps.add(updatedHabitStep);
-
+        updatedHabitStep = new HabitStep(habitStep.getHabitStepId(), habitStep.getHabitStep_HabitId(), habitStep.getHabitStepNum(), updatedDescription, updatedTime, updatedEmoji);
+        habitSteps.set(position, updatedHabitStep);
     }
 
     public interface Listener{
