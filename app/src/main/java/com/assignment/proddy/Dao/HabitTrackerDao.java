@@ -20,7 +20,7 @@ public interface HabitTrackerDao {
     public Long insert(HabitTracker habitTracker);
 
     @Delete
-    public void delete(HabitTracker habitTracker);
+    public Void delete(HabitTracker habitTracker);
 
     @Update
     public Void update(HabitTracker habitTracker);

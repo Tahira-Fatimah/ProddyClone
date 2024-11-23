@@ -24,7 +24,18 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+//        new InsertUser(getApplicationContext()).execute(new User(CONSTANT_UUID,"Fatimah", "fatimah@hamna.com","123"));
         AuthUtils.storeUserInfo(this);
+
+//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
+//        new InsertHabit(getApplicationContext()).execute(habit);
+//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
+//                Calendar.getInstance().getTime(),
+//                true));
+//        new GetCompletedHabitsTask(this, this,"good habit").execute();
 
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);

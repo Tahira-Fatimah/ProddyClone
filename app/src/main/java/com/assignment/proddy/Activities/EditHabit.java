@@ -19,10 +19,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.HabitCategoryAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habit.asyncTasks.GetHabitStackTask;
 import com.assignment.proddy.Entity.habit.asyncTasks.UpdateHabit;
+import com.assignment.proddy.Entity.habit.asyncTasks.onHabitStackRetrievedListener;
 import com.assignment.proddy.Fragments.BottomSheets.DeleteHabitBottomSheet;
 import com.assignment.proddy.Fragments.BottomSheets.NameValidationBottomSheet;
 import com.assignment.proddy.Models.HabitCategory;
+import com.assignment.proddy.ObjectMapping.HabitStack;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.HabitSingleton;
 import com.assignment.proddy.Utils.StringUtils;
@@ -30,10 +33,10 @@ import com.assignment.proddy.ZoomOutPageTransformer;
 
 import java.util.List;
 
-public class EditHabit extends AppCompatActivity {
+public class EditHabit extends AppCompatActivity implements onHabitStackRetrievedListener {
 
     ViewPager2 habitTypeViewPager;
-    TextView deleteHabitBtn, saveChangesBtn, createReminder, editReminderTime, charCount;
+    TextView deleteHabitBtn, saveChangesBtn, createReminder, editReminderTime, charCount, btnEditStack;
     ImageView closeBtn;
     AppCompatButton noReminder;
     EditText habitNameEdit, habitReasonEdit;
@@ -62,7 +65,7 @@ public class EditHabit extends AppCompatActivity {
         defineAllDaysButtons();
         defineSaveChangeBtn();
         defineCloseBtn();
-
+        defineEditStackBtn();
     }
 
     @Override
@@ -99,6 +102,7 @@ public class EditHabit extends AppCompatActivity {
         createReminder = findViewById(R.id.createReminder);
         editReminderTime = findViewById(R.id.edit_reminder_time);
         charCount = findViewById(R.id.edit_habit_name_char_count);
+        btnEditStack = findViewById(R.id.btn_edit_stack);
         daysTextViews = new TextView[]{
                 findViewById(R.id.monday),
                 findViewById(R.id.tuesday),
@@ -266,6 +270,19 @@ public class EditHabit extends AppCompatActivity {
         });
     }
 
+    private void defineEditStackBtn(){
+        btnEditStack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new GetHabitStackTask(EditHabit.this,EditHabit.this ).execute(habit.getHabitId());
+            }
+        });
+    }
 
-
+    @Override
+    public void onHabitStackRetrieved(HabitStack habitStack) {
+        Intent intent = new Intent(EditHabit.this, EditHabitStack.class);
+        intent.putExtra("habitStack", habitStack);
+        startActivity(intent);
+    }
 }

@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import com.assignment.proddy.Entity.habit.Habit;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(tableName = "habit_step",
@@ -20,7 +21,7 @@ import java.util.UUID;
         ),
         indices = @Index(value = "habitStep_HabitId")
 )
-public class HabitStep {
+public class HabitStep implements Serializable {
     @PrimaryKey
     @NonNull private UUID habitStepId;
 
@@ -33,6 +34,10 @@ public class HabitStep {
     private int habitStepTime;
 
     private String habitStepEmoji;
+
+    public HabitStep() {
+
+    }
 
     public HabitStep(@NonNull UUID habitStepId, UUID habitStep_HabitId, int habitStepNum, String habitStepDescription, int habitStepTime, String habitStepEmoji) {
         this.habitStepId = habitStepId;

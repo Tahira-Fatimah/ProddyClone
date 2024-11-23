@@ -45,9 +45,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Proud"
+        android:text="@string/proud"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -59,25 +59,11 @@
             android:backgroundTint="@color/reflection_feeling_bg_dark"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Foggy"
+            android:text="@string/foggy"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
+
             android:textColor="@color/reflection_feeling_bg_dark_font" />
-
-
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_margin="4dp"
-            android:background="@drawable/rounded_background_2"
-            android:backgroundTint="@color/reflection_feeling_bg_light"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="Peaceful"
-            android:textStyle="bold"
-            android:textSize="17sp"
-            android:textColor="@color/reflection_feeling_bg_light_font" />
 
 
     <TextView
@@ -89,9 +75,24 @@
             android:backgroundTint="@color/reflection_feeling_bg_dark"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Euphoric"
+            android:text="@string/peaceful"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
+            android:textColor="@color/white" />
+
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_background_2"
+            android:backgroundTint="@color/reflection_feeling_bg_dark"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/euphoric"
+            android:textStyle="bold"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -103,9 +104,9 @@
             android:backgroundTint="@color/reflection_feeling_bg_dark"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Sad"
+            android:text="@string/sad"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -117,9 +118,9 @@
             android:backgroundTint="@color/reflection_feeling_bg_dark"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Happy"
+            android:text="@string/happy"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="15.5sp"
             android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -131,9 +132,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Moody"
+        android:text="@string/moody"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -145,9 +146,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Helpless"
+        android:text="@string/helpless"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
 
@@ -160,9 +161,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Anxious"
+        android:text="@string/anxious"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -174,9 +175,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Grateful"
+        android:text="@string/grateful"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -188,9 +189,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Loved"
+        android:text="@string/loved"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -202,9 +203,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Angry"
+        android:text="@string/angry"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -216,9 +217,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Calm"
+        android:text="@string/calm"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -230,9 +231,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Creative"
+        android:text="@string/creative"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -244,9 +245,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Distracted"
+        android:text="@string/distracted"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -258,9 +259,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Motivated"
+        android:text="@string/motivated"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -272,9 +273,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Insecure"
+        android:text="@string/insecure"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
     <TextView
@@ -286,9 +287,9 @@
         android:backgroundTint="@color/reflection_feeling_bg_dark"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Nostalgic"
+        android:text="@string/nostalgic"
         android:textStyle="bold"
-        android:textSize="17sp"
+        android:textSize="15.5sp"
         android:textColor="@color/reflection_feeling_bg_dark_font" />
 
 

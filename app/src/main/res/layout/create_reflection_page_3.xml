@@ -18,14 +18,17 @@
         android:textSize="35sp"/>
 
     <GridLayout
+        android:id="@+id/activitiesGridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="15dp"
         android:columnCount="3">
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/sports_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -33,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="💪"
+                android:text="@string/sports_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -44,13 +47,15 @@
                 android:textSize="20sp"
                 android:textColor="@color/reflection_add_note"
                 android:layout_gravity="center_horizontal"
-                android:text="Sports"/>
+                android:text="@string/sports"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/love_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -58,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u2764"
+                android:text="@string/love_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -69,13 +74,15 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Love"/>
+                android:text="@string/love"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="Friends"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -83,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✌️"
+                android:text="@string/friends_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -94,13 +101,15 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Friends"/>
+                android:text="@string/friends"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/work_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -108,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👩‍💻"
+                android:text="@string/relaxing_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -119,13 +128,15 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Work"/>
+                android:text="@string/work"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/studying_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -133,7 +144,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📚"
+                android:text="@string/studying_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -144,13 +155,15 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Studying"/>
+                android:text="@string/studying"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/self_care_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -158,7 +171,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🎆"
+                android:text="@string/self_care_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -169,13 +182,15 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Self-Care"/>
+                android:text="@string/self_care"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/chores_description"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
             android:orientation="vertical">
@@ -183,7 +198,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🧹"
+                android:text="@string/chores_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -194,12 +209,14 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Chores"/>
+                android:text="@string/chores"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
+            android:contentDescription="@string/nature_description"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
@@ -208,7 +225,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🌱"
+                android:text="@string/nature_emoji"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:textSize="30sp"/>
@@ -219,12 +236,14 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Nature"/>
+                android:text="@string/nature"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="5dp"
             android:layout_width="0dp"
+            android:contentDescription="@string/relaxing_description"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_margin="4dp"
@@ -244,7 +263,7 @@
                 android:textSize="20sp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/reflection_add_note"
-                android:text="Relaxing"/>
+                android:text="@string/relaxing"/>
 
         </LinearLayout>
 

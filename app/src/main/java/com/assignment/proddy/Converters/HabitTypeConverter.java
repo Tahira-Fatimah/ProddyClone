@@ -1,6 +1,8 @@
-package com.assignment.proddy.Entity.habit;
+package com.assignment.proddy.Converters;
 
 import androidx.room.TypeConverter;
+
+import com.assignment.proddy.Entity.habit.HabitType;
 
 public class HabitTypeConverter {
 

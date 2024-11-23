@@ -4,4 +4,10 @@
         <item name="android:windowEnterAnimation">@anim/slide_from_bottom_dialog</item>
         <item name="android:windowExitAnimation">@anim/slide_to_bottom_dialog</item>
     </style>
+
+    <style name="CustomFabShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <!-- Override the corner size to make it circular -->
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Ensures the shape is circular -->
+    </style>
 </resources>

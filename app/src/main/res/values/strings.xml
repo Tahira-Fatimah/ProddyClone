@@ -8,5 +8,57 @@
     <string name="already_have_account_text"><u>I already have an account</u></string>
     <string name="forgot_password_text"><u>Forgot password?</u></string>
     <string name="edit_habit_delete_message">If you press confirm now, this habit will be deleted and all of it\'s data will be lost</string>
+    <string name="terrible">TERRIBLE</string>
+    <string name="meh">MEH</string>
+    <string name="normal">NORMAL</string>
+    <string name="good">GOOD</string>
+    <string name="awesome">AWESOME</string>
+
+    <string name="self_care">Self_Care</string>
+    <string name="studying">Studying</string>
+    <string name="friends">Friends</string>
+    <string name="love">Love</string>
+    <string name="nature">Nature</string>
+    <string name="relaxing">Relaxing</string>
+    <string name="sports">Sports</string>
+    <string name="work">Work</string>
+    <string name="chores">Chores</string>
+
+    <string name="sports_emoji">💪</string>
+    <string name="love_emoji">❤</string>
+    <string name="friends_emoji">✌️</string>
+    <string name="self_care_emoji">🎆</string>
+    <string name="studying_emoji">📚</string>
+    <string name="relaxing_emoji">👩‍💻</string>
+    <string name="nature_emoji">🌱</string>
+    <string name="chores_emoji">🧹</string>
+
+    <string name="sports_description">Sports</string>
+    <string name="love_description">Love</string>
+    <string name="self_care_description">Self_Care</string>
+    <string name="studying_description">Studying</string>
+    <string name="work_description">Work</string>
+    <string name="relaxing_description">Relaxing</string>
+    <string name="nature_description">Nature</string>
+    <string name="chores_description">Chores</string>
+
+    <string name="proud">Proud</string>
+    <string name="foggy">Foggy</string>
+    <string name="peaceful">Peaceful</string>
+    <string name="euphoric">Euphoric</string>
+    <string name="sad">Sad</string>
+    <string name="happy">Happy</string>
+    <string name="moody">Moody</string>
+    <string name="helpless">Helpless</string>
+    <string name="anxious">Anxious</string>
+    <string name="grateful">Grateful</string>
+    <string name="loved">Loved</string>
+    <string name="angry">Angry</string>
+    <string name="calm">Calm</string>
+    <string name="creative">Creative</string>
+    <string name="distracted">Distracted</string>
+    <string name="motivated">Motivated</string>
+    <string name="insecure">Insecure</string>
+    <string name="nostalgic">Nostalgic</string>
 
 </resources>

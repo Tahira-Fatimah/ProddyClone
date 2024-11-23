@@ -18,7 +18,7 @@ public interface HabitStepDao {
     public void delete(HabitStep habitStep);
 
     @Update
-    public void update(HabitStep habitStep);
+    public Void update(HabitStep habitStep);
 
     @Insert
     public Long[] insertAll(List<HabitStep> habitStepList);

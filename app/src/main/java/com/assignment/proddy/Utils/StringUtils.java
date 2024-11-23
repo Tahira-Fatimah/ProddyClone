@@ -1,15 +1,24 @@
 package com.assignment.proddy.Utils;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 
 import com.assignment.proddy.Entity.Lesson;
 import com.assignment.proddy.Entity.habit.HabitType;
 import com.assignment.proddy.Models.HabitCategory;
 import com.assignment.proddy.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StringUtils {
     public static List<String> getAllDays(){
@@ -77,4 +86,62 @@ public class StringUtils {
         }
         return -1;
     }
+
+    public static String getFormattedDate(){
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+        return formattedDate;
+    }
+
+    public static String getRequiredFormattedDate(Date currentDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+        return formattedDate;
+    }
+
+    public static SpannableStringBuilder getSpannableString(Date boldDate, String initialText){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(boldDate);
+        SpannableStringBuilder spannableBuilder = new SpannableStringBuilder(initialText);
+        SpannableString boldSpannable = new SpannableString(formattedDate);
+        boldSpannable.setSpan(new StyleSpan(Typeface.BOLD), 0, formattedDate.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableBuilder.append(boldSpannable);
+        return spannableBuilder;
+    }
+
+    public static String getAverageMoodTextFromRate(int rate){
+        switch (rate){
+            case 1:
+                return "Sad";
+            case 2:
+                return "Not that great";
+            case 3:
+                return "Fine";
+            case 4:
+                return "Pretty Happy";
+            case 5:
+                return "Perfect";
+            default:
+                return "Very Sad";
+        }
+    }
+
+    public static String getMoodFromRate(int rate){
+        switch (rate){
+            case 1:
+                return "Terrible";
+            case 2:
+                return "Meh";
+            case 3:
+                return "Normal";
+            case 4:
+                return "Good";
+            case 5:
+                return "Awesome";
+            default:
+                return "Nothing Here Yet. ";
+        }
+    }
+
 }
