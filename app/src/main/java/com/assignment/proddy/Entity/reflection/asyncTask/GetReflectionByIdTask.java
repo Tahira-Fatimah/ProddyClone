@@ -13,9 +13,11 @@ import java.util.UUID;
 
 public class GetReflectionByIdTask extends AsyncTask<UUID, Void, Reflection> {
     private Context context;
+    private onGetReflectionByIdListener onGetReflectionByIdListener;
 
-    public GetReflectionByIdTask(Context context){
+    public GetReflectionByIdTask(Context context, onGetReflectionByIdListener onGetReflectionByIdListener){
         this.context = context;
+        this.onGetReflectionByIdListener = onGetReflectionByIdListener;
     }
 
     @Override
@@ -27,8 +29,16 @@ public class GetReflectionByIdTask extends AsyncTask<UUID, Void, Reflection> {
     @Override
     protected void onPostExecute(Reflection reflection){
         if(reflection != null) {
-            Log.d("Reflection", reflection.toString());
+            onGetReflectionByIdListener.onSuccess(reflection);
+//            Log.d("Reflection", reflection.toString());
         }
-        Log.d("Reflection", reflection.getReflectionCreationDate().toString());
+        else{
+            onGetReflectionByIdListener.onFailure();
+        }
+    }
+
+    public interface onGetReflectionByIdListener{
+        void onSuccess(Reflection reflection);
+        void onFailure();
     }
 }

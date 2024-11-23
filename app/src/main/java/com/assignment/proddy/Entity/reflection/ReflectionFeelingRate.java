@@ -27,5 +27,7 @@ public enum ReflectionFeelingRate {
         }
         throw new IllegalArgumentException("No enum constant with rate: " + rate);
     }
+
+
 }
 

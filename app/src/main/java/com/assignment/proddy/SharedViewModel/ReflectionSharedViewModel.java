@@ -11,6 +11,7 @@ import com.assignment.proddy.Entity.reflection.Reflection;
 import com.assignment.proddy.Entity.reflection.ReflectionActivities;
 import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
     private final MutableLiveData<Integer> reflectionFeelingRate = new MutableLiveData<>(-1);
     private final MutableLiveData<List<ReflectionActivities>> reflectionActivitiesList = new MutableLiveData<>();
     private final MutableLiveData<String> reflectionThoughts = new MutableLiveData<>();
+    private final MutableLiveData<Date> reflectionCreationDate = new MutableLiveData<>();
 
     public ReflectionSharedViewModel(@NonNull Application application) {
         super(application);
@@ -81,6 +83,14 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
         this.reflectionThoughts.setValue(thoughts);
     }
 
+    public void setReflectionCreationDate(Date reflectionCreationDate) {
+        this.reflectionCreationDate.setValue(reflectionCreationDate);
+    }
+
+    public LiveData<Date> getReflectionCreationDate(){
+        return reflectionCreationDate;
+    }
+
     // Method to populate the ViewModel from a Reflection object
     public void setReflectionData(Reflection reflection) {
         setReflectionId(reflection.getReflectionId());
@@ -89,6 +99,7 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
         setReflectionFeelingRate(reflection.getReflectionFeelingRate());
         setReflectionActivitiesList(reflection.getReflectionActivitiesList());
         setReflectionThoughts(reflection.getReflectionThoughts());
+        setReflectionCreationDate(reflection.getReflectionCreationDate());
     }
 
 

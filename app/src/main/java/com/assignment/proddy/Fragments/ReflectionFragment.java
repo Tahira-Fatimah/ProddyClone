@@ -1,37 +1,91 @@
 package com.assignment.proddy.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.text.SpannableStringBuilder;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.assignment.proddy.Activities.StartReflection;
+import com.assignment.proddy.Entity.reflection.Reflection;
+import com.assignment.proddy.Entity.reflection.ReflectionActivities;
+import com.assignment.proddy.Entity.reflection.ReflectionActivityEmojiEnum;
+import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
+import com.assignment.proddy.Entity.reflection.ReflectionFeelingsColourEnum;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetAverageReflectionMoodTask;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionByDateTodayTask;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionByIdTask;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionFeelingRateAndDateForLastWeek;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionFeelingRateForLastMonthTask;
+import com.assignment.proddy.ObjectMapping.ReflectionDateAndRate;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.DrawableUtils;
+import com.assignment.proddy.Utils.StringUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 
 public class ReflectionFragment extends Fragment {
 
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MMM", Locale.getDefault());
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd", Locale.getDefault());
+    SimpleDateFormat dayFormat = new SimpleDateFormat("EEE");
+    LinearLayout reflectionHorizontalScrollViewContainer, tapToReflectButton;
+    TextView moodDateView, moodTextView, moodNumView, thoughtsView, avgMoodTextView, avgMoodNumView;
+    GridLayout feelingsGridView, activitiesGridView;
+    LinearLayout allBarsView;
+    ImageView moodEmojiView, avgMoodEmojiView;
+    int avgMood;
+    LinearLayout lastDateContainerClicked;
+    TextView lastMonthClicked;
+    TextView lastDateClicked;
+    HorizontalScrollView dateContainerHorizontalScrollView;
+    Reflection currentReflection;
+    private boolean isComingBackFromAnotherActivity = false;
+
+
     public ReflectionFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Reflection updatedReflection = (Reflection) result.getData().getSerializableExtra("Reflection");
+                        // Handle the updatedReflection object here (e.g., update UI, ViewModel, etc.)
+                        Log.d("UpdatedReflection", updatedReflection.toString());
+                    }
+                }
+        );
     }
 
     @Override
@@ -43,150 +97,455 @@ public class ReflectionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView moodDateView = view.findViewById(R.id.moodDate);
-        TextView moodTextView = view.findViewById(R.id.moodText);
-        ImageView moodEmojiView = view.findViewById(R.id.moodEmoji);
-        TextView moodNumView = view.findViewById(R.id.moodNum);
-        TextView thoughtsView = view.findViewById(R.id.thoughts);
-        GridLayout feelingsGridView = view.findViewById(R.id.feelingsGrid);
-        GridLayout activitiesGridView = view.findViewById(R.id.activitiesGrid);
-        LinearLayout allBarsView = view.findViewById(R.id.allBars);
-        TextView avgMoodTextView = view.findViewById(R.id.avgMoodText);
-        ImageView avgMoodEmojiView = view.findViewById(R.id.avgMoodEmoji);
-        TextView avgMoodNumView = view.findViewById(R.id.avgMoodNum);
+        initViews(view);
+        setInitialView();
+        setReflectionRateWeekBars();
+        inflateDateHorizontalScrollView();
+        defineTapToReflectBtn();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isComingBackFromAnotherActivity) {
+            getUpdatedReflectionViewOnResume();
+            allBarsView.removeAllViews();
+            setReflectionRateWeekBars();
+            setAverageReflectionMood();
+            isComingBackFromAnotherActivity = false;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isComingBackFromAnotherActivity = true;
+    }
+
+    private void initViews(View view){
+        reflectionHorizontalScrollViewContainer = view.findViewById(R.id.reflectionHorizontalScrollViewContainer);
+        moodDateView = view.findViewById(R.id.moodDate);
+        moodTextView = view.findViewById(R.id.moodText);
+        moodEmojiView = view.findViewById(R.id.moodEmoji);
+        moodNumView = view.findViewById(R.id.moodNum);
+        thoughtsView = view.findViewById(R.id.thoughts);
+        feelingsGridView = view.findViewById(R.id.feelingsGrid);
+        activitiesGridView = view.findViewById(R.id.activitiesGrid);
+        allBarsView = view.findViewById(R.id.allBars);
+        avgMoodTextView = view.findViewById(R.id.avgMoodText);
+        avgMoodEmojiView = view.findViewById(R.id.avgMoodEmoji);
+        avgMoodNumView = view.findViewById(R.id.avgMoodNum);
+        tapToReflectButton = view.findViewById(R.id.tapToReflectButton);
+        dateContainerHorizontalScrollView = view.findViewById(R.id.dateContainerHorizontalScrollView);
+    }
+
+    private void setInitialView(){
+        new GetReflectionByDateTodayTask(getContext(), new GetReflectionByDateTodayTask.onReflectionRetrievedListener() {
+            @Override
+            public void onSuccess(Reflection reflection) {
+                tapToReflectButton.setVisibility(View.VISIBLE);
+                currentReflection = reflection;
+                defineDefaultReflection(Calendar.getInstance().getTime());
+                setCustomReflection(reflection);
+            }
+
+            @Override
+            public void onFailure() {
+                tapToReflectButton.setVisibility(View.GONE);
+                defineDefaultReflection(Calendar.getInstance().getTime());
+            }
+        }).execute(Calendar.getInstance().getTime());
+    }
+
+    private void defineDefaultReflection(Date today){
+        SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(today, "Your mood on ");
+        moodDateView.setText(spannableBuilder);
+        moodTextView.setText("Nothing here yet.");
+        moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(-1));
+        setAverageReflectionMood();
+    }
+
+    private void inflateDateHorizontalScrollView() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        Date todaysDate = Calendar.getInstance().getTime();
+
+        new GetReflectionFeelingRateForLastMonthTask(getContext(), new GetReflectionFeelingRateForLastMonthTask.onGetReflectionFeelingRateForLastMonthListener() {
+            @Override
+            public void onSuccess(List<ReflectionDateAndRate> res) {
+                Log.d("ReflectionDateAndRAte", String.valueOf(res.get(0).getReflectionCreationDate()));
+                for (int i = 0; i <= 30; i++) {
+                    LinearLayout childView = (LinearLayout) inflater.inflate(
+                            R.layout.reflection_horizontal_scroll_view_date_item,
+                            reflectionHorizontalScrollViewContainer,
+                            false
+                    );
+                    ImageView reflectionFeelingEmoji = childView.findViewById(R.id.reflectionFeelingEmoji);
+
+                    Date currentDate = calendar.getTime();
+                    int feelingRate = findFeelingRateByDate(res, currentDate);
+                    if(feelingRate != -1){
+                        reflectionFeelingEmoji.setImageResource(DrawableUtils.getReflectionEmojiDrawable(feelingRate));
+                    } else{
+                        reflectionFeelingEmoji.setImageResource(R.drawable.add_circle_purple);
+//                        reflectionFeelingEmoji.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                Intent intent = new Intent(getContext(), StartReflection.class);
+//                                activityResultLauncher.launch(intent);
+//                            }
+//                        });
+                    }
+                    String month = monthFormat.format(currentDate);
+                    String day = dateFormat.format(currentDate);
+
+                    LinearLayout dateContainerLinearLayout = childView.findViewById(R.id.dateContainer);
+
+                    TextView monthTextView = childView.findViewById(R.id.reflectionMonth);
+                    monthTextView.setText(month);
+
+                    TextView dayTextView = childView.findViewById(R.id.reflectionDate);
+                    dayTextView.setText(day);
+
+                    childView.setContentDescription(currentDate.toString());
+                    dateContainerLinearLayout.setTag(currentDate);
+
+                    if(currentDate.equals(todaysDate)){
+                        lastDateContainerClicked = dateContainerLinearLayout;
+                        lastDateClicked = dayTextView;
+                        lastMonthClicked = monthTextView;
+                        dateContainerLinearLayout.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
+                        monthTextView.setTextColor(getResources().getColor(R.color.white));
+                        dayTextView.setTextColor(getResources().getColor(R.color.white));
+                    }
+
+                    setDateContainerOnClick(dateContainerLinearLayout, monthTextView, dayTextView);
+                    reflectionHorizontalScrollViewContainer.addView(childView);
+
+                    calendar.add(Calendar.DAY_OF_MONTH, 1);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }).execute();
+
+        dateContainerHorizontalScrollView.postDelayed(new Runnable() {
+            public void run() {
+                dateContainerHorizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+            }
+        }, 100L);
+
+    }
+
+    public int findFeelingRateByDate(List<ReflectionDateAndRate> res, Date targetDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // Formatting the date as YYYY-MM-DD
+        String targetDateString = dateFormat.format(targetDate);
+
+        for (ReflectionDateAndRate reflection : res) {
+            String reflectionDateString = dateFormat.format(reflection.getReflectionCreationDate());
+            if (targetDateString.equals(reflectionDateString)) {
+                return reflection.getReflectionFeelingRate();
+            }
+        }
+        return -1;
+    }
+
+    private void defineReflectionDateOnClick(Date selectedDate) {
+        new GetReflectionByDateTodayTask(getContext(), new GetReflectionByDateTodayTask.onReflectionRetrievedListener() {
+            @Override
+            public void onSuccess(Reflection reflection) {
+                currentReflection = reflection;
+                clearViews();
+                tapToReflectButton.setVisibility(View.VISIBLE);
+                setCustomReflection(reflection);
+            }
+
+            @Override
+            public void onFailure() {
+                currentReflection = null;
+                clearViews();
+                tapToReflectButton.setVisibility(View.GONE);
+                defineDefaultReflection(selectedDate);
+            }
+        }).execute(selectedDate);
+    }
+
+    private void setAverageReflectionMood(){
+        new GetAverageReflectionMoodTask(getContext(), new GetAverageReflectionMoodTask.onGetAverageReflectionMoodListener() {
+            @Override
+            public void onSuccess(Float avg) {
+                float truncated =  (float) ((int) (avg * 10)) / 10;
+                avgMood = Math.round(avg);
+                avgMoodNumView.setText(String.valueOf(truncated));
+                avgMoodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(avgMood));
+                avgMoodTextView.setText(StringUtils.getAverageMoodTextFromRate(avgMood));
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }).execute();
+    }
+
+    private void setReflectionRateWeekBars(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -6);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                0 ,// 0 height with weight applied
+                LinearLayout.LayoutParams.MATCH_PARENT
+                );
+        layoutParams.weight = 1;
+        new GetReflectionFeelingRateAndDateForLastWeek(getContext(), new GetReflectionFeelingRateAndDateForLastWeek.onGetReflectionFeelingRateAndDateForLastWeekListener() {
+            @Override
+            public void onSuccess(List<ReflectionDateAndRate> res) {
+                Log.d("ReflectionDateAndRate ", res.toString());
+                for (int i = 0; i < 7; i++) {
+                    Date currentDate = calendar.getTime();
+                    String day = dayFormat.format(currentDate);
+
+                    int feelingRate = findFeelingRateByDate(res, currentDate);
+                    LinearLayout daylinearLayout = new LinearLayout(requireContext());
+                    daylinearLayout.setOrientation(LinearLayout.VERTICAL);
+                    daylinearLayout.setGravity(Gravity.BOTTOM);
+                    daylinearLayout.setLayoutParams(layoutParams);
+
+                    // Create the Spacer View
+                    View spacerView = new View(requireContext());
+                    LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams(
+                            0, 0 // 0dp width and height
+                    );
+                    spacerParams.weight = 1;
+                    spacerView.setLayoutParams(spacerParams);
+
+                    TextView moodNum = new TextView(requireContext());
+                    View bar = new View(requireContext());
+
+                    // Create TextView for mood number
+                    moodNum.setTypeface(null, Typeface.BOLD);
+                    moodNum.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16); // 16sp
+                    LinearLayout.LayoutParams moodNumParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    moodNumParams.gravity = Gravity.CENTER_HORIZONTAL;
+                    moodNum.setLayoutParams(moodNumParams);
+
+                    // Create the Bar View
+                    bar.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.rounded_background_1));
+                    LinearLayout.LayoutParams barParams;
 
 
-        String date = "Nov 10, 2024"; // get from db thru create reflection------------
-        moodDateView.setText("Your mood on " + date);
-        String selectedMood = "Good"; // get from db thru create reflection------------
-        moodTextView.setText(selectedMood);
-        moodEmojiView.setImageResource(R.drawable.mood1);
-        String num = "4"; // get from db thru create reflection------------
-        moodNumView.setText(num);
-        String thoughts = "good thoughts only"; // get from db thru create reflection------------
-        thoughtsView.setText(thoughts);
+                    if(feelingRate != -1){
+                        barParams = new LinearLayout.LayoutParams(
+                                (int) (12 * getResources().getDisplayMetrics().density), // 12dp in pixels
+                                (int) (feelingRate * 16 * getResources().getDisplayMetrics().density)  // 80dp in pixels // calc height using mood num from db -------
+                        );
+                        moodNum.setText(String.valueOf(feelingRate));
+                        moodNum.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                        bar.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.light_purple));
+                    } else{
+                        barParams = new LinearLayout.LayoutParams(
+                                (int) (12 * getResources().getDisplayMetrics().density), // 12dp in pixels
+                                (int) (80 * getResources().getDisplayMetrics().density)  // 80dp in pixels // calc height using mood num from db -------
+                        );
+                        moodNum.setTextColor(ContextCompat.getColor(requireContext(), R.color.your_week_bg_colour));
+                        bar.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.your_week_bg_colour));
+                    }
 
-// FEELINGS
-
-        // textview for 1 feeling
-        TextView newTextView = new TextView(requireContext());
-        newTextView.setText("Happy"); // get from db thru create reflection------------
-        newTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_font)); // get from db thru create reflection------------
-        newTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_bg)); // get from db thru create reflection------------
-
-        // Set padding (convert dp to pixels)
-        float density = getResources().getDisplayMetrics().density; // Get the screen density
-        int paddingHorizontal = (int) (8 * density); // Convert 8dp to pixels
-        int paddingVertical = (int) (3 * density);  // Convert 3dp to pixels
-        newTextView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
-
-        // Set margin using LayoutParams
-        ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.setMargins((int) (4 * density), (int) (4 * density), (int) (4 * density), (int) (4 * density)); // 4dp margins
-        newTextView.setLayoutParams(layoutParams);
-        feelingsGridView.addView(newTextView);
+                    barParams.gravity = Gravity.CENTER_HORIZONTAL;
+                    barParams.topMargin = (int) (4 * getResources().getDisplayMetrics().density); // 4dp top margin
+                    barParams.bottomMargin = (int) (20 * getResources().getDisplayMetrics().density); // 20dp bottom margin
+                    bar.setLayoutParams(barParams);
 
 
-// ACTIVITIES
+                    TextView dayText = new TextView(requireContext());
+                    dayText.setText(day);
+                    dayText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+                    LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    textParams.gravity = Gravity.CENTER_HORIZONTAL;
+                    dayText.setLayoutParams(textParams);
 
-        // LinearLayout for 1 activity
-        LinearLayout linearLayout = new LinearLayout(requireContext());
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
+                    daylinearLayout.addView(spacerView);
+                    daylinearLayout.addView(moodNum);
+                    daylinearLayout.addView(bar);
+                    daylinearLayout.addView(dayText);
 
-        GridLayout.LayoutParams layoutparams = new GridLayout.LayoutParams();
-        layoutparams.width = (int) (135 * getResources().getDisplayMetrics().density); // Convert 35dp to px
-        layoutparams.height = GridLayout.LayoutParams.WRAP_CONTENT;
-        linearLayout.setLayoutParams(layoutparams);
+                    allBarsView.addView(daylinearLayout);
+                    calendar.add(Calendar.DAY_OF_MONTH, 1);
 
-        // first TextView for emoji
-        TextView emojiTextView = new TextView(requireContext());
-        emojiTextView.setText("💪"); // get from db thru create reflection------------
-        emojiTextView.setTextSize(30); // 30sp
-        emojiTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-        emojiTextView.setPadding(0, 8, 0, 8); // Margin in dp to px
+                }
+            }
 
-        // second TextView for text
-        TextView studyingTextView = new TextView(requireContext());
-        studyingTextView.setText("Studying"); // get from create reflection----------------
-        studyingTextView.setTextSize(15); // 15sp
-        studyingTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.reflection_date_font_purple));
-        studyingTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+            @Override
+            public void onFailure() {
+                Log.d("ReflectionDateAndRate", "");
+            }
+        }).execute();
+    }
 
-        // Add TextViews to the LinearLayout
-        linearLayout.addView(emojiTextView);
-        linearLayout.addView(studyingTextView);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            if (data != null) {
+                Reflection updatedReflection = (Reflection) data.getSerializableExtra("Reflection");
+                Log.d("UpdatedReflection", updatedReflection.toString());
+            }
+        }
+    }
 
-        // Add LinearLayout to the GridLayout
-        activitiesGridView.addView(linearLayout);
+    private void setCustomReflection(Reflection reflection){
 
-// YOUR WEEK
+        String reflectionThoughts = reflection.getReflectionThoughts();
+        List<ReflectionActivities> reflectionActivities = reflection.getReflectionActivitiesList();
+        List<ReflectionFeelings> reflectionFeelings = reflection.getReflectionFeelingsList();
 
-        // Create LinearLayout for each day reflection exists (1 linear layout for now)
-        LinearLayout daylinearLayout = new LinearLayout(requireContext());
-        daylinearLayout.setOrientation(LinearLayout.VERTICAL);
-        daylinearLayout.setGravity(Gravity.BOTTOM);
+        thoughtsView.setText(reflectionThoughts);
+        SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(reflection.getReflectionCreationDate(), "Your mood on ");
+        moodDateView.setText(spannableBuilder);
+        moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(reflection.getReflectionFeelingRate()));
+        moodTextView.setText(StringUtils.getMoodFromRate(reflection.getReflectionFeelingRate()));
+        moodNumView.setText(String.valueOf(reflection.getReflectionFeelingRate()));
 
-        // Create the Spacer View
-        View spacerView = new View(requireContext());
-        LinearLayout.LayoutParams spacerParams = new LinearLayout.LayoutParams(
-                0, 0 // 0dp width and height
-        );
-        spacerParams.weight = 1;
-        spacerView.setLayoutParams(spacerParams);
+        for(ReflectionFeelings reflectionFeeling: reflectionFeelings){
+            int value = ReflectionFeelingsColourEnum.valueOf(reflectionFeeling.name()).getValue();
 
-        // Create TextView for mood number
-        TextView moodNum = new TextView(requireContext());
-        moodNum.setText("5");
-        moodNum.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-        moodNum.setTypeface(null, Typeface.BOLD);
-        moodNum.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16); // 16sp
-        LinearLayout.LayoutParams moodNumParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        moodNumParams.gravity = Gravity.CENTER_HORIZONTAL;
-        moodNum.setLayoutParams(moodNumParams);
+            TextView newTextView = new TextView(requireContext());
+            newTextView.setText(reflectionFeeling.getDisplayName());
+            if(value == 0){
+                newTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_negative_font));
+                newTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_negative_bg));
+            }
+            else{
+                newTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_font));
+                newTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_bg));
+            }
+            // get from db thru create reflection------------
 
-        // Create the Bar View
-        View bar = new View(requireContext());
-        bar.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.rounded_background_1));
-        bar.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.light_purple));
-        LinearLayout.LayoutParams barParams = new LinearLayout.LayoutParams(
-                (int) (12 * getResources().getDisplayMetrics().density), // 12dp in pixels
-                (int) (80 * getResources().getDisplayMetrics().density)  // 80dp in pixels // calc height using mood num from db -------
-        );
-        barParams.gravity = Gravity.CENTER_HORIZONTAL;
-        barParams.topMargin = (int) (4 * getResources().getDisplayMetrics().density); // 4dp top margin
-        barParams.bottomMargin = (int) (20 * getResources().getDisplayMetrics().density); // 20dp bottom margin
-        bar.setLayoutParams(barParams);
+            // Set padding (convert dp to pixels)
+            float density = getResources().getDisplayMetrics().density; // Get the screen density
+            int paddingHorizontal = (int) (8 * density); // Convert 8dp to pixels
+            int paddingVertical = (int) (3 * density);  // Convert 3dp to pixels
+            newTextView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
 
-        // Create the Day TextView
-        TextView text = new TextView(requireContext());
-        text.setText("Mon"); // get from db ---------
-        text.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-        LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        textParams.gravity = Gravity.CENTER_HORIZONTAL;
-        text.setLayoutParams(textParams);
-
-        // Add all views to the dayLinearLayout
-        daylinearLayout.addView(spacerView);
-        daylinearLayout.addView(moodNum);
-        daylinearLayout.addView(bar);
-        daylinearLayout.addView(text);
-
-        allBarsView.addView(daylinearLayout);
+            // Set margin using LayoutParams
+            ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            layoutParams.setMargins((int) (4 * density), (int) (4 * density), (int) (4 * density), (int) (4 * density)); // 4dp margins
+            newTextView.setLayoutParams(layoutParams);
+            feelingsGridView.addView(newTextView);
+        }
 
 
-// AVERAGE MOOD
-        avgMoodTextView.setText("Fine");
-        avgMoodEmojiView.setImageResource(R.drawable.mood3);
-        avgMoodNumView.setText("3.0");
+        for(int i = 0; i<reflectionActivities.size(); i++){
+            ReflectionActivities reflectionActivity = reflectionActivities.get(i);
+            Log.d("ReflectionActivity", reflectionActivity.getDisplayName());
+            String value = ReflectionActivityEmojiEnum.fromEnumName(reflectionActivity.getDisplayName()).getDisplayName();
+            LinearLayout linearLayout = new LinearLayout(requireContext());
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+
+            linearLayoutParams.setMargins(0, 5, 0, 5);
+
+
+            GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams();
+            layoutParams.width = 0;
+            layoutParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            layoutParams.columnSpec = GridLayout.spec(i % 3, 1f);
+            layoutParams.rowSpec = GridLayout.spec(i / 3);
+
+            TextView emojiTextView = new TextView(requireContext());
+            emojiTextView.setText(value);
+            emojiTextView.setTextSize(30);
+            emojiTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+            emojiTextView.setPadding(0, 8, 0, 8);
+
+            TextView activityTextView = new TextView(requireContext());
+            activityTextView.setText(reflectionActivity.getDisplayName());
+            activityTextView.setTextSize(15); // 15sp
+            activityTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.reflection_date_font_purple));
+            activityTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            linearLayout.addView(emojiTextView);
+            linearLayout.addView(activityTextView);
+            linearLayout.setLayoutParams(linearLayoutParams);
+
+            // Add LinearLayout to the GridLayout
+            activitiesGridView.addView(linearLayout, layoutParams);
+        }
+
+    }
+
+    private void setDateContainerOnClick(LinearLayout layout, TextView month, TextView date){
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date selectedDate = (Date) layout.getTag();
+                if(lastDateContainerClicked != null){
+                    lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
+                    lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+                    lastMonthClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+                }
+                layout.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
+                month.setTextColor(getResources().getColor(R.color.white));
+                date.setTextColor(getResources().getColor(R.color.white));
+
+                lastDateContainerClicked = layout;
+                lastMonthClicked = month;
+                lastDateClicked = date;
+                defineReflectionDateOnClick(selectedDate);
+
+            }
+        });
+    }
+
+    private void clearViews(){
+        moodNumView.setText("");
+        thoughtsView.setText("");
+        feelingsGridView.removeAllViews();
+        activitiesGridView.removeAllViews();
+    }
+
+    private void defineTapToReflectBtn(){
+        tapToReflectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentReflection != null){
+                    Intent intent = new Intent(getContext(), StartReflection.class);
+                    intent.putExtra("Reflection", currentReflection);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void getUpdatedReflectionViewOnResume(){
+        new GetReflectionByIdTask(getContext(), new GetReflectionByIdTask.onGetReflectionByIdListener() {
+            @Override
+            public void onSuccess(Reflection reflection) {
+                clearViews();
+                currentReflection = reflection;
+                setCustomReflection(currentReflection);
+            }
+            @Override
+            public void onFailure() {
+
+            }
+        }).execute(currentReflection.getReflectionId());
 
     }
 }

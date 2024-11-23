@@ -48,6 +48,8 @@ public class StartReflection1 extends Fragment {
         initViewModels();
         defineCloseBtn();
         defineFeelingRateLayouts(view);
+        currentDate.setText(StringUtils.getRequiredFormattedDate(reflectionSharedViewModel.getReflectionCreationDate().getValue()));
+        
     }
 
     private void initViewModels(){
@@ -60,7 +62,6 @@ public class StartReflection1 extends Fragment {
         reflectionQuoteAuthor = view.findViewById(R.id.reflectionQuoteAuthor);
         closeBtn = view.findViewById(R.id.closeBtn);
         currentDate = view.findViewById(R.id.currentDate);
-        currentDate.setText(StringUtils.getFormattedDate());
 
     }
 

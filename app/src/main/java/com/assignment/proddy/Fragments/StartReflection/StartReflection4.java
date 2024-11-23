@@ -33,6 +33,10 @@ public class StartReflection4 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         reflectionSharedViewModel = new ViewModelProvider(requireActivity()).get(ReflectionSharedViewModel.class);
         initAndDefineEditText(view);
+        if(reflectionSharedViewModel.getReflectionThoughts().getValue() != null){
+            renderInitValues();
+        }
+
     }
 
     private void initAndDefineEditText(View view){
@@ -47,6 +51,7 @@ public class StartReflection4 extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String thoughts = s.toString();
                 reflectionSharedViewModel.setReflectionThoughts(thoughts);
+                System.out.println("Value Changed");
             }
 
             @Override
@@ -54,5 +59,9 @@ public class StartReflection4 extends Fragment {
 
             }
         });
+    }
+
+    private void renderInitValues(){
+        reflectionThoughts.setText(reflectionSharedViewModel.getReflectionThoughts().getValue());
     }
 }

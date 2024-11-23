@@ -17,354 +17,20 @@
         android:paddingBottom="16dp"/>
 
     <HorizontalScrollView
+        android:id="@+id/dateContainerHorizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="20dp"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:divider="?android:attr/dividerHorizontal">-->
+                <LinearLayout
+                    android:id="@+id/reflectionHorizontalScrollViewContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:divider="?android:attr/dividerHorizontal">
 
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="65dp"-->
-        <!--                    android:layout_height="65dp"-->
-        <!--                    android:orientation="vertical"-->
-        <!--                    android:background="@drawable/rounded_background_1"-->
-        <!--                    android:layout_marginHorizontal="6dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:backgroundTint="@color/reflection_date_light_grey"-->
-        <!--                    android:gravity="center">-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Oct"-->
-        <!--                        android:textSize="16sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-
-        <!--                    <TextView-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="15"-->
-        <!--                        android:textStyle="bold"-->
-        <!--                        android:textSize="22sp"-->
-        <!--                        android:textColor="@color/reflection_date_font_purple"-->
-        <!--                        android:gravity="center"/>-->
-        <!--                </LinearLayout>-->
-        <!--                <ImageView-->
-        <!--                    android:layout_width="50dp"-->
-        <!--                    android:layout_height="50dp"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:src="@drawable/mood1"/>-->
-
-        <!--            </LinearLayout>-->
-
-
-        <!--        </LinearLayout>-->
+                </LinearLayout>
     </HorizontalScrollView>
 
     <ScrollView
@@ -379,6 +45,7 @@
             android:background="#F5F5F5">
 
             <LinearLayout
+                android:id="@+id/tapToReflectButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_background_1"
@@ -416,7 +83,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Your mood on Nov 10, 2024"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="16sp"/>
 
@@ -456,7 +122,6 @@
                         android:id="@+id/moodNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
                         android:textColor="@color/white"
                         android:layout_alignParentEnd="true"
                         android:textSize="40sp"
@@ -494,7 +159,6 @@
                         android:id="@+id/thoughts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Good thoughts onlyyyyyyyyyyyyyy"
                         android:textSize="15dp"
                         android:textColor="@color/reflection_date_font_purple"
                         android:paddingVertical="8dp"/>
@@ -534,7 +198,14 @@
                         android:textColor="@color/reflection_date_font_purple"
                         android:textStyle="bold"/>
 
-                    <include layout="@layout/activities"/>
+                    <GridLayout
+                        android:id="@+id/activitiesGrid"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="3"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="start"/>
 
 
                 </LinearLayout>
@@ -898,7 +569,6 @@
                         android:id="@+id/avgMoodNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4.5"
                         android:textColor="@color/reflection_date_font_purple"
                         android:layout_alignParentEnd="true"
                         android:textSize="40sp"

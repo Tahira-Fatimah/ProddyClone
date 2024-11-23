@@ -12,6 +12,7 @@ import com.assignment.proddy.Converters.ReflectionFeelingsConverter;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.user.User;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,7 @@ import java.util.UUID;
                 onUpdate = ForeignKey.CASCADE
         )
 )
-public class Reflection {
+public class Reflection implements Serializable {
     @PrimaryKey
     @NonNull private UUID reflectionId;
 
@@ -43,6 +44,9 @@ public class Reflection {
     private String reflectionThoughts;
 
     private Date reflectionCreationDate;
+
+    public Reflection() {
+    }
 
     public Reflection(@NonNull UUID reflectionId, UUID reflection_UserId, List<ReflectionFeelings> reflectionFeelingsList, int reflectionFeelingRate, List<ReflectionActivities> reflectionActivitiesList, String reflectionThoughts, Date reflectionCreationDate) {
         this.reflectionId = reflectionId;

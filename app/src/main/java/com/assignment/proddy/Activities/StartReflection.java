@@ -1,16 +1,20 @@
 package com.assignment.proddy.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Update;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.StartReflectionAdapter;
 import com.assignment.proddy.Entity.reflection.Reflection;
+import com.assignment.proddy.Entity.reflection.asyncTask.UpdateReflectionTask;
 import com.assignment.proddy.Fragments.StartReflection.StartReflection1;
 import com.assignment.proddy.Fragments.StartReflection.StartReflection2;
 import com.assignment.proddy.Fragments.StartReflection.StartReflection3;
@@ -22,9 +26,7 @@ import com.assignment.proddy.SharedViewModel.ReflectionSharedViewModel;
 import com.assignment.proddy.Utils.AuthUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,11 +38,17 @@ public class StartReflection extends AppCompatActivity {
     ReflectionSharedViewModel reflectionSharedViewModel;
     ReflectionNavigationViewModel reflectionNavigationViewModel;
     FloatingActionButton backBtn, nextBtn;
+    Reflection receivedReflection;
+
+    //1732301535647
+    //1732301637066
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_reflection);
+        receivedReflection = (Reflection) getIntent().getSerializableExtra("Reflection");
+//        Log.d("ReceivedReflection", receivedReflection.toString());
         initViews();
         initViewModels();
         initFragments();
@@ -50,6 +58,11 @@ public class StartReflection extends AppCompatActivity {
         defineNextBtn();
         defineBackBtn();
         defineStartReflectionAdapter();
+
+        if(receivedReflection != null){
+            reflectionSharedViewModel.setReflectionData(receivedReflection);
+            reflectionSharedViewModel.toString();
+        }
     }
 
     private void initViews(){
@@ -62,8 +75,18 @@ public class StartReflection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(startReflectionViewPager.getCurrentItem() == createReflectionFragments.size() -1){
-                    Reflection reflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), Calendar.getInstance().getTime());
-                    new InsertReflectionTask(StartReflection.this).execute(reflection);
+                    Reflection updatedReflection;
+                    if(receivedReflection.getReflectionId() == null){
+                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), Calendar.getInstance().getTime());
+                        new InsertReflectionTask(StartReflection.this).execute(updatedReflection);
+                    }
+                    else{
+                        updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
+                        new UpdateReflectionTask(StartReflection.this).execute(updatedReflection);
+                    }
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("Reflection", updatedReflection);
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                 } else{
                     startReflectionViewPager.setCurrentItem(startReflectionViewPager.getCurrentItem() + 1);

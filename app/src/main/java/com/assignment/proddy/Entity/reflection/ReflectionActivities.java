@@ -7,7 +7,7 @@ public enum ReflectionActivities {
     FRIENDS("Friends"),
     WORK("Work"),
     STUDYING("Studying"),
-    SELF_CARE("Self-care"),
+    SELF_CARE("Self_Care"),
     CHORES("Chores"),
     NATURE("Nature"),
     RELAXING("Relaxing");

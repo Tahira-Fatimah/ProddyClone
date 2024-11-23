@@ -70,6 +70,12 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
         defineHabitStack();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        defineHabitStack();
+    }
+
     private void initViews(){
         createStackLayout = findViewById(R.id.createStack);
         stackExistsLayout = findViewById(R.id.stackExists);

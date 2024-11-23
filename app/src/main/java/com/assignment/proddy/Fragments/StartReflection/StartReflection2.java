@@ -38,6 +38,10 @@ public class StartReflection2 extends Fragment {
         initViews(view);
         defineFeelingsTextView();
         reflectionSharedViewModel = new ViewModelProvider(requireActivity()).get(ReflectionSharedViewModel.class);
+        if(reflectionSharedViewModel.getReflectionFeelingsList().getValue() != null &&
+                !(reflectionSharedViewModel.getReflectionFeelingsList().getValue().isEmpty())){
+            renderInitValues();
+        }
 
     }
 
@@ -51,6 +55,7 @@ public class StartReflection2 extends Fragment {
             defineFeelingsTextViewOnClick(textView);
         }
     }
+
     private List<TextView> getTextViewsFromGridLayout(GridLayout gridLayout) {
         List<TextView> textViewList = new ArrayList<>();
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
@@ -90,5 +95,16 @@ public class StartReflection2 extends Fragment {
                 Log.d("ReflectionFeeling ", reflectionSharedViewModel.toString());
             }
         });
+    }
+
+    private void renderInitValues(){
+        for(TextView textView : feelingTextViews){
+            String text = (String) textView.getText();
+            ReflectionFeelings feeling = ReflectionFeelings.fromString(text);
+            if(reflectionSharedViewModel.getReflectionFeelingsList().getValue().contains(feeling)){
+                textView.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_feeling_bg_light));
+                textView.setTextColor(getResources().getColor(R.color.reflection_feeling_bg_light_font));
+            }
+        }
     }
 }

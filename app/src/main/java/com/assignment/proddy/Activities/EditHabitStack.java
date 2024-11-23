@@ -117,6 +117,7 @@ public class EditHabitStack extends AppCompatActivity {
     }*/
 
     private void refreshAdapter(){
+        habitSteps.sort(Comparator.comparingInt(HabitStep::getHabitStepNum).reversed());
         adapter = new EditHabitStackAdapter(this, habitSteps, new EditHabitStackAdapter.Listener() {
             @Override
             public void onListItemClick() {
@@ -150,7 +151,6 @@ public class EditHabitStack extends AppCompatActivity {
             public void onClick(View v) {
                 insertNewStep();
                 insertedSteps.add(habitSteps.get(habitSteps.size() - 1));
-                habitSteps.sort(Comparator.comparingInt(HabitStep::getHabitStepNum).reversed());
                 refreshAdapter();
                 refreshViews();
             }
@@ -196,9 +196,7 @@ public class EditHabitStack extends AppCompatActivity {
 
     private void defineSeekBar() {
         seekbarForTime.setMax(60);
-
         seekbarForTime.setProgress(0);
-
         seekbarForTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

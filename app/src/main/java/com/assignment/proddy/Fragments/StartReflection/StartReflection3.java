@@ -21,6 +21,7 @@ import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.ReflectionSharedViewModel;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,11 @@ public class StartReflection3 extends Fragment {
         reflectionSharedViewModel = new ViewModelProvider(requireActivity()).get(ReflectionSharedViewModel.class);
         initViews(view);
         defineActivitiesLinearLayouts();
+        if (reflectionSharedViewModel.getReflectionActivitiesList().getValue() != null &&
+                !reflectionSharedViewModel.getReflectionActivitiesList().getValue().isEmpty()) {
+            renderInitValues();
+        }
+
     }
 
     private void initViews(View view){
@@ -96,4 +102,12 @@ public class StartReflection3 extends Fragment {
         });
     }
 
+    private void renderInitValues(){
+        for(LinearLayout linearLayout:activitiesLinearLayouts){
+            ReflectionActivities reflectionActivity = ReflectionActivities.fromString((String) linearLayout.getContentDescription());
+            if(reflectionSharedViewModel.getReflectionActivitiesList().getValue().contains(reflectionActivity)){
+                linearLayout.setBackgroundResource(R.drawable.reflection_activity_selected_bg);
+            }
+        }
+    }
 }

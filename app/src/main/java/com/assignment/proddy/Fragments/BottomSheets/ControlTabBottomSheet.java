@@ -12,8 +12,12 @@ import androidx.annotation.Nullable;
 
 import com.assignment.proddy.Activities.CreateHabit;
 import com.assignment.proddy.Activities.StartReflection;
+import com.assignment.proddy.Entity.reflection.Reflection;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionByDateTodayTask;
 import com.assignment.proddy.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Calendar;
 
 public class ControlTabBottomSheet extends BottomSheetDialogFragment {
 
@@ -34,7 +38,21 @@ public class ControlTabBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), StartReflection.class);
-                startActivity(intent);
+                new GetReflectionByDateTodayTask(getContext(), new GetReflectionByDateTodayTask.onReflectionRetrievedListener() {
+                    @Override
+                    public void onSuccess(Reflection reflection) {
+                        intent.putExtra("Reflection", reflection);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Reflection newReflection = new Reflection();
+                        newReflection.setReflectionCreationDate(Calendar.getInstance().getTime());
+                        intent.putExtra("Reflection", newReflection);
+                        startActivity(intent);
+                    }
+                }).execute(Calendar.getInstance().getTime());
                 requireActivity().overridePendingTransition(android.R.anim.fade_in, 0);
             }
         });
