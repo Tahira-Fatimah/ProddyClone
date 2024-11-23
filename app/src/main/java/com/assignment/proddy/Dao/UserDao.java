@@ -9,6 +9,7 @@ import androidx.room.Update;
 import com.assignment.proddy.Entity.user.User;
 
 import java.util.List;
+import java.util.UUID;
 
 @Dao
 public interface UserDao {
@@ -23,4 +24,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM user")
     public List<User> getAllUsers();
+
+    @Query("SELECT COUNT(*) FROM habit WHERE habit_UserId = :userId")
+    public int getUserHabitCount(UUID userId);
+
 }

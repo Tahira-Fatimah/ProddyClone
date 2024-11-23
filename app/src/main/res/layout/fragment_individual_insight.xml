@@ -102,15 +102,17 @@
                 android:textColor="@color/white"
                 />
 
-                <GridView
-                    android:id="@+id/calendarIndividual"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginVertical="30dp"
-                    android:horizontalSpacing="3dp"
-                    android:verticalSpacing="5dp"
-                    android:paddingHorizontal="40dp"
-                    android:numColumns="7" />
+            <GridView
+                android:minWidth="200dp"
+                android:id="@+id/calendarIndividual"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:layout_marginVertical="30dp"
+                android:horizontalSpacing="8dp"
+                android:verticalSpacing="8dp"
+                android:numColumns="7" />
 
 
             <LinearLayout
@@ -234,7 +236,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/rounded_background_1"
             android:backgroundTint="@color/habit_track"
@@ -256,10 +258,10 @@
 
             <GridView
                 android:id="@+id/habitTrack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
                 android:horizontalSpacing="8dp"
-                android:verticalSpacing="20dp"
+                android:verticalSpacing="12dp"
                 android:numColumns="3" />
 
 
@@ -267,7 +269,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:orientation="horizontal"
             android:background="@drawable/rounded_background_1"
             android:backgroundTint="@color/completed_habits_scale_1"

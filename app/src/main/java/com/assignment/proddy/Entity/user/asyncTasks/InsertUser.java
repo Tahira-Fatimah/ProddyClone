@@ -1,4 +1,4 @@
-package com.assignment.proddy.Entity.user;
+package com.assignment.proddy.Entity.user.asyncTasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;
 import com.assignment.proddy.Dao.UserDao;
+import com.assignment.proddy.Entity.user.User;
 
 public class InsertUser extends AsyncTask<User,Void, Long> {
 

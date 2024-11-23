@@ -19,19 +19,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Activities.EditHabit;
+import com.assignment.proddy.Dao.HabitTrackerDao;
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habitTracker.HabitTracker;
+import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
+import com.assignment.proddy.Fragments.AllHabitsFragment;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.DateUtils;
 import com.assignment.proddy.Utils.DrawableUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIncompleteAdapter.MyViewHolder>{
     private Context context;
     private List<Habit> habits;
+    private OnButtonClickListener listenerImplementation;
 
-    public HabitListIncompleteAdapter(Context context, List<Habit> habits) {
+    public interface OnButtonClickListener {
+        void onButtonClick();
+    }
+
+    public HabitListIncompleteAdapter(OnButtonClickListener listenerImplementation, Context context, List<Habit> habits) {
         this.context = context;
+        this.listenerImplementation = listenerImplementation;
         if(habits == null){
             habits = new ArrayList<>();
         }
@@ -43,6 +57,10 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         notifyDataSetChanged();
     }
 
+    public void empty(){
+        this.habits.clear();
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -116,7 +134,13 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         });
 
         holder.markCompletedView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Completed Button Pressed", Toast.LENGTH_SHORT).show();
+            holder.markCompletedView.setClickable(false);
+            holder.markCompletedView.setEnabled(false);
+            new InsertHabitTrackerTask(context).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getToday(),true));
+            if (listenerImplementation != null) {
+                listenerImplementation.onButtonClick();
+            }
+            notifyItemRemoved(position);
         });
 
     }

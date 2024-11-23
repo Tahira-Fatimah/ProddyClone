@@ -16,9 +16,9 @@ import com.assignment.proddy.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class insights extends Fragment {
+public class Insights extends Fragment {
 
-    public insights() {}
+    public Insights() {}
 
 
     @Override
@@ -48,4 +48,5 @@ public class insights extends Fragment {
             }
         }).attach();
     }
+
 }

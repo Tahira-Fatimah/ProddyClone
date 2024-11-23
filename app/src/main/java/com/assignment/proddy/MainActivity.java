@@ -1,9 +1,6 @@
 package com.assignment.proddy;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,38 +8,16 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-//import com.assignment.proddy.Fragments.AllHabitsFragment;
-//import com.assignment.proddy.Fragments.insights;
-
-//import com.assignment.proddy.Activities.Lessons;
-import com.assignment.proddy.Activities.EditHabit;
-import com.assignment.proddy.Dao.HabitDao;
-import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;
-import com.assignment.proddy.Entity.habit.Habit;
-import com.assignment.proddy.Entity.habit.HabitType;
-import com.assignment.proddy.Entity.habit.asyncTasks.GetCompletedHabitsTask;
-import com.assignment.proddy.Entity.habit.asyncTasks.InsertHabit;
-import com.assignment.proddy.Entity.habit.asyncTasks.onCompletedHabitsRetrievedListener;
-import com.assignment.proddy.Entity.habitTracker.HabitTracker;
-import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
-import com.assignment.proddy.Entity.user.InsertUser;
-import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
-
 import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.LessonsFragment;
 import com.assignment.proddy.Fragments.ReflectionFragment;
-import com.assignment.proddy.Fragments.insights;
+import com.assignment.proddy.Fragments.Insights;
 import com.assignment.proddy.Utils.AuthUtils;
-import com.assignment.proddy.Utils.StringUtils;
+
 import com.google.android.material.tabs.TabLayout;
 
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
-
-public class MainActivity extends AppCompatActivity implements onCompletedHabitsRetrievedListener{
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,28 +26,19 @@ public class MainActivity extends AppCompatActivity implements onCompletedHabits
 
         AuthUtils.storeUserInfo(this);
 
-
-//        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
-//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
-//        new InsertHabit(getApplicationContext()).execute(habit);
-//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
-//                Calendar.getInstance().getTime(),
-//                true));
-//        new GetCompletedHabitsTask(this, this,"good habit").execute();
-
         TabLayout tabLayout = findViewById(R.id.controltabLayout);
         inflateTabs(tabLayout);
         setTabLayoutOnClickListener(tabLayout);
-//        TabLayout tabLayout = findViewById(R.id.controltabLayout);
-//        inflateTabs(tabLayout);
-//        setTabLayoutOnClickListener(tabLayout);
-//        Log.d("HabitMain", "Habit " + habit.toString());
-//        Intent intent = new Intent(this, EditHabit.class);
-//        intent.putExtra("Habit",habit);
-//        startActivity(intent);
 
+        launchApp();
+    }
+
+    private void launchApp() {
+        Fragment fragment = new AllHabitsFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, fragment)
+                .commit();
     }
 
     void inflateTabs(TabLayout tabLayout){
@@ -110,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements onCompletedHabits
                         fragment = new AllHabitsFragment();
                         break;
                     case 1:
-                        fragment = new insights();
+                        fragment = new Insights();
                         break;
                     case 3:
                         fragment = new ReflectionFragment();
@@ -137,9 +103,16 @@ public class MainActivity extends AppCompatActivity implements onCompletedHabits
             }
         });
     }
-
-    @Override
-    public void onCompletedHabitsRetrieved(Habit habitsWithTrackers) {
-        Log.d("habittttttt",habitsWithTrackers.toString());
-    }
 }
+
+
+
+//        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
+//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
+//        new InsertHabit(getApplicationContext()).execute(habit);
+//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
+//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
+//                Calendar.getInstance().getTime(),
+//                true));
+//        new GetCompletedHabitsTask(this, this,"good habit").execute();

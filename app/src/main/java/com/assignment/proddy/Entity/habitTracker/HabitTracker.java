@@ -37,7 +37,7 @@ public class HabitTracker {
     private Boolean habitTrackerStatus;
 
     public HabitTracker(@NonNull UUID habitTrackerId, UUID habitTracker_HabitId, Date habitTrackerDate, Boolean habitTrackerStatus) {
-        Log.d("HabitTracker CONSTRUCTOR",String.valueOf(habitTrackerId)+String.valueOf(habitTracker_HabitId));
+        Log.d("HabitTracker CONSTRUCTOR",String.valueOf(habitTrackerId)+String.valueOf(habitTrackerDate));
         this.habitTrackerId = habitTrackerId;
         this.habitTracker_HabitId = habitTracker_HabitId;
         this.habitTrackerDate = habitTrackerDate;
@@ -77,5 +77,14 @@ public class HabitTracker {
         this.habitTracker_HabitId = habitTracker_HabitId;
     }
 
+    @Override
+    public String toString() {
+        return "HabitTracker{" +
+                "habitTrackerId=" + habitTrackerId +
+                ", habitTracker_HabitId=" + habitTracker_HabitId +
+                ", habitTrackerDate=" + (habitTrackerDate != null ? habitTrackerDate.toString() : "No date") +
+                ", habitTrackerStatus=" + (habitTrackerStatus != null ? habitTrackerStatus : "No status") +
+                '}';
+    }
 
 }

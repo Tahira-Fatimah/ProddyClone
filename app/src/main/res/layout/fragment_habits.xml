@@ -9,6 +9,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
@@ -58,98 +64,158 @@
         </LinearLayout>
     </LinearLayout>
 
-
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TODAY"-->
-<!--        android:fontFamily="@font/ibx_medium"-->
-<!--        android:textColor="@color/font_dark_purple"-->
-<!--        android:layout_marginVertical="10dp"-->
-<!--        android:textSize="13sp" />-->
-
-
-
         <LinearLayout
-            android:id="@+id/completedToday"
+            android:id="@+id/noHabit"
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="match_parent"
             android:visibility="gone"
-            android:background="@drawable/rounded_background_1"
-            android:backgroundTint="@color/light_purple"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textColor="@color/reflection_date_font_purple"
+                    android:text="Ready to build a ">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textColor="@color/reflection_date_font_purple"
+                    android:background="#d6ccf2"
+                    android:text="new">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/reflection_date_font_purple"
+                    android:textSize="25dp"
+                    android:text=" lifestyle?">
+
+                </TextView>
+
+            </LinearLayout>
 
             <ImageView
-                android:id="@+id/illustration"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:layout_marginVertical="28dp"
-                android:padding="38dp"
-                android:src="@drawable/newyear"
-                android:scaleType="centerCrop" />
+                android:layout_width="wrap_content"
+                android:layout_height="450dp"
+                android:src="@drawable/book_lover"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:id="@+id/amazing"
-                android:text="Amazing! All done today!"
-                android:fontFamily="@font/ibx_medium"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#200346"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/reflection_date_font_purple"
+                android:text="Tap the plus button at the bottom to create a new habit">
+
+            </TextView>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hasHabit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TODAY"
-                android:layout_marginVertical="20dp"
-                android:fontFamily="@font/ibx_medium"
-                android:textSize="13sp"
-                android:textColor="@color/font_dark_purple"/>
+                <LinearLayout
+                    android:id="@+id/completedToday"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="225dp"
+                    android:visibility="visible"
+                    android:background="@drawable/rounded_background_1"
+                    android:backgroundTint="@color/light_purple"
+                    android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/habit_incomplete_recycler_view"/>
+                    <ImageView
+                        android:id="@+id/illustration"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="4"
+                        android:layout_marginVertical="28dp"
+                        android:padding="38dp"
+                        android:src="@drawable/newyear"
+                        android:scaleType="centerCrop" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:id="@+id/amazing"
+                        android:text="Amazing! All done today!"
+                        android:fontFamily="@font/ibx_medium"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#200346"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/todayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TODAY"
+                        android:layout_marginVertical="20dp"
+                        android:fontFamily="@font/ibx_medium"
+                        android:textSize="13sp"
+                        android:textColor="@color/font_dark_purple"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/habit_incomplete_recycler_view"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/completion_status"
+                        android:text="1 COMPLETED TODAY"
+                        android:layout_marginVertical="20dp"
+                        android:fontFamily="@font/ibx_medium"
+                        android:textSize="13sp"
+                        android:drawableEnd="@drawable/arrow_up"
+                        android:textColor="@color/font_dark_purple"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/habit_recycler_view"/>
+
+
+                </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/completion_status"
-                android:text="1 COMPLETED TODAY"
-                android:layout_marginVertical="20dp"
-                android:fontFamily="@font/ibx_medium"
-                android:textSize="13sp"
-                android:drawableEnd="@drawable/arrow_up"
-                android:textColor="@color/font_dark_purple"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:id="@+id/habit_recycler_view"/>
-
-
-        </LinearLayout>
-
+    </LinearLayout>
 
 
 </LinearLayout>

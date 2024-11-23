@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="30dp"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@drawable/rounded_background_general_habits"
@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/day"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:text="Monday"
         android:textSize="16sp"

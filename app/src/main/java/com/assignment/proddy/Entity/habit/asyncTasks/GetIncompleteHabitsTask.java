@@ -8,6 +8,7 @@ import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class GetIncompleteHabitsTask extends AsyncTask<Void, Void, List<HabitWit
     @Override
     protected List<HabitWithTrackers> doInBackground(Void... voids) {
         HabitDao habitDao = ProddyDatabaseClient.getInstance(context).proddyDatabase.habitDao();
-        return habitDao.getHabits(userId,today);
+        return new ArrayList<>();
     }
 
     @Override

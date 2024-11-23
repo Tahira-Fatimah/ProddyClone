@@ -18,10 +18,13 @@ import com.assignment.proddy.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class IndividualInsightFragment extends Fragment {
 
+    GridView calendarGridView;
+    GridView dayTrackGridView;
 
     public IndividualInsightFragment() {}
 
@@ -33,29 +36,29 @@ public class IndividualInsightFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_individual_insight, container, false);
+        View view = inflater.inflate(R.layout.fragment_individual_insight, container, false);
+
+        dayTrackGridView = view.findViewById(R.id.habitTrack);
+        calendarGridView = view.findViewById(R.id.calendarIndividual);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Track habit
-        GridView gridView = view.findViewById(R.id.habitTrack);
-        String[] DaysData = new String[] {
-                "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday", "Saturday", "Sunday"
-        };
-        gridView.setAdapter(new HabitTrackAdapter(requireContext(), DaysData));
+        dayTrackGridView.setAdapter(new HabitTrackAdapter(requireContext(), new String[0]));
+        calendarGridView.setAdapter(new HabitCalenderAdapter(requireContext(), new ArrayList<>()));
+    }
 
-        //Calender
-        GridView habitGridView = view.findViewById(R.id.calendarIndividual);
-        List<String> calendarItems = new ArrayList<>();
-        for (int i = 1; i <= 30; i++) {
-            calendarItems.add(String.valueOf(i));
-        }
-        HabitCalenderAdapter adapter = new HabitCalenderAdapter(requireContext(), calendarItems);
-        habitGridView.setAdapter(adapter);
+    private void setGridViewLayout() {
+        int dpWidth = 223;
+        float scale = getResources().getDisplayMetrics().density;
+        int pxWidth = (int) (dpWidth * scale + 0.5f);
+        ViewGroup.LayoutParams params = calendarGridView.getLayoutParams();
+        params.width = pxWidth;
+        calendarGridView.setLayoutParams(params);
     }
 
 }

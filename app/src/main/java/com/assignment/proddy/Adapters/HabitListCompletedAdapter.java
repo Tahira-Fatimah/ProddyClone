@@ -33,6 +33,11 @@ public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCom
         notifyDataSetChanged();
     }
 
+    public void empty(){
+        this.habits.clear();
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,9 +49,6 @@ public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCom
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Habit habit = habits.get(position);
-
-        // Bind data to the views
-        holder.timeTextView.setText(habit.getHabitReminderTime().toString());
         holder.titleTextView.setText(habit.getHabitName());
     }
 
@@ -56,13 +58,10 @@ public class HabitListCompletedAdapter extends RecyclerView.Adapter<HabitListCom
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView timeTextView;
         public TextView titleTextView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-            timeTextView = itemView.findViewById(R.id.time);
             titleTextView = itemView.findViewById(R.id.title);
         }
     }
