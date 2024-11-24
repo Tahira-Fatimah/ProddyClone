@@ -77,7 +77,7 @@ public class StartReflection extends AppCompatActivity {
                 if(startReflectionViewPager.getCurrentItem() == createReflectionFragments.size() -1){
                     Reflection updatedReflection;
                     if(receivedReflection.getReflectionId() == null){
-                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), Calendar.getInstance().getTime());
+                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
                         new InsertReflectionTask(StartReflection.this).execute(updatedReflection);
                     }
                     else{
