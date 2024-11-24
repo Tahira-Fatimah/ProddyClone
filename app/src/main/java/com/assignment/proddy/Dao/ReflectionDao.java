@@ -24,7 +24,7 @@ public interface ReflectionDao {
     public void delete(Reflection reflection);
 
     @Update
-    public void update(Reflection reflection);
+    public int update(Reflection reflection);
 
     @Query("SELECT * FROM reflection WHERE reflectionId =:uuid")
     public Reflection findReflectionById(UUID uuid);

@@ -78,16 +78,40 @@ public class StartReflection extends AppCompatActivity {
                     Reflection updatedReflection;
                     if(receivedReflection.getReflectionId() == null){
                         updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
-                        new InsertReflectionTask(StartReflection.this).execute(updatedReflection);
+                        new InsertReflectionTask(StartReflection.this, new InsertReflectionTask.onInsertReflectionListener() {
+                            @Override
+                            public void onSuccess() {
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra("Reflection", updatedReflection);
+                                setResult(RESULT_OK, resultIntent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        }).execute(updatedReflection);
                     }
                     else{
                         updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
-                        new UpdateReflectionTask(StartReflection.this).execute(updatedReflection);
+                        new UpdateReflectionTask(StartReflection.this, new UpdateReflectionTask.onUpdateReflectionListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("Updated Successfully", " haha ");
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra("Reflection", updatedReflection);
+                                setResult(RESULT_OK, resultIntent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        }).execute(updatedReflection);
                     }
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("Reflection", updatedReflection);
-                    setResult(RESULT_OK, resultIntent);
-                    finish();
+
                 } else{
                     startReflectionViewPager.setCurrentItem(startReflectionViewPager.getCurrentItem() + 1);
                 }
