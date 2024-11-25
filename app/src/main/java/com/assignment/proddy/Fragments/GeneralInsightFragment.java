@@ -129,9 +129,6 @@ public class GeneralInsightFragment extends Fragment implements onGetTrackersWit
         fetchUserHabitCount();
         fetchTrackersForMonth();
         latestWeek = DateUtils.getLatestWeek();
-        for (int i = 0; i < latestWeek.size(); i++){
-            latestWeek.set(i,DateUtils.latestWeek.get(i));
-        }
 
         fetchReflectionsForWeek();
         fetchTotalTimeSpent();

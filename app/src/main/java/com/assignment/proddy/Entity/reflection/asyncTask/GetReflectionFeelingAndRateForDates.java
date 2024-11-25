@@ -3,6 +3,7 @@ package com.assignment.proddy.Entity.reflection.asyncTask;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.assignment.proddy.Dao.ReflectionDao;
 import com.assignment.proddy.DatabaseConfig.ProddyDatabaseClient;

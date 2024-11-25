@@ -24,6 +24,7 @@ import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.ReflectionNavigationViewModel;
 import com.assignment.proddy.SharedViewModel.ReflectionSharedViewModel;
 import com.assignment.proddy.Utils.AuthUtils;
+import com.assignment.proddy.Utils.DateUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
@@ -77,10 +78,14 @@ public class StartReflection extends AppCompatActivity {
                 if(startReflectionViewPager.getCurrentItem() == createReflectionFragments.size() -1){
                     Reflection updatedReflection;
                     if(receivedReflection.getReflectionId() == null){
-                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
+                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
+                                reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
+                                reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
+                                DateUtils.getDateForMatchDB(receivedReflection.getReflectionCreationDate()));
                         new InsertReflectionTask(StartReflection.this, new InsertReflectionTask.onInsertReflectionListener() {
                             @Override
                             public void onSuccess() {
+                                updatedReflection.setReflectionCreationDate(receivedReflection.getReflectionCreationDate());
                                 Intent resultIntent = new Intent();
                                 resultIntent.putExtra("Reflection", updatedReflection);
                                 setResult(RESULT_OK, resultIntent);
@@ -94,7 +99,10 @@ public class StartReflection extends AppCompatActivity {
                         }).execute(updatedReflection);
                     }
                     else{
-                        updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)), reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(), reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(), receivedReflection.getReflectionCreationDate());
+                        updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
+                                reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
+                                reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
+                                receivedReflection.getReflectionCreationDate());
                         new UpdateReflectionTask(StartReflection.this, new UpdateReflectionTask.onUpdateReflectionListener() {
                             @Override
                             public void onSuccess() {

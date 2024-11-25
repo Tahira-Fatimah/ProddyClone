@@ -34,10 +34,13 @@ import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
 import com.assignment.proddy.Entity.reflection.ReflectionFeelingsColourEnum;
 import com.assignment.proddy.Entity.reflection.asyncTask.GetAverageReflectionMoodTask;
 import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionByDateTodayTask;
+import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionFeelingAndRateForDates;
 import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionFeelingRateAndDateForLastWeek;
 import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionFeelingRateForLastMonthTask;
 import com.assignment.proddy.ObjectMapping.ReflectionDateAndRate;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.AuthUtils;
+import com.assignment.proddy.Utils.DateUtils;
 import com.assignment.proddy.Utils.DrawableUtils;
 import com.assignment.proddy.Utils.StringUtils;
 
@@ -48,6 +51,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 
 public class ReflectionFragment extends Fragment {
@@ -174,7 +178,11 @@ public class ReflectionFragment extends Fragment {
     }
 
     private void inflateDateHorizontalScrollView() {
-        new GetReflectionFeelingRateForLastMonthTask(getContext(), new GetReflectionFeelingRateForLastMonthTask.onGetReflectionFeelingRateForLastMonthListener() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        new GetReflectionFeelingAndRateForDates(getContext(), UUID.fromString(AuthUtils.getLoggedInUser(getContext())),
+                calendar.getTime(),DateUtils.getToday(),
+                new GetReflectionFeelingAndRateForDates.onGetReflectionFeelingRateForDatesListener() {
             @Override
             public void onSuccess(List<ReflectionDateAndRate> res) {
                 Log.d("FeelingRateAndDate", "hahahahha");
@@ -233,6 +241,7 @@ public class ReflectionFragment extends Fragment {
             }
 
             int feelingRate = findFeelingRateByDate(res, currentDate);
+            Log.d("Returned",String.valueOf(feelingRate));
             if(feelingRate != -1){
                 reflectionFeelingEmoji.setImageResource(DrawableUtils.getReflectionEmojiDrawable(feelingRate));
             } else{
@@ -256,7 +265,9 @@ public class ReflectionFragment extends Fragment {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-//        adjustSelectedDateColourOnResume(currentReflection.getReflectionCreationDate());
+        if(currentReflection!=null) {
+            adjustSelectedDateColourOnResume(DateUtils.getDateForMatchDB(currentReflection.getReflectionCreationDate()));
+        }
         dateContainerHorizontalScrollView.postDelayed(new Runnable() {
             public void run() {
                 dateContainerHorizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
@@ -266,12 +277,9 @@ public class ReflectionFragment extends Fragment {
     }
 
     public int findFeelingRateByDate(List<ReflectionDateAndRate> res, Date targetDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()); // Formatting the date as YYYY-MM-DD
-        String targetDateString = dateFormat.format(targetDate);
 
         for (ReflectionDateAndRate reflection : res) {
-            String reflectionDateString = dateFormat.format(reflection.getReflectionCreationDate());
-            if (targetDateString.equals(reflectionDateString)) {
+            if (DateUtils.getDateOnly(DateUtils.getDateForMatchDB(targetDate)).equals(DateUtils.getDateOnly(reflection.getReflectionCreationDate()))) {
                 return reflection.getReflectionFeelingRate();
             }
         }
@@ -444,6 +452,9 @@ public class ReflectionFragment extends Fragment {
     }
 
     private void setActivitiesGridView(List<ReflectionActivities> reflectionActivities){
+        if(reflectionActivities == null){
+            return;
+        }
         for(int i = 0; i<reflectionActivities.size(); i++){
             ReflectionActivities reflectionActivity = reflectionActivities.get(i);
             Log.d("ReflectionActivity", reflectionActivity.getDisplayName());
@@ -487,6 +498,9 @@ public class ReflectionFragment extends Fragment {
     }
 
     private void setReflectionFeelingsGridView(List<ReflectionFeelings> reflectionFeelings){
+        if(reflectionFeelings==null){
+            return;
+        }
         for(ReflectionFeelings reflectionFeeling: reflectionFeelings){
             int value = ReflectionFeelingsColourEnum.valueOf(reflectionFeeling.name()).getValue();
 
@@ -577,7 +591,8 @@ public class ReflectionFragment extends Fragment {
                 LinearLayout linearLayout = (LinearLayout) child;
                 Log.d("CurrentDatee", String.valueOf(linearLayout.getContentDescription())+ String.valueOf(date));
 
-                if (linearLayout.getContentDescription() != null) {
+                if (linearLayout.getTag() != null &&
+                        DateUtils.getDateOnly(DateUtils.getDateForMatchDB((Date) linearLayout.getTag())).equals(DateUtils.getDateOnly(date))){
                     if (lastDateContainerClicked != null) {
                         lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
                         lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));

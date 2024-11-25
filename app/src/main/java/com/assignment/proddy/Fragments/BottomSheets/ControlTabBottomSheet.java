@@ -15,6 +15,7 @@ import com.assignment.proddy.Activities.StartReflection;
 import com.assignment.proddy.Entity.reflection.Reflection;
 import com.assignment.proddy.Entity.reflection.asyncTask.GetReflectionByDateTodayTask;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.DateUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
@@ -48,7 +49,7 @@ public class ControlTabBottomSheet extends BottomSheetDialogFragment {
                     @Override
                     public void onFailure() {
                         Reflection newReflection = new Reflection();
-                        newReflection.setReflectionCreationDate(Calendar.getInstance().getTime());
+                        newReflection.setReflectionCreationDate(DateUtils.getToday());
                         intent.putExtra("Reflection", newReflection);
                         startActivity(intent);
                     }
