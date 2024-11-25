@@ -14,25 +14,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Activities.EditHabit;
 import com.assignment.proddy.Activities.HabitStepsListActivity;
-import com.assignment.proddy.Dao.HabitTrackerDao;
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habitStreak.asyncTasks.SetHabitStreakTask;
 import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
-import com.assignment.proddy.Fragments.AllHabitsFragment;
 import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.DateUtils;
 import com.assignment.proddy.Utils.DrawableUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -140,7 +136,8 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         holder.markCompletedView.setOnClickListener(v -> {
             holder.markCompletedView.setClickable(false);
             holder.markCompletedView.setEnabled(false);
-            new InsertHabitTrackerTask(context).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getToday(),true));
+            new InsertHabitTrackerTask(context).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getTodayForInsertDB(),true));
+            new SetHabitStreakTask(context).execute(habit.getHabitId());
             if (listenerImplementation != null) {
                 listenerImplementation.onButtonClick();
             }

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.asyncTasks.InsertHabit;
+import com.assignment.proddy.Entity.habitStreak.asyncTasks.InsertHabitStreakTask;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit1;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit2;
 import com.assignment.proddy.Fragments.CreateHabit.CreateHabit3;
@@ -135,6 +136,7 @@ public class CreateHabit extends AppCompatActivity{
                         habitSharedViewModel.getReminderTime().getValue(),
                         habitSharedViewModel.getHabitDays().getValue());
                 new InsertHabit(this).execute(habit);
+                new InsertHabitStreakTask(this).execute(habit.getHabitId());
                 finish();
                 overridePendingTransition(0,android.R.anim.fade_out);
             } else {

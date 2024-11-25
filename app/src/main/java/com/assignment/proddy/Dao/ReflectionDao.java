@@ -50,4 +50,12 @@ public interface ReflectionDao {
             "  AND r.reflectionCreationDate <= strftime('%s', 'now') * 1000 ORDER BY reflectionCreationDate ASC")
     public List<ReflectionDateAndRate> getReflectionFeelingRatesForLastWeek();
 
+    @Query("SELECT r.reflectionFeelingRate as reflectionFeelingRate, r.reflectionCreationDate as reflectionCreationDate \n" +
+            "FROM reflection r\n" +
+            "WHERE R.reflection_UserId = :userId " +
+            "AND(date(r.reflectionCreationDate/1000, 'unixepoch') >= date(:startDate/1000, 'unixepoch') " +
+            "AND date(r.reflectionCreationDate/1000, 'unixepoch') <= date(:endDate/1000, 'unixepoch'))" +
+            "ORDER BY reflectionCreationDate ASC")
+    public List<ReflectionDateAndRate> getReflectionFeelingRatesForDateBound(UUID userId, Date startDate, Date endDate);
+
 }

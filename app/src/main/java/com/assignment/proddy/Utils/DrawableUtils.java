@@ -58,13 +58,13 @@ public class DrawableUtils {
     }
 
     public static int getMoodScaleColor(int value) {
-        if(value == 1){
+        if(value == 2){
             return R.color.daily_mood_scale_2;
-        } else if (value == 2) {
+        } else if (value == 3) {
             return R.color.daily_mood_scale_3;
-        } else if (value >= 3 && value <= 5) {
+        } else if (value == 4) {
             return R.color.daily_mood_scale_4;
-        } else if (value >=6) {
+        } else if (value ==5) {
             return R.color.daily_mood_scale_5;
         }
         return R.color.daily_mood_scale_1;

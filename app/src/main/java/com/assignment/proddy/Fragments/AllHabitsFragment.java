@@ -3,9 +3,7 @@ package com.assignment.proddy.Fragments;
 import static java.lang.Math.abs;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -13,14 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -38,8 +33,6 @@ import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.AuthUtils;
 import com.assignment.proddy.Utils.DateUtils;
 
-import java.util.Date;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -161,7 +154,7 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     }
 
     public void fetchHabitLists() {
-        new GetHabitsTask(requireContext(), this,DateUtils.getDateForFetchDB(DateUtils.getToday()), UUID.fromString(AuthUtils.getLoggedInUser(getContext())))
+        new GetHabitsTask(requireContext(), this, DateUtils.getTodayForInsertDB(), UUID.fromString(AuthUtils.getLoggedInUser(getContext())))
                 .execute();
     }
 

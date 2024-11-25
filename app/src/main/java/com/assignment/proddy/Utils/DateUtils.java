@@ -10,8 +10,33 @@ import java.util.List;
 
 public class DateUtils {
 
+    public static Date getDateOnly(Date date){
+        return new Date(date.getYear(),date.getMonth(),date.getDate());
+    }
+
     public static Date getToday(){
         return Calendar.getInstance().getTime();
+    }
+
+    public static Date getTodayForInsertDB(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(getToday());
+        calendar.add(Calendar.HOUR, +5);
+        return calendar.getTime();
+    }
+
+    public static Date getYesterdayForDB(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR,-1);
+        calendar.add(Calendar.HOUR, +5);
+        return calendar.getTime();
+    }
+
+    public static Date getDateForMatchDB(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR, +5);
+        return calendar.getTime();
     }
 
     public static Date getCurrentMonthStart(){
@@ -26,9 +51,24 @@ public class DateUtils {
         return calendar.getTime();
     }
 
+
+    public static Date getCurrentWeekStart(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, 1);
+        return calendar.getTime();
+    }
+
+    public static Date getCurrentWeekEnd(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, 7);
+        return calendar.getTime();
+    }
+
+
     public static List<Date> getLatestWeek(){
         List<Date> latestSevenDates = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR, +5);
 
         Date today = getDateOnly(calendar.getTime());
         latestSevenDates.add(today);
@@ -37,6 +77,13 @@ public class DateUtils {
             latestSevenDates.add(getDateOnly(calendar.getTime()));
         }
         Collections.reverse(latestSevenDates);
+
+        for (int i = 0; i <= 6; i++) {
+            Date date = latestSevenDates.get(i);
+            date.setHours(latestSevenDates.get(i).getHours()+5);
+            latestSevenDates.set(i,date);
+        }
+
         return latestSevenDates;
     }
 
@@ -45,7 +92,6 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         int max = calendar.getTime().getDate();
-        Log.d("max", String.valueOf(max));
         calendar.set(Calendar.DAY_OF_MONTH, 1);
 
         Date today = getDateOnly(calendar.getTime());
@@ -54,17 +100,14 @@ public class DateUtils {
             calendar.add(Calendar.DATE, 1);
             monthDates.add(getDateOnly(calendar.getTime()));
         }
+
+        for (int i = 0; i <= max; i++) {
+            Date date = monthDates.get(i);
+            date.setHours(monthDates.get(i).getHours()+5);
+            monthDates.set(i,date);
+        }
         return monthDates;
     }
 
-    public static Date getDateOnly(Date date){
-        return new Date(date.getYear(),date.getMonth(),date.getDate());
-    }
 
-    public static Date getDateForFetchDB(Date date){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.HOUR, -5);
-        return calendar.getTime();
-    }
 }

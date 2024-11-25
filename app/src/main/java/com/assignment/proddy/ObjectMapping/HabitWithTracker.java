@@ -5,7 +5,7 @@ import androidx.room.TypeConverters;
 
 import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.habit.HabitType;
-import com.assignment.proddy.Entity.habit.HabitTypeConverter;
+import com.assignment.proddy.Converters.HabitTypeConverter;
 import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 
 import java.sql.Time;

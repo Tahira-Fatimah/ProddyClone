@@ -1,6 +1,7 @@
 package com.assignment.proddy;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.assignment.proddy.Fragments.ReflectionFragment;
 import com.assignment.proddy.Fragments.Insights;
 import com.assignment.proddy.Utils.AuthUtils;
 
+import com.assignment.proddy.Utils.DateUtils;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity{
@@ -23,8 +25,9 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        Log.d("dataaaaaaaaeee", DateUtils.getTodayForInsertDB().toString());
+//        UUID CONSTANT_UUID = UUID.fromString("E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
+//
 //        new InsertUser(getApplicationContext()).execute(new User(CONSTANT_UUID,"Fatimah", "fatimah@hamna.com","123"));
         AuthUtils.storeUserInfo(this);
 

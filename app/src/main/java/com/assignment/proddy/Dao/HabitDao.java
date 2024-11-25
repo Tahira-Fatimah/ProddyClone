@@ -7,10 +7,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.ObjectMapping.HabitWithStreakAndTime;
 import com.assignment.proddy.ObjectMapping.HabitStack;
-import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 import com.assignment.proddy.ObjectMapping.HabitWithTracker;
-import com.assignment.proddy.ObjectMapping.HabitWithTrackers;
 
 import java.util.Date;
 import java.util.List;
@@ -68,6 +67,13 @@ public interface HabitDao {
                     "WHEN '5' THEN 'Friday' " +
                     "WHEN '6' THEN 'Saturday' END || '%'")
     public List<HabitWithTracker> getHabits(UUID userId, Date today);
+
+
+    @Query("SELECT habitId, habitName, habitDays, habitStreak_HabitId, habitStreakCrrStreak, habitStreakMaxStreak, SUM(habitStepTime) AS timeSpent " +
+            "FROM habit JOIN habit_streak ON habitId = habitStreak_HabitId LEFT JOIN habit_step ON habitStep_HabitId = habitId " +
+            "WHERE habit_UserId = :userId " +
+            "GROUP BY habitId")
+    public List<HabitWithStreakAndTime> getHabitsWithStreak(UUID userId);
 
     @Query("SELECT * FROM habit WHERE habit_UserId = :userId")
     public List<Habit> getHabitsForUser(UUID userId);
