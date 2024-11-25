@@ -1,6 +1,8 @@
 package com.assignment.proddy.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +11,23 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 import com.assignment.proddy.ObjectMapping.HabitInsightData;
 import com.assignment.proddy.ObjectMapping.HabitWithStreakAndTime;
 import com.assignment.proddy.R;
+import com.assignment.proddy.Utils.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class IndividualInsightsAdapter extends RecyclerView.Adapter<IndividualInsightsAdapter.IndividualInsightViewHolder> {
 
     private Context context;
     private List<HabitInsightData> habitInsightData;
+    private HabitCalenderAdapter habitCalenderAdapter;
 
     public IndividualInsightsAdapter(Context context, List<HabitInsightData> habitInsightData) {
         this.context = context;
@@ -33,11 +41,12 @@ public class IndividualInsightsAdapter extends RecyclerView.Adapter<IndividualIn
     }
 
     @Override
-    public IndividualInsightsAdapter.IndividualInsightViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public IndividualInsightViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_individual_insight_item, parent, false);
         return new IndividualInsightViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(IndividualInsightViewHolder holder, int position) {
 
@@ -45,7 +54,9 @@ public class IndividualInsightsAdapter extends RecyclerView.Adapter<IndividualIn
 
         HabitWithStreakAndTime habitWithStreakAndTime = habitInsightData.get(position).getHabitWithStreak();
 
-        holder.calendar.setAdapter(new HabitCalenderAdapter(context, new ArrayList<>()));
+        habitCalenderAdapter = new HabitCalenderAdapter(context, new ArrayList<>());
+        holder.calendar.setAdapter(habitCalenderAdapter);
+
         holder.dayTrack.setAdapter(new HabitTrackAdapter(context, habitWithStreakAndTime.getHabitDays().toArray(new String[0])));
         holder.habitName.setText(habitWithStreakAndTime.getHabitName());
         holder.streakCount.setText(String.valueOf(habitWithStreakAndTime.getHabitStreakCrrStreak()));
@@ -53,6 +64,34 @@ public class IndividualInsightsAdapter extends RecyclerView.Adapter<IndividualIn
                 habitWithStreakAndTime.getHabitStreakMaxStreak()));
         holder.timeSpent.setText(String.format("You've spent %d minutes on this habit",
                 habitWithStreakAndTime.getTimeSpent()));
+
+        setCalendar(holder.calendar, habitInsightData.get(position).getHabitTrackerList(), habitWithStreakAndTime.getHabitDays());
+    }
+
+    public void setCalendar(GridView calendar, List<HabitTracker> habitTrackerList, List<String> habitDays){
+        habitCalenderAdapter.empty();
+
+        Map<Date, Integer> trackMap = new HashMap<>();
+        for(HabitTracker ht : habitTrackerList){
+            trackMap.put(DateUtils.getDateOnly(ht.getHabitTrackerDate()),1);
+        }
+
+        List<Date> monthDates = DateUtils.getMonth();
+        for(int i = 0; i<monthDates.size(); i++){
+            if(DateUtils.getDateOnly(monthDates.get(i)).equals(DateUtils.getDateOnly(DateUtils.getToday()))){
+                habitCalenderAdapter.addItem(Map.entry(String.valueOf(i+1),"TODAY"));
+                continue;
+            }
+            if(trackMap.get(DateUtils.getDateOnly(monthDates.get(i))) !=null){
+                habitCalenderAdapter.addItem(Map.entry(String.valueOf(i+1),"COMPLETED"));
+            } else {
+                if(habitDays.contains(DateUtils.getDayOfWeek(monthDates.get(i)))){
+                    habitCalenderAdapter.addItem(Map.entry(String.valueOf(i+1),"NOT COMPLETED"));
+                } else {
+                    habitCalenderAdapter.addItem(Map.entry(String.valueOf(i+1),"NOT TRACKED"));
+                }
+            }
+        }
     }
 
     @Override

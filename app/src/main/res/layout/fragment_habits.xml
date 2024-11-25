@@ -29,12 +29,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/openHabits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:fontFamily="@font/evaicons"
-                android:text="&#xEA7D;"
+                android:text="&#xEA69;"
                 android:textColor="@color/icon_light_purple"
                 android:textSize="30sp" />
 

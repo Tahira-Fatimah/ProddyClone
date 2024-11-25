@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/cancel"
+            android:id="@+id/cancel_habit"
             android:src="@drawable/close"
             app:tint="@color/reflection_date_font_purple"
             android:layout_gravity="center_horizontal"
@@ -31,16 +31,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All Habits"
-            android:fontFamily="@font/ibx_medium"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/reflection_date_font_purple"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All Habits"
+                android:fontFamily="@font/ibx_medium"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/reflection_date_font_purple"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/incomplete_habits_rv"
+        android:id="@+id/list_habits"
         android:paddingHorizontal="20dp"
         android:layout_marginVertical="20dp"
         android:layout_width="match_parent"

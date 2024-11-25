@@ -18,8 +18,5 @@ public class ChangeHabitsOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_habits_order);
 
-        RecyclerView incompleteHabitsView = findViewById(R.id.incomplete_habits_rv);
-        RecyclerView completedHabitsView = findViewById(R.id.completed_habits_rv);
-
     }
 }

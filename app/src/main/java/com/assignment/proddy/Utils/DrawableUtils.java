@@ -3,6 +3,8 @@ package com.assignment.proddy.Utils;
 import com.assignment.proddy.Entity.habit.HabitType;
 import com.assignment.proddy.R;
 
+import java.util.Objects;
+
 public class DrawableUtils {
     public static int getHabitDrawable(HabitType habitType) {
         switch (habitType) {
@@ -68,5 +70,19 @@ public class DrawableUtils {
             return R.color.daily_mood_scale_5;
         }
         return R.color.daily_mood_scale_1;
+    }
+
+    public static int getCalendarItemColor(String status){
+        int color = R.color.grid_item_calendar;
+        if(Objects.equals(status, "NONE") || Objects.equals(status, "NOT COMPLETED")){
+            color = R.color.grid_item_calendar;
+        } else if (Objects.equals(status, "SOME") || Objects.equals(status, "TODAY")) {
+            color = R.color.today_item_calendar;
+        } else if (Objects.equals(status, "ALL") || Objects.equals(status, "COMPLETED")){
+            color = R.color.completed_habits_scale_1;
+        } else if (Objects.equals(status, "NOT TRACKED")){
+            color = R.color.checkmark_purple;
+        }
+        return color;
     }
 }

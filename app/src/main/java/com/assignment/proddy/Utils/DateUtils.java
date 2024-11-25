@@ -1,7 +1,5 @@
 package com.assignment.proddy.Utils;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -78,12 +76,6 @@ public class DateUtils {
         }
         Collections.reverse(latestSevenDates);
 
-        for (int i = 0; i <= 6; i++) {
-            Date date = latestSevenDates.get(i);
-            date.setHours(latestSevenDates.get(i).getHours()+5);
-            latestSevenDates.set(i,date);
-        }
-
         return latestSevenDates;
     }
 
@@ -100,14 +92,20 @@ public class DateUtils {
             calendar.add(Calendar.DATE, 1);
             monthDates.add(getDateOnly(calendar.getTime()));
         }
-
-        for (int i = 0; i <= max; i++) {
-            Date date = monthDates.get(i);
-            date.setHours(monthDates.get(i).getHours()+5);
-            monthDates.set(i,date);
-        }
         return monthDates;
     }
 
+    public static String getDayOfWeek(Date date){
+        switch (date.getDay()){
+            case 0: return "Sunday";
+            case 1: return "Monday";
+            case 2: return "Tuesday";
+            case 3: return "Wednesday";
+            case 4: return "Thursday";
+            case 5: return "Friday";
+            case 6: return "Saturday";
+        }
+        return "Sunday";
+    }
 
 }

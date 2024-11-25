@@ -1,5 +1,6 @@
 package com.assignment.proddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.assignment.proddy.Activities.SignupActivity;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
 import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.LessonsFragment;
@@ -19,40 +21,54 @@ import com.assignment.proddy.Utils.AuthUtils;
 import com.assignment.proddy.Utils.DateUtils;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("dataaaaaaaaeee", DateUtils.getTodayForInsertDB().toString());
-//        UUID CONSTANT_UUID = UUID.fromString("E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
-//
-//        new InsertUser(getApplicationContext()).execute(new User(CONSTANT_UUID,"Fatimah", "fatimah@hamna.com","123"));
-        AuthUtils.storeUserInfo(this);
 
-//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
-//        new InsertHabit(getApplicationContext()).execute(habit);
-//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
-//                Calendar.getInstance().getTime(),
-//                true));
-//        new GetCompletedHabitsTask(this, this,"good habit").execute();
+        checkAuthenticationState();
+    }
 
-        TabLayout tabLayout = findViewById(R.id.controltabLayout);
-        inflateTabs(tabLayout);
-        setTabLayoutOnClickListener(tabLayout);
-
-        launchApp();
+    private void checkAuthenticationState() {
+        if(Objects.equals(AuthUtils.getLoggedInUser(this), "blank")){
+            Intent signIn = new Intent(this, SignupActivity.class);
+            startActivityForResult(signIn,100);
+        } else {
+            launchApp();
+        }
     }
 
     private void launchApp() {
-        Fragment fragment = new AllHabitsFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container_main, fragment)
-                .commit();
+
+        TabLayout tabLayout = findViewById(R.id.controltabLayout);
+            inflateTabs(tabLayout);
+            setTabLayoutOnClickListener(tabLayout);
+
+            Fragment fragment = new AllHabitsFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container_main, fragment)
+                    .commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == 100) {  // Check the request code
+            if (resultCode == RESULT_OK) {
+                if (resultData != null) {
+                    String userId = resultData.getStringExtra("USERID");
+                    AuthUtils.storeUserInfo(this,userId);
+                    launchApp();
+                }
+            } else {
+                finish();
+            }
+        }
     }
 
     void inflateTabs(TabLayout tabLayout){
@@ -118,15 +134,3 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 }
-
-
-
-//        new InsertUser(getApplicationContext()).execute(new User(UUID.randomUUID(),"Fatimah", "fatimah@hamna.com","123"));
-//        Habit habit = new Habit(UUID.randomUUID(), "good habit", "hahaha", HabitType.FINANCES, 1, new Time(1,45,0), StringUtils.getAllDays());
-//        new InsertHabit(getApplicationContext()).execute(habit);
-//        new InsertHabitTrackerTask(this).execute(new HabitTracker(
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557E"),
-//                UUID.fromString("ABB62547-02A2-4B8E-B88C-3F084A60557C"),
-//                Calendar.getInstance().getTime(),
-//                true));
-//        new GetCompletedHabitsTask(this, this,"good habit").execute();

@@ -1,32 +1,79 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerII"
+    <LinearLayout
+        android:id="@+id/noHabitII"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@id/left_arrow"
-        android:layout_toStartOf="@id/right_arrow"/>
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:visibility="visible">
 
-    <TextView
-        android:id="@+id/left_arrow"
-        android:fontFamily="@font/evaicons"
-        android:textSize="50sp"
-        android:textColor="@color/reflection_date_font_purple"
-        android:text="\uE9C5"
-        android:layout_gravity="center|start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:background="@drawable/rounded_background_4"
+            android:backgroundTint="@color/reflection_date_font_purple"
+            android:paddingHorizontal="70dp"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/right_arrow"
-        android:fontFamily="@font/evaicons"
-        android:textColor="@color/reflection_date_font_purple"
-        android:layout_gravity="center_vertical|end"
-        android:textSize="50sp"
-        android:text="\uE9C4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:text="Create your first habit to see your insights"
+                android:gravity="center"/>
 
-</FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-100dp"
+                android:src="@drawable/data_analytics"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/hasHabitII"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerII"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/left_arrow"
+            android:layout_toStartOf="@id/right_arrow"/>
+
+        <TextView
+            android:id="@+id/left_arrow"
+            android:fontFamily="@font/evaicons"
+            android:textSize="50sp"
+            android:textColor="@color/reflection_date_font_purple"
+            android:text="\uE9C5"
+            android:layout_gravity="center|start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/right_arrow"
+            android:fontFamily="@font/evaicons"
+            android:textColor="@color/reflection_date_font_purple"
+            android:layout_gravity="center_vertical|end"
+            android:textSize="50sp"
+            android:text="\uE9C4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+</LinearLayout>
+
+
