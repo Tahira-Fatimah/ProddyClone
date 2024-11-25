@@ -41,6 +41,7 @@ import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.DrawableUtils;
 import com.assignment.proddy.Utils.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,10 +80,11 @@ public class ReflectionFragment extends Fragment {
         activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
+                    Log.d("Back",":");
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         currentReflection = (Reflection) result.getData().getSerializableExtra("Reflection");
                         // Handle the updatedReflection object here (e.g., update UI, ViewModel, etc.)
-                        Log.d("UpdatedReflection", currentReflection.toString());
+                        Log.d("UpdatedReflectionFromActivity", currentReflection.toString());
                     }
                 }
         );
@@ -109,16 +111,19 @@ public class ReflectionFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (isComingBackFromAnotherActivity) {
-            getUpdatedReflectionViewOnResume();
-            reflectionHorizontalScrollViewContainer.removeAllViews();
-            allBarsView.removeAllViews();
-            setReflectionRateWeekBarsAsyncTaskCall();
-            setAverageReflectionMood();
-            inflateDateHorizontalScrollView();
+            if(currentReflection != null){
+                reflectionHorizontalScrollViewContainer.removeAllViews();
+                allBarsView.removeAllViews();
+                setReflectionRateWeekBarsAsyncTaskCall();
+                setAverageReflectionMood();
+                inflateDateHorizontalScrollView();
+                Log.d("Child Count",String.valueOf(reflectionHorizontalScrollViewContainer.getChildCount()));
+                clearViews();
+                setCustomReflection(currentReflection);
+            }
             isComingBackFromAnotherActivity = false;
         }
     }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -203,23 +208,7 @@ public class ReflectionFragment extends Fragment {
             ImageView reflectionFeelingEmoji = childView.findViewById(R.id.reflectionFeelingEmoji);
 
             Date currentDate = calendar.getTime();
-            int feelingRate = findFeelingRateByDate(res, currentDate);
-            if(feelingRate != -1){
-                reflectionFeelingEmoji.setImageResource(DrawableUtils.getReflectionEmojiDrawable(feelingRate));
-            } else{
-                reflectionFeelingEmoji.setImageResource(R.drawable.add_circle_purple);
-                reflectionFeelingEmoji.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getContext(), StartReflection.class);
-                        Reflection reflectionToCreationProbably = new Reflection();
-                        Log.d("Date Selected", String.valueOf(currentDate));
-                        reflectionToCreationProbably.setReflectionCreationDate(currentDate);
-                        intent.putExtra("Reflection", reflectionToCreationProbably);
-                        activityResultLauncher.launch(intent);
-                    }
-                });
-            }
+
             String month = monthFormat.format(currentDate);
             String day = dateFormat.format(currentDate);
 
@@ -243,12 +232,31 @@ public class ReflectionFragment extends Fragment {
                 dayTextView.setTextColor(getResources().getColor(R.color.white));
             }
 
+            int feelingRate = findFeelingRateByDate(res, currentDate);
+            if(feelingRate != -1){
+                reflectionFeelingEmoji.setImageResource(DrawableUtils.getReflectionEmojiDrawable(feelingRate));
+            } else{
+                reflectionFeelingEmoji.setImageResource(R.drawable.add_circle_purple);
+                reflectionFeelingEmoji.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), StartReflection.class);
+                        Reflection reflectionToCreationProbably = new Reflection();
+                        Log.d("Date Selected", String.valueOf(currentDate));
+                        reflectionToCreationProbably.setReflectionCreationDate(currentDate);
+                        intent.putExtra("Reflection", reflectionToCreationProbably);
+                        activityResultLauncher.launch(intent);
+//                        adjustDateContainerSelected(dateContainerLinearLayout, monthTextView, dayTextView);
+                    }
+                });
+            }
             setDateContainerOnClick(dateContainerLinearLayout, monthTextView, dayTextView);
             reflectionHorizontalScrollViewContainer.addView(childView);
 
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
+//        adjustSelectedDateColourOnResume(currentReflection.getReflectionCreationDate());
         dateContainerHorizontalScrollView.postDelayed(new Runnable() {
             public void run() {
                 dateContainerHorizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
@@ -411,17 +419,6 @@ public class ReflectionFragment extends Fragment {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            if (data != null) {
-                Reflection updatedReflection = (Reflection) data.getSerializableExtra("Reflection");
-                Log.d("UpdatedReflection", updatedReflection.toString());
-            }
-        }
-    }
-
     private void setCustomReflection(Reflection reflection){
         String reflectionThoughts = reflection.getReflectionThoughts();
         List<ReflectionActivities> reflectionActivities = reflection.getReflectionActivitiesList();
@@ -527,23 +524,27 @@ public class ReflectionFragment extends Fragment {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Date selectedDate = (Date) layout.getTag();
-                if(lastDateContainerClicked != null){
-                    lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
-                    lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
-                    lastMonthClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
-                }
-                layout.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
-                month.setTextColor(getResources().getColor(R.color.white));
-                date.setTextColor(getResources().getColor(R.color.white));
-
-                lastDateContainerClicked = layout;
-                lastMonthClicked = month;
-                lastDateClicked = date;
-                defineReflectionDateOnClick(selectedDate);
+                adjustDateContainerSelected(layout, month, date);
 
             }
         });
+    }
+
+    private void adjustDateContainerSelected(LinearLayout layout, TextView month, TextView date){
+        Date selectedDate = (Date) layout.getTag();
+        if(lastDateContainerClicked != null){
+            lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
+            lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+            lastMonthClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+        }
+        layout.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
+        month.setTextColor(getResources().getColor(R.color.white));
+        date.setTextColor(getResources().getColor(R.color.white));
+
+        lastDateContainerClicked = layout;
+        lastMonthClicked = month;
+        lastDateClicked = date;
+        defineReflectionDateOnClick(selectedDate);
     }
 
     private void clearViews(){
@@ -560,25 +561,65 @@ public class ReflectionFragment extends Fragment {
                 if(currentReflection != null){
                     Intent intent = new Intent(getContext(), StartReflection.class);
                     intent.putExtra("Reflection", currentReflection);
-                    startActivity(intent);
+                    activityResultLauncher.launch(intent);
                 }
             }
         });
     }
 
-    private void getUpdatedReflectionViewOnResume(){
-//        new GetReflectionByIdTask(getContext(), new GetReflectionByIdTask.onGetReflectionByIdListener() {
-//            @Override
-//            public void onSuccess(Reflection reflection) {
-//                clearViews();
-//                currentReflection = reflection;
-//                setCustomReflection(currentReflection);
-//            }
-//            @Override
-//            public void onFailure() {
-//
-//            }
-//        }).execute(currentReflection.getReflectionId());
+    private void adjustSelectedDateColourOnResume(Date date){
+        Log.d("CurrentDate", String.valueOf(date));
+        for (int i = 0; i < reflectionHorizontalScrollViewContainer.getChildCount(); i++) {
+            View child = reflectionHorizontalScrollViewContainer.getChildAt(i);
+//            Date tagDate = (Date) child.getContentDescription();
+
+            if(child instanceof LinearLayout) {
+                LinearLayout linearLayout = (LinearLayout) child;
+                Log.d("CurrentDatee", String.valueOf(linearLayout.getContentDescription())+ String.valueOf(date));
+
+                if (linearLayout.getContentDescription() != null) {
+                    if (lastDateContainerClicked != null) {
+                        lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
+                        lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+                        lastMonthClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
+                    }
+                    TextView month, dateView;
+
+                    for (int j = 0; j < linearLayout.getChildCount(); j ++){
+                        View innerChild = linearLayout.getChildAt(i);
+                        if(innerChild instanceof TextView && i == 0){
+                            month = (TextView) innerChild;
+                            month.setTextColor(getResources().getColor(R.color.white));
+                            lastMonthClicked = month;
+                        }
+                        else{
+                            dateView = (TextView) innerChild;
+                            dateView.setTextColor(getResources().getColor(R.color.white));
+                            lastDateClicked = dateView;
+                        }
+                    }
+
+                    child.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
+                    lastDateContainerClicked = linearLayout;
+                }
+            }
+
+
+        }
 
     }
+//
+//    public boolean compareDates(String dateTime1, String dateTime2){
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//        try {
+//            Date date1 = dateFormat.parse(dateTime1);
+//            Date date2 = dateFormat.parse(dateTime2);
+//
+//            return date1.equals(date2);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 }

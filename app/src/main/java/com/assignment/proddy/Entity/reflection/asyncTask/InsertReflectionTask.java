@@ -11,9 +11,11 @@ import com.assignment.proddy.Entity.reflection.Reflection;
 
 public class InsertReflectionTask extends AsyncTask<Reflection, Void, Long> {
     private Context context;
+    private onInsertReflectionListener onInsertReflectionListener;
 
-    public InsertReflectionTask(Context context){
+    public InsertReflectionTask(Context context, onInsertReflectionListener onInsertReflectionListener){
         this.context = context;
+        this.onInsertReflectionListener = onInsertReflectionListener;
     }
 
     @Override
@@ -26,10 +28,17 @@ public class InsertReflectionTask extends AsyncTask<Reflection, Void, Long> {
     @Override
     protected void onPostExecute(Long result){
         if(result != -1){
+            onInsertReflectionListener.onSuccess();
             Toast.makeText(context, "Reflection Added", Toast.LENGTH_SHORT).show();
         } else{
+            onInsertReflectionListener.onFailure();
             Toast.makeText(context, "SEDDD", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    public interface onInsertReflectionListener{
+        void onSuccess();
+        void onFailure();
     }
 }
