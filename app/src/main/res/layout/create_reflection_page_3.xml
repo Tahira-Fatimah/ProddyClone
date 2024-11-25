@@ -5,6 +5,7 @@
     android:background="@drawable/habit_create_bg"
     android:backgroundTint="@color/reflection_date_font_purple"
     android:paddingTop="40dp"
+    android:paddingBottom="60dp"
     android:paddingHorizontal="20dp"
     android:orientation="vertical">
 
@@ -271,6 +272,7 @@
     </GridLayout>
 
     <TextView
+        android:id="@+id/reflectionDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your habits on Nov 11, 2024"
@@ -279,17 +281,9 @@
         android:textColor="@color/reflection_feeling_title"
         android:layout_marginVertical="10dp"/>
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/reflection_habit_list_item"/>
-
-        <include layout="@layout/reflection_habit_list_item"/>
-
-        <include layout="@layout/reflection_habit_list_item"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/habitsListView"/>
 
 </LinearLayout>

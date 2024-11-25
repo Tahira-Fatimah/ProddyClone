@@ -585,7 +585,6 @@ public class ReflectionFragment extends Fragment {
         Log.d("CurrentDate", String.valueOf(date));
         for (int i = 0; i < reflectionHorizontalScrollViewContainer.getChildCount(); i++) {
             View child = reflectionHorizontalScrollViewContainer.getChildAt(i);
-//            Date tagDate = (Date) child.getContentDescription();
 
             if(child instanceof LinearLayout) {
                 LinearLayout linearLayout = (LinearLayout) child;

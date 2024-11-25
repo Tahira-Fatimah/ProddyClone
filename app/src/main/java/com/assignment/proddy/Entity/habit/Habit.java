@@ -129,4 +129,25 @@ public class Habit implements Serializable {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        // Check if the object references are the same
+        if (this == obj) return true;
+
+        // Check if the object is null or not an instance of Habit
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        // Cast the object to Habit
+        Habit habit = (Habit) obj;
+
+        // Check if habitId is equal
+        return habitId.equals(habit.habitId);
+    }
+
+    @Override
+    public int hashCode() {
+        return habitId.hashCode();
+    }
+
+
 }

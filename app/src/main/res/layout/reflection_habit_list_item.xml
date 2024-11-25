@@ -8,12 +8,14 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/habitCategory"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/mindfulness"/>
 
     <TextView
+        android:id="@+id/habitTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -24,6 +26,7 @@
         android:textColor="@color/white"/>
 
     <CheckBox
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/white"

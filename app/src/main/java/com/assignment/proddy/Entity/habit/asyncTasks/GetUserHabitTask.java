@@ -11,16 +11,17 @@ import com.assignment.proddy.Entity.habit.Habit;
 import java.util.List;
 import java.util.UUID;
 
-public class getUserHabitTask extends AsyncTask<Void, Void, List<Habit> >{
+public class GetUserHabitTask extends AsyncTask<Void, Void, List<Habit> >{
 
     private Context context;
-    onUserHabitsRetrieved listener;
+    private onUserHabitsRetrieved listener;
     UUID userID;
 
-    public getUserHabitTask(Context context, onUserHabitsRetrieved listener,  UUID userID){
+    public GetUserHabitTask(Context context, UUID userID, onUserHabitsRetrieved listener){
         this.context = context;
         this.listener = listener;
         this.userID = userID;
+
     }
 
     @Override
@@ -34,7 +35,12 @@ public class getUserHabitTask extends AsyncTask<Void, Void, List<Habit> >{
         super.onPostExecute(habits);
 
         if (listener != null) {
-            listener.onuserHabitsRetrieved(habits);
+            listener.onSuccess(habits);
         }
     }
+
+    public interface onUserHabitsRetrieved {
+       void onSuccess(List<Habit> userHabits);
+    }
+
 }

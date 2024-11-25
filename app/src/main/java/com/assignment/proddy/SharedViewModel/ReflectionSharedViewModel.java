@@ -7,10 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.assignment.proddy.Entity.habit.Habit;
 import com.assignment.proddy.Entity.reflection.Reflection;
 import com.assignment.proddy.Entity.reflection.ReflectionActivities;
 import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,10 +22,11 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
     private final MutableLiveData<UUID> reflectionId = new MutableLiveData<>();
     private final MutableLiveData<UUID> reflectionUserId = new MutableLiveData<>();
     private final MutableLiveData<List<ReflectionFeelings>> reflectionFeelingsList = new MutableLiveData<>();
-    private final MutableLiveData<Integer> reflectionFeelingRate = new MutableLiveData<>(-1);
+    private final MutableLiveData<Integer> reflectionFeelingRate = new MutableLiveData<>(3);
     private final MutableLiveData<List<ReflectionActivities>> reflectionActivitiesList = new MutableLiveData<>();
     private final MutableLiveData<String> reflectionThoughts = new MutableLiveData<>();
     private final MutableLiveData<Date> reflectionCreationDate = new MutableLiveData<>();
+    private final MutableLiveData<List<Habit>> completedHabits = new MutableLiveData<>(new ArrayList<>());
 
     public ReflectionSharedViewModel(@NonNull Application application) {
         super(application);
@@ -32,6 +35,14 @@ public class ReflectionSharedViewModel extends AndroidViewModel {
     // Getter and Setter for reflectionId
     public LiveData<UUID> getReflectionId() {
         return reflectionId;
+    }
+
+    public LiveData<List<Habit>> getHabits(){
+        return completedHabits;
+    }
+
+    public void setHabit(Habit habit){
+        completedHabits.getValue().add(habit);
     }
 
     public void setReflectionId(UUID id) {

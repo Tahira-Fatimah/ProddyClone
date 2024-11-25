@@ -13,6 +13,9 @@ import androidx.room.Update;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.StartReflectionAdapter;
+import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habitTracker.HabitTracker;
+import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
 import com.assignment.proddy.Entity.reflection.Reflection;
 import com.assignment.proddy.Entity.reflection.asyncTask.UpdateReflectionTask;
 import com.assignment.proddy.Fragments.StartReflection.StartReflection1;
@@ -62,7 +65,9 @@ public class StartReflection extends AppCompatActivity {
 
         if(receivedReflection != null){
             reflectionSharedViewModel.setReflectionData(receivedReflection);
-            reflectionSharedViewModel.toString();
+            if(receivedReflection.getReflectionFeelingRate() == 0){
+                reflectionSharedViewModel.setReflectionFeelingRate(3);
+            }
         }
     }
 
@@ -97,6 +102,7 @@ public class StartReflection extends AppCompatActivity {
 
                             }
                         }).execute(updatedReflection);
+
                     }
                     else{
                         updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
@@ -118,6 +124,11 @@ public class StartReflection extends AppCompatActivity {
 
                             }
                         }).execute(updatedReflection);
+
+                    }
+
+                    for(Habit habit : reflectionSharedViewModel.getHabits().getValue()){
+                        new InsertHabitTrackerTask(StartReflection.this).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getTodayForInsertDB(),true));
                     }
 
                 } else{
