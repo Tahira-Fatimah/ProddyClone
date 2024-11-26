@@ -33,10 +33,15 @@ public class GetUserRecord extends AsyncTask<Void, Void, User> {
     @Override
     protected void onPostExecute(User user) {
         super.onPostExecute(user);
-        this.onUserRecordRetrievedListener.onSuccess(user);
+        if(user == null){
+            this.onUserRecordRetrievedListener.onFailure();
+        } else{
+            this.onUserRecordRetrievedListener.onSuccess(user);
+        }
     }
 
     public interface OnUserRecordRetrievedListener{
         void onSuccess(User user);
+        void onFailure();
     }
 }

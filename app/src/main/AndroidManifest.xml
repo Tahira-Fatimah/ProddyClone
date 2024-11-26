@@ -15,9 +15,6 @@
         android:theme="@style/Theme.Proddy"
         tools:targetApi="31" >
         <activity
-            android:name=".Activities.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.HabitListActivity"
             android:exported="false" />
         <activity

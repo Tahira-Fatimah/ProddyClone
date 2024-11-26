@@ -18,7 +18,7 @@
             android:textColor="#3D155F"
             android:textSize="33sp"
             android:textStyle="bold"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="100dp"
             android:gravity="center"/>
 
         <!-- Image (Illustration) -->
@@ -32,6 +32,7 @@
         <!-- Continue with Apple Button -->
 
         <LinearLayout
+            android:id="@+id/btnGoogleSignIn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_background_1"
@@ -126,6 +127,7 @@
 
 
         <TextView
+            android:id="@+id/checkonly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/reflection_bg"

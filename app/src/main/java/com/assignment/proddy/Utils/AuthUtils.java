@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.assignment.proddy.Entity.user.User;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -49,5 +50,12 @@ public class AuthUtils {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(emailRegex);
         return pattern.matcher(email).matches();
+    }
+
+    public static GoogleSignInOptions getGoogleSignInOptions(){
+        return new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("661052001100-rlsrq5ponrnhkgqv80pd9ln5jh5nt6fl.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
     }
 }

@@ -2,6 +2,7 @@ package com.assignment.proddy.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,12 @@ import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Entity.user.asyncTasks.InsertUser;
 import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.AuthUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -33,7 +40,9 @@ public class SignupActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     TextView registerBtn;
+    TextView signUpWithGoogle;
 
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +58,24 @@ public class SignupActivity extends AppCompatActivity {
         email = findViewById(R.id.etEmail_s);
         password = findViewById(R.id.etPassword_s);
         registerBtn = findViewById(R.id.register);
+        signUpWithGoogle = findViewById(R.id.btnGoogleSignIn);
 
+        setGoogleSignUpButtonListener();
         setEmailButtonListener();
         setRegisterButtonListener();
+    }
+
+    private void setGoogleSignUpButtonListener() {
+        signUpWithGoogle.setOnClickListener(v->{
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken("661052001100-rlsrq5ponrnhkgqv80pd9ln5jh5nt6fl.apps.googleusercontent.com")
+                    .requestEmail()
+                    .build();
+
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
+            Intent signInIntent = googleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        });
     }
 
     private void setRegisterButtonListener() {
@@ -98,6 +122,20 @@ public class SignupActivity extends AppCompatActivity {
         intent.putExtra("USER_PASSWORD", password);
         setResult(RESULT_OK,intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(resultData);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                signUpUser(account.getDisplayName(),account.getEmail(), "");
+            } catch (ApiException e) {
+                Log.w("GoogleSignIn", "Google sign-in failed", e);
+            }
+        }
     }
 
 

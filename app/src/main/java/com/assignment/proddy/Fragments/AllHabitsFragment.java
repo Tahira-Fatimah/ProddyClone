@@ -28,6 +28,7 @@ import com.assignment.proddy.Adapters.HabitListIncompleteAdapter;
 import com.assignment.proddy.Entity.habit.asyncTasks.GetHabitsTask;
 import com.assignment.proddy.Entity.habit.asyncTasks.onHabitsRetrievedListener;
 import com.assignment.proddy.Entity.user.asyncTasks.GetUserHabitCount;
+import com.assignment.proddy.MainActivity;
 import com.assignment.proddy.ObjectMapping.HabitWithTracker;
 import com.assignment.proddy.Entity.user.asyncTasks.onUserHabitCountRetrieved;
 import com.assignment.proddy.R;
@@ -35,6 +36,7 @@ import com.assignment.proddy.Utils.AuthUtils;
 import com.assignment.proddy.Utils.DateUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -160,8 +162,15 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     @Override
     public void onResume() {
         super.onResume();
-        fetchHabitLists();
-        getUserHabitsCount();
+        if(Objects.equals(AuthUtils.getLoggedInUser(getContext()), "blank")){
+            Intent intent = new Intent(requireContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            requireActivity().finish();
+        } else {
+            fetchHabitLists();
+            getUserHabitsCount();
+        }
     }
 
     public void fetchHabitLists() {

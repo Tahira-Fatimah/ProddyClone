@@ -2,6 +2,7 @@ package com.assignment.proddy.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,6 +22,12 @@ import com.assignment.proddy.Entity.user.asyncTasks.GetUserRecord;
 import com.assignment.proddy.Entity.user.asyncTasks.InsertUser;
 import com.assignment.proddy.R;
 import com.assignment.proddy.Utils.AuthUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -30,6 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     TextView signUpOption;
     TextView loginButton;
+    LinearLayout googleSignInBtn;
+    TextView text;
+
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +55,21 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
 
+        googleSignInBtn = findViewById(R.id.btnGoogleSignIn_login);
+        text = findViewById(R.id.checkonly);
+
         setSignUpOptionButtonListener();
         setLoginButtonListener();
+        setGoogleSinInButtonListener();
+    }
+
+    private void setGoogleSinInButtonListener(){
+        googleSignInBtn.setOnClickListener(v -> {
+            GoogleSignInOptions gso = AuthUtils.getGoogleSignInOptions();
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
+            Intent signInIntent = googleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        });
     }
 
     private void setLoginButtonListener() {
@@ -81,6 +106,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(User user) {
                 setAuthStateForReturn(user);
             }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(LoginActivity.this,"Email or Password is incorrect",Toast.LENGTH_LONG).show();
+                loginButton.setClickable(true);
+                loginButton.setEnabled(true);
+            }
         }, email, password).execute();
     }
 
@@ -97,6 +129,14 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 finish();
             }
+        } else if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(resultData);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                logInUser(account.getEmail(),"");
+            } catch (ApiException e) {
+                Log.w("GoogleSignIn", "Google sign-in failed", e);
+            }
         }
     }
 
@@ -106,4 +146,5 @@ public class LoginActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         finish();
     }
+
 }

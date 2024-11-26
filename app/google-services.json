@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "661052001100",
+    "project_id": "proddy-clone",
+    "storage_bucket": "proddy-clone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661052001100:android:4df34daf20ca44389a1de9",
+        "android_client_info": {
+          "package_name": "com.assignment.proddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661052001100-2blf16sn7pdf2lidfbotcm1ec8fh10e4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.assignment.proddy",
+            "certificate_hash": "baae4a1439485f62bdfb95810362e6ff6296b4ce"
+          }
+        },
+        {
+          "client_id": "661052001100-rlsrq5ponrnhkgqv80pd9ln5jh5nt6fl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdadahxme04IlzybXK9WtTTHOcilnlbyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661052001100-rlsrq5ponrnhkgqv80pd9ln5jh5nt6fl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
