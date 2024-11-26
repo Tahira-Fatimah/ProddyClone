@@ -86,7 +86,7 @@ public class StartReflection extends AppCompatActivity {
                         updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
                                 reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
                                 reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
-                                DateUtils.getDateForMatchDB(receivedReflection.getReflectionCreationDate()));
+                                receivedReflection.getReflectionCreationDate());
                         new InsertReflectionTask(StartReflection.this, new InsertReflectionTask.onInsertReflectionListener() {
                             @Override
                             public void onSuccess() {

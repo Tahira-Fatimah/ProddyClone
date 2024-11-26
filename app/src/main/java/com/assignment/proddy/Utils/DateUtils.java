@@ -1,5 +1,7 @@
 package com.assignment.proddy.Utils;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -107,5 +109,24 @@ public class DateUtils {
         }
         return "Sunday";
     }
+
+
+    public static int findDateIndex(Date inputDate) {
+        Date today = getDateOnly(getToday());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        Date startDate = getDateOnly(calendar.getTime());
+
+
+        if (!inputDate.before(startDate) && !inputDate.after(today)) {
+            long diffInMillies = inputDate.getTime() - startDate.getTime();
+            int position = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
+            return position;
+        } else {
+            return -1;
+        }
+    }
+
 
 }

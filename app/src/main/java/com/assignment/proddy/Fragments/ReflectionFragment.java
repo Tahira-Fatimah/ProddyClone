@@ -73,25 +73,13 @@ public class ReflectionFragment extends Fragment {
     Reflection currentReflection;
     private boolean isComingBackFromAnotherActivity = false;
 
-
     public ReflectionFragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    Log.d("Back",":");
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        currentReflection = (Reflection) result.getData().getSerializableExtra("Reflection");
-                        // Handle the updatedReflection object here (e.g., update UI, ViewModel, etc.)
-                        Log.d("UpdatedReflectionFromActivity", currentReflection.toString());
-                    }
-                }
-        );
+        registerActivityResultLauncher();
     }
 
     @Override
@@ -102,7 +90,6 @@ public class ReflectionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initViews(view);
         setInitialView();
         setReflectionRateWeekBarsAsyncTaskCall();
@@ -121,17 +108,30 @@ public class ReflectionFragment extends Fragment {
                 setReflectionRateWeekBarsAsyncTaskCall();
                 setAverageReflectionMood();
                 inflateDateHorizontalScrollView();
-                Log.d("Child Count",String.valueOf(reflectionHorizontalScrollViewContainer.getChildCount()));
                 clearViews();
+                tapToReflectButton.setVisibility(View.VISIBLE);
                 setCustomReflection(currentReflection);
             }
             isComingBackFromAnotherActivity = false;
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
         isComingBackFromAnotherActivity = true;
+    }
+
+    private void registerActivityResultLauncher(){
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        currentReflection = (Reflection) result.getData().getSerializableExtra("Reflection");
+
+                    }
+                }
+        );
     }
 
     private void initViews(View view){
@@ -185,13 +185,11 @@ public class ReflectionFragment extends Fragment {
                 new GetReflectionFeelingAndRateForDates.onGetReflectionFeelingRateForDatesListener() {
             @Override
             public void onSuccess(List<ReflectionDateAndRate> res) {
-                Log.d("FeelingRateAndDate", "hahahahha");
                 inflateHorizontalView(res);
             }
 
             @Override
             public void onFailure() {
-                Log.d("FeelingRateAndDate", "haha");
                 List<ReflectionDateAndRate> res = new ArrayList<>();
                 inflateHorizontalView(res);
             }
@@ -207,7 +205,6 @@ public class ReflectionFragment extends Fragment {
         calendar.add(Calendar.DAY_OF_MONTH, -30);
         Date todaysDate = Calendar.getInstance().getTime();
         for (int i = 0; i <= 30; i++) {
-            Log.d("Feeling", String.valueOf(i));
             LinearLayout childView = (LinearLayout) inflater.inflate(
                     R.layout.reflection_horizontal_scroll_view_date_item,
                     reflectionHorizontalScrollViewContainer,
@@ -216,6 +213,7 @@ public class ReflectionFragment extends Fragment {
             ImageView reflectionFeelingEmoji = childView.findViewById(R.id.reflectionFeelingEmoji);
 
             Date currentDate = calendar.getTime();
+            currentDate = DateUtils.getDateOnly(currentDate);
 
             String month = monthFormat.format(currentDate);
             String day = dateFormat.format(currentDate);
@@ -231,7 +229,7 @@ public class ReflectionFragment extends Fragment {
             childView.setContentDescription(currentDate.toString());
             dateContainerLinearLayout.setTag(currentDate);
 
-            if(currentDate.equals(todaysDate)){
+            if(currentDate.equals(DateUtils.getDateOnly(todaysDate))){
                 lastDateContainerClicked = dateContainerLinearLayout;
                 lastDateClicked = dayTextView;
                 lastMonthClicked = monthTextView;
@@ -241,21 +239,16 @@ public class ReflectionFragment extends Fragment {
             }
 
             int feelingRate = findFeelingRateByDate(res, currentDate);
-            Log.d("Returned",String.valueOf(feelingRate));
+
             if(feelingRate != -1){
                 reflectionFeelingEmoji.setImageResource(DrawableUtils.getReflectionEmojiDrawable(feelingRate));
             } else{
                 reflectionFeelingEmoji.setImageResource(R.drawable.add_circle_purple);
+                Date finalCurrentDate = currentDate;
                 reflectionFeelingEmoji.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(), StartReflection.class);
-                        Reflection reflectionToCreationProbably = new Reflection();
-                        Log.d("Date Selected", String.valueOf(currentDate));
-                        reflectionToCreationProbably.setReflectionCreationDate(currentDate);
-                        intent.putExtra("Reflection", reflectionToCreationProbably);
-                        activityResultLauncher.launch(intent);
-//                        adjustDateContainerSelected(dateContainerLinearLayout, monthTextView, dayTextView);
+                        createReflectionForSpecifiedDate(finalCurrentDate);
                     }
                 });
             }
@@ -266,20 +259,50 @@ public class ReflectionFragment extends Fragment {
         }
 
         if(currentReflection!=null) {
-            adjustSelectedDateColourOnResume(DateUtils.getDateForMatchDB(currentReflection.getReflectionCreationDate()));
+            adjustSelectedDateColourOnResume(currentReflection.getReflectionCreationDate());
+            scrollHorizontalViewDateContainerToSpecificPosition();
+
+        } else{
+            scrollHorizontalViewDateContainerToEnd();
         }
+
+    }
+
+    private void createReflectionForSpecifiedDate(Date finalCurrentDate) {
+        Intent intent = new Intent(getContext(), StartReflection.class);
+        Reflection reflectionToCreateProbably = new Reflection();
+        reflectionToCreateProbably.setReflectionCreationDate(finalCurrentDate);
+        intent.putExtra("Reflection", reflectionToCreateProbably);
+        activityResultLauncher.launch(intent);
+    }
+
+    private void scrollHorizontalViewDateContainerToSpecificPosition() {
+        int index = DateUtils.findDateIndex(currentReflection.getReflectionCreationDate());
+        dateContainerHorizontalScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout childContainer = (LinearLayout) dateContainerHorizontalScrollView.getChildAt(0);
+                if (childContainer != null) {
+                    int childWidth = childContainer.getChildAt(0).getWidth();
+                    int scrollPosition = childWidth * (index - 1);
+                    dateContainerHorizontalScrollView.smoothScrollTo(scrollPosition, 0);
+                }
+            }
+        }, 100L);
+    }
+
+    private void scrollHorizontalViewDateContainerToEnd() {
         dateContainerHorizontalScrollView.postDelayed(new Runnable() {
             public void run() {
                 dateContainerHorizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
             }
         }, 100L);
-
     }
 
     public int findFeelingRateByDate(List<ReflectionDateAndRate> res, Date targetDate) {
 
         for (ReflectionDateAndRate reflection : res) {
-            if (DateUtils.getDateOnly(DateUtils.getDateForMatchDB(targetDate)).equals(DateUtils.getDateOnly(reflection.getReflectionCreationDate()))) {
+            if (DateUtils.getDateOnly(targetDate).equals(DateUtils.getDateOnly(reflection.getReflectionCreationDate()))) {
                 return reflection.getReflectionFeelingRate();
             }
         }
@@ -310,11 +333,8 @@ public class ReflectionFragment extends Fragment {
         new GetAverageReflectionMoodTask(getContext(), new GetAverageReflectionMoodTask.onGetAverageReflectionMoodListener() {
             @Override
             public void onSuccess(Float avg) {
-                float truncated =  (float) ((int) (avg * 10)) / 10;
-                avgMood = Math.round(avg);
-                avgMoodNumView.setText(String.valueOf(truncated));
-                avgMoodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(avgMood));
-                avgMoodTextView.setText(StringUtils.getAverageMoodTextFromRate(avgMood));
+                setAverageReflectionMoodViews(avg);
+
             }
 
             @Override
@@ -322,6 +342,14 @@ public class ReflectionFragment extends Fragment {
 
             }
         }).execute();
+    }
+
+    private void setAverageReflectionMoodViews(Float avg) {
+        float truncated =  (float) ((int) (avg * 10)) / 10;
+        avgMood = Math.round(avg);
+        avgMoodNumView.setText(String.valueOf(truncated));
+        avgMoodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(avgMood));
+        avgMoodTextView.setText(StringUtils.getAverageMoodTextFromRate(avgMood));
     }
 
     private void setReflectionRateWeekBarsAsyncTaskCall(){
@@ -342,7 +370,7 @@ public class ReflectionFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -6);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                0 ,// 0 height with weight applied
+                0 ,
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         layoutParams.weight = 1;
@@ -457,7 +485,6 @@ public class ReflectionFragment extends Fragment {
         }
         for(int i = 0; i<reflectionActivities.size(); i++){
             ReflectionActivities reflectionActivity = reflectionActivities.get(i);
-            Log.d("ReflectionActivity", reflectionActivity.getDisplayName());
             String value = ReflectionActivityEmojiEnum.fromEnumName(reflectionActivity.getDisplayName()).getDisplayName();
             LinearLayout linearLayout = new LinearLayout(requireContext());
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -491,7 +518,6 @@ public class ReflectionFragment extends Fragment {
             linearLayout.addView(activityTextView);
             linearLayout.setLayoutParams(linearLayoutParams);
 
-            // Add LinearLayout to the GridLayout
             activitiesGridView.addView(linearLayout, layoutParams);
         }
 
@@ -514,15 +540,12 @@ public class ReflectionFragment extends Fragment {
                 newTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_font));
                 newTextView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.feeling_tag_positive_bg));
             }
-            // get from db thru create reflection------------
 
-            // Set padding (convert dp to pixels)
-            float density = getResources().getDisplayMetrics().density; // Get the screen density
-            int paddingHorizontal = (int) (8 * density); // Convert 8dp to pixels
-            int paddingVertical = (int) (3 * density);  // Convert 3dp to pixels
+            float density = getResources().getDisplayMetrics().density;
+            int paddingHorizontal = (int) (8 * density);
+            int paddingVertical = (int) (3 * density);
             newTextView.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
 
-            // Set margin using LayoutParams
             ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
@@ -539,7 +562,6 @@ public class ReflectionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adjustDateContainerSelected(layout, month, date);
-
             }
         });
     }
@@ -573,67 +595,52 @@ public class ReflectionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(currentReflection != null){
-                    Intent intent = new Intent(getContext(), StartReflection.class);
-                    intent.putExtra("Reflection", currentReflection);
-                    activityResultLauncher.launch(intent);
+                    goToStartReflectionActivityForViewOrEdit();
                 }
             }
         });
     }
 
+    private void goToStartReflectionActivityForViewOrEdit() {
+        Intent intent = new Intent(getContext(), StartReflection.class);
+        intent.putExtra("Reflection", currentReflection);
+        activityResultLauncher.launch(intent);
+    }
+
     private void adjustSelectedDateColourOnResume(Date date){
-        Log.d("CurrentDate", String.valueOf(date));
         for (int i = 0; i < reflectionHorizontalScrollViewContainer.getChildCount(); i++) {
             View child = reflectionHorizontalScrollViewContainer.getChildAt(i);
 
             if(child instanceof LinearLayout) {
                 LinearLayout linearLayout = (LinearLayout) child;
-                Log.d("CurrentDatee", String.valueOf(linearLayout.getContentDescription())+ String.valueOf(date));
-
-                if (linearLayout.getTag() != null &&
-                        DateUtils.getDateOnly(DateUtils.getDateForMatchDB((Date) linearLayout.getTag())).equals(DateUtils.getDateOnly(date))){
+                if (linearLayout.getContentDescription() != null && linearLayout.getContentDescription().toString().equals(date.toString())){
                     if (lastDateContainerClicked != null) {
                         lastDateContainerClicked.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_light_grey));
                         lastDateClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
                         lastMonthClicked.setTextColor(getResources().getColor(R.color.reflection_date_font_purple));
                     }
+                    LinearLayout dateContainerLinearLayout =(LinearLayout) linearLayout.getChildAt(0);
                     TextView month, dateView;
 
-                    for (int j = 0; j < linearLayout.getChildCount(); j ++){
-                        View innerChild = linearLayout.getChildAt(i);
-                        if(innerChild instanceof TextView && i == 0){
+                    for (int j = 0; j < dateContainerLinearLayout.getChildCount(); j ++){
+                        View innerChild = dateContainerLinearLayout.getChildAt(j);
+                        if(innerChild instanceof TextView && j == 0){
                             month = (TextView) innerChild;
                             month.setTextColor(getResources().getColor(R.color.white));
                             lastMonthClicked = month;
                         }
-                        else{
+                        else if(innerChild instanceof TextView){
                             dateView = (TextView) innerChild;
                             dateView.setTextColor(getResources().getColor(R.color.white));
                             lastDateClicked = dateView;
                         }
                     }
 
-                    child.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
-                    lastDateContainerClicked = linearLayout;
+                    dateContainerLinearLayout.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.reflection_date_font_purple));
+                    lastDateContainerClicked = dateContainerLinearLayout;
                 }
             }
-
-
         }
 
     }
-//
-//    public boolean compareDates(String dateTime1, String dateTime2){
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//
-//        try {
-//            Date date1 = dateFormat.parse(dateTime1);
-//            Date date2 = dateFormat.parse(dateTime2);
-//
-//            return date1.equals(date2);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
 }
