@@ -47,6 +47,8 @@ public class EditHabitStack extends AppCompatActivity {
 //    int habitStepNumber = 1;
     List<HabitStep> insertedSteps = new ArrayList<>();
     List<HabitStep> updatedSteps = new ArrayList<>();
+    int habitStackOverallTime = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,10 @@ public class EditHabitStack extends AppCompatActivity {
             steps=new ArrayList<>();
         }
         this.habitSteps = steps;
+        for(HabitStep habitStep: habitSteps){
+            habitStackOverallTime += habitStep.getHabitStepTime();
+        }
+        overallTime.setText("Overall Time : " + String.valueOf(habitStackOverallTime) + " minutes");
     }
 
     private void defineOnClickListeners(){
@@ -125,9 +131,13 @@ public class EditHabitStack extends AppCompatActivity {
             }
 
             @Override
-            public void onSaveBtnClick(HabitStep habitStep) {
+            public void onSaveBtnClick(HabitStep habitStep, int oldTime) {
+
+                habitStackOverallTime-=oldTime;
                 updatedSteps.add(habitStep);
                 newStepLayoutEditHabitStack.setVisibility(View.VISIBLE);
+                habitStackOverallTime+=habitStep.getHabitStepTime();
+                overallTime.setText("Overall Time : " + String.valueOf(habitStackOverallTime) + " minutes");
 
             }
         });
@@ -143,6 +153,9 @@ public class EditHabitStack extends AppCompatActivity {
         HabitStep newHabitStep = new HabitStep(UUID.randomUUID(), habitStack.getHabit().getHabitId(), number, description, time, emoji);
         Log.d("HabitStepInsert", newHabitStep.toString());
         habitSteps.add(newHabitStep);
+        habitStackOverallTime+=newHabitStep.getHabitStepTime();
+        overallTime.setText("Overall Time : " +  String.valueOf(habitStackOverallTime) + " minutes");
+
     }
 
     private void defineSaveBtn(){

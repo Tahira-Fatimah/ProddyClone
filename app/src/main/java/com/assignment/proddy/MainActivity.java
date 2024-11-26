@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.assignment.proddy.Entity.user.User;
+import com.assignment.proddy.Entity.user.asyncTasks.InsertUser;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
 import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.LessonsFragment;
@@ -19,6 +21,8 @@ import com.assignment.proddy.Utils.AuthUtils;
 import com.assignment.proddy.Utils.DateUtils;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity{
 
     @Override
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("dataaaaaaaaeee", DateUtils.getTodayForInsertDB().toString());
-//        UUID CONSTANT_UUID = UUID.fromString("E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
+        UUID CONSTANT_UUID = UUID.fromString("E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
 //
 //        new InsertUser(getApplicationContext()).execute(new User(CONSTANT_UUID,"Fatimah", "fatimah@hamna.com","123"));
         AuthUtils.storeUserInfo(this);

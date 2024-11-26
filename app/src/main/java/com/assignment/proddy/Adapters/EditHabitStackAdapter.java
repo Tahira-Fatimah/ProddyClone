@@ -1,6 +1,8 @@
 package com.assignment.proddy.Adapters;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,7 @@ public class EditHabitStackAdapter extends BaseAdapter {
 
     public interface Listener {
         void onListItemClick();
-        void onSaveBtnClick(HabitStep habitStep);
+        void onSaveBtnClick(HabitStep habitStep, int oldTime);
     }
 
     public EditHabitStackAdapter(Context context, List<HabitStep> habitSteps, Listener listener) {
@@ -126,18 +128,41 @@ public class EditHabitStackAdapter extends BaseAdapter {
         // Save button click listener for edit mode
         saveNewStepBtn.setOnClickListener(v -> {
             // Update the habit step with new values
+            int oldHabitTime = currentStep.getHabitStepTime();
+            Log.d("OldTime ", String.valueOf(oldHabitTime));
             currentStep.setHabitStepDescription(newStepText.getText().toString());
             currentStep.setHabitStepEmoji(newStepEmoji.getText().toString());
             currentStep.setHabitStepTime(Integer.parseInt(newStepTime.getText().toString().split(" ")[0]));
 
             // Notify the activity about save
             if (listener != null) {
-                listener.onSaveBtnClick(currentStep);
+                listener.onSaveBtnClick(currentStep, oldHabitTime);
             }
 
             // Switch back to view mode
             expandedPosition = -1;
             notifyDataSetChanged();
+        });
+
+        newStepText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(newStepText.getText().toString().length() > 0){
+                    saveNewStepBtn.setImageResource(R.drawable.check_circle_white);
+                } else{
+                    saveNewStepBtn.setImageResource(R.drawable.check_circle_purple);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         return convertView;
