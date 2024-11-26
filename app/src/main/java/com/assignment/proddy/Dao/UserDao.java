@@ -1,5 +1,7 @@
 package com.assignment.proddy.Dao;
 
+import static java.nio.file.attribute.AclEntryPermission.DELETE;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -17,7 +19,7 @@ public interface UserDao {
     public Long insert(User user);
 
     @Delete
-    public void delete(User user);
+    public Void delete(User user);
 
     @Update
     public void update(User user);
@@ -28,4 +30,6 @@ public interface UserDao {
     @Query("SELECT COUNT(*) FROM habit WHERE habit_UserId = :userId")
     public int getUserHabitCount(UUID userId);
 
+    @Query("DELETE FROM user WHERE userId = :userId ")
+    public Void deleteUserById(UUID userId);
 }
