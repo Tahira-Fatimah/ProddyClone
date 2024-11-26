@@ -14,21 +14,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.assignment.proddy.Adapters.AllHabitsInReflectionAdapter;
+import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habit.asyncTasks.GetHabitsTask;
+import com.assignment.proddy.Entity.habit.asyncTasks.GetUserHabitTask;
+import com.assignment.proddy.Entity.habit.asyncTasks.onHabitsRetrievedListener;
 import com.assignment.proddy.Entity.reflection.ReflectionActivities;
 import com.assignment.proddy.Entity.reflection.ReflectionFeelings;
+import com.assignment.proddy.ObjectMapping.HabitWithTracker;
 import com.assignment.proddy.R;
 import com.assignment.proddy.SharedViewModel.ReflectionSharedViewModel;
+import com.assignment.proddy.Utils.AuthUtils;
+import com.assignment.proddy.Utils.DateUtils;
+import com.assignment.proddy.Utils.StringUtils;
 
 import java.sql.Ref;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 public class StartReflection3 extends Fragment {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
     ReflectionSharedViewModel reflectionSharedViewModel;
     GridLayout gridLayout;
     List<LinearLayout> activitiesLinearLayouts;
+    ListView habitsListView;
+    AllHabitsInReflectionAdapter allHabitsInReflectionAdapter;
+    TextView reflectionDateView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +65,14 @@ public class StartReflection3 extends Fragment {
                 !reflectionSharedViewModel.getReflectionActivitiesList().getValue().isEmpty()) {
             renderInitValues();
         }
+        getAllHabitsForUser();
+        reflectionDateView.setText("Your Habits on " + dateFormat.format(reflectionSharedViewModel.getReflectionCreationDate().getValue()));
 
     }
 
     private void initViews(View view){
+        reflectionDateView = view.findViewById(R.id.reflectionDateView);
+        habitsListView = view.findViewById(R.id.habitsListView);
         gridLayout = view.findViewById(R.id.activitiesGridLayout);
         activitiesLinearLayouts = getTextViewsFromGridLayout(gridLayout);
     }
@@ -109,5 +130,15 @@ public class StartReflection3 extends Fragment {
                 linearLayout.setBackgroundResource(R.drawable.reflection_activity_selected_bg);
             }
         }
+    }
+
+    private void getAllHabitsForUser(){
+        new GetHabitsTask(getContext(), new onHabitsRetrievedListener() {
+            @Override
+            public void onHabitsRetrieved(List<HabitWithTracker> habitWithTrackers) {
+                allHabitsInReflectionAdapter = new AllHabitsInReflectionAdapter(getContext(), habitWithTrackers, reflectionSharedViewModel);
+                habitsListView.setAdapter(allHabitsInReflectionAdapter);
+            }
+        }, DateUtils.getToday(), UUID.fromString(AuthUtils.getLoggedInUser(getContext()))).execute();
     }
 }
