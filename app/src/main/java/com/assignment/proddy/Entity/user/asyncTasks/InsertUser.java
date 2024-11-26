@@ -11,8 +11,11 @@ import com.assignment.proddy.Entity.user.User;
 public class InsertUser extends AsyncTask<User,Void, Long> {
 
     private Context context;
-    public InsertUser(Context context){
+    private OnUserInsertListener onUserInsertListener;
+
+    public InsertUser(Context context, OnUserInsertListener onUserInsertListener) {
         this.context = context;
+        this.onUserInsertListener = onUserInsertListener;
     }
 
     @Override
@@ -24,8 +27,12 @@ public class InsertUser extends AsyncTask<User,Void, Long> {
     @Override
     protected void onPostExecute(Long result){
         if(result != -1){
-            Toast.makeText(context,"User Inserted Successfully", Toast.LENGTH_LONG).show();
+            this.onUserInsertListener.onSuccess();
         }
+    }
+
+    public interface OnUserInsertListener{
+        void onSuccess();
     }
 
 }

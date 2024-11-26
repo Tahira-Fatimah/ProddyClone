@@ -10,7 +10,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.assignment.proddy.Activities.LoginActivity;
 import com.assignment.proddy.Activities.SignupActivity;
+import com.assignment.proddy.Entity.user.User;
 import com.assignment.proddy.Fragments.AllHabitsFragment;
 import com.assignment.proddy.Fragments.BottomSheets.ControlTabBottomSheet;
 import com.assignment.proddy.Fragments.LessonsFragment;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void checkAuthenticationState() {
         if(Objects.equals(AuthUtils.getLoggedInUser(this), "blank")){
-            Intent signIn = new Intent(this, SignupActivity.class);
+            Intent signIn = new Intent(this, LoginActivity.class);
             startActivityForResult(signIn,100);
         } else {
             launchApp();
@@ -61,8 +63,8 @@ public class MainActivity extends AppCompatActivity{
         if (requestCode == 100) {  // Check the request code
             if (resultCode == RESULT_OK) {
                 if (resultData != null) {
-                    String userId = resultData.getStringExtra("USERID");
-                    AuthUtils.storeUserInfo(this,userId);
+                    User user = (User)resultData.getSerializableExtra("USER_RECORD");
+                    AuthUtils.storeUserInfo(this, user);
                     launchApp();
                 }
             } else {

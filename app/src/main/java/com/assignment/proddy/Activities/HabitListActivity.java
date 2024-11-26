@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.proddy.Adapters.HabitListAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
-import com.assignment.proddy.Entity.habit.asyncTasks.getUserHabitTask;
+import com.assignment.proddy.Entity.habit.asyncTasks.GetUserHabitTask;
 import com.assignment.proddy.Entity.habit.asyncTasks.onHabitsRetrievedListener;
 import com.assignment.proddy.Entity.habit.asyncTasks.onUserHabitsRetrieved;
 import com.assignment.proddy.R;
@@ -50,15 +50,16 @@ public class HabitListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("kaaaaaaaaaaaaaaaaa","akkkkkkkkkkkkkkkkkkkkkkk");
-        new getUserHabitTask(this, new onUserHabitsRetrieved() {
+
+        
+        new GetUserHabitTask(this, UUID.fromString(AuthUtils.getLoggedInUser(this)), new GetUserHabitTask.onUserHabitsRetrieved() {
             @Override
-            public void onuserHabitsRetrieved(List<Habit> userHabits) {
+            public void onSuccess(List<Habit> userHabits) {
                 habitListAdapter.empty();
                 for(Habit h: userHabits){
                     habitListAdapter.addHabit(h);
                 }
             }
-        }, UUID.fromString(AuthUtils.getLoggedInUser(this))).execute();
+        }).execute();
     }
 }

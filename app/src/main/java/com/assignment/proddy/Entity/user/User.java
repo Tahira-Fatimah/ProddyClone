@@ -5,13 +5,14 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 
 @Entity(tableName = "user", indices = {@Index(value = "userEmail", unique = true)})
-public class User {
+public class User implements Serializable {
 
     @PrimaryKey
     @NonNull private UUID userId;

@@ -59,27 +59,17 @@ public class SignupActivity extends AppCompatActivity {
             registerBtn.setClickable(false);
             registerBtn.setEnabled(false);
 
-            String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-            Pattern pattern = Pattern.compile(emailRegex);
-
             String _name, _email, _password;
-
             _name = name.getText().toString();
             _email = email.getText().toString();
             _password = password.getText().toString();
 
-            if(_name.isEmpty() || _password.isEmpty() || _email.isEmpty() || !pattern.matcher(_email).matches()){
+            if(_name.isEmpty() || _password.isEmpty() || _email.isEmpty() || !AuthUtils.checkEmailValidity(_email)){
                 Toast.makeText(this,"Please validate the incorrect fields",Toast.LENGTH_LONG).show();
                 registerBtn.setClickable(true);
                 registerBtn.setEnabled(true);
             } else {
-                UUID userId = UUID.randomUUID();
-                new InsertUser(this).execute(new User(userId,_name,_email,_password));
-
-                Intent intent = new Intent();
-                intent.putExtra("USERID",userId.toString());
-                setResult(RESULT_OK,intent);
-                finish();
+                signUpUser(_name, _email, _password);
             }
         });
     }
@@ -89,6 +79,25 @@ public class SignupActivity extends AppCompatActivity {
             emailSignUp.setVisibility(View.VISIBLE);
             signUpChoose.setVisibility(View.GONE);
         });
+    }
+
+
+    private void signUpUser(String name, String email, String password){
+        UUID userId = UUID.randomUUID();
+        new InsertUser(this, new InsertUser.OnUserInsertListener() {
+            @Override
+            public void onSuccess() {
+                finishSignUpActivity(email,password);
+            }
+        }).execute(new User(userId,name,email,password));
+    }
+
+    private void finishSignUpActivity(String email, String password) {
+        Intent intent = new Intent();
+        intent.putExtra("USER_EMAIL", email);
+        intent.putExtra("USER_PASSWORD", password);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
 

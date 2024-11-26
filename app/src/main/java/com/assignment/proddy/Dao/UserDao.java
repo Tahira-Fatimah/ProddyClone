@@ -22,8 +22,8 @@ public interface UserDao {
     @Update
     public void update(User user);
 
-    @Query("SELECT * FROM user")
-    public List<User> getAllUsers();
+    @Query("SELECT * FROM user WHERE userEmail = :email AND userPassword = :password")
+    public User getUserByEmailAndPassword(String email, String password);
 
     @Query("SELECT COUNT(*) FROM habit WHERE habit_UserId = :userId")
     public int getUserHabitCount(UUID userId);

@@ -5,18 +5,28 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.assignment.proddy.Entity.user.User;
+
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class AuthUtils {
 
-    public static void storeUserInfo(Context context, String userId){
+    public static void storeUserInfo(Context context, User user){
         SharedPreferences userInfo = context.getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = userInfo.edit();
 
-        editor.putString("userId", userId);
-        editor.putString("userName", "UserOne");
-        editor.putString("userEmail", "user@email.com");
+        editor.putString("userId", user.getUserId().toString());
+        editor.putString("userName", user.getUserName());
+        editor.putString("userEmail", user.getUserEmail());
         editor.putBoolean("isLoggedIn", true);
+        editor.apply();
+    }
+
+    public static void clearUserRecord(Context context){
+        SharedPreferences userInfo = context.getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = userInfo.edit();
+        editor.clear();
         editor.apply();
     }
 
@@ -33,5 +43,11 @@ public class AuthUtils {
     public static String getLoggedInUserEmail(Context context){
         SharedPreferences userInfo = context.getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
         return userInfo.getString("userEmail","JohnDoe@gmail.com");
+    }
+
+    public static Boolean checkEmailValidity(String email){
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
     }
 }
