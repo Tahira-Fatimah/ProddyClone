@@ -27,17 +27,13 @@ public class UpdateReflectionTask extends AsyncTask<Reflection, Void, Integer> {
 
     @Override
     protected void onPostExecute(Integer res){
-        if(res < 1){
-            onUpdateReflectionListener.onFailure();
-        }
-        else{
+        if(res > 0){
             onUpdateReflectionListener.onSuccess();
         }
     }
 
     public interface onUpdateReflectionListener{
         void onSuccess();
-        void onFailure();
     }
 
 }

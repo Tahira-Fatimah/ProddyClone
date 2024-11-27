@@ -136,7 +136,7 @@ public class HabitListIncompleteAdapter extends RecyclerView.Adapter<HabitListIn
         holder.markCompletedView.setOnClickListener(v -> {
             holder.markCompletedView.setClickable(false);
             holder.markCompletedView.setEnabled(false);
-            new InsertHabitTrackerTask(context).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getTodayForInsertDB(),true));
+            new InsertHabitTrackerTask(context).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getDateOnly(DateUtils.getToday()),true));
             new SetHabitStreakTask(context).execute(habit.getHabitId());
             if (listenerImplementation != null) {
                 listenerImplementation.onButtonClick();

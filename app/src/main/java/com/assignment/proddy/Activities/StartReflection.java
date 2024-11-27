@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.assignment.proddy.Adapters.StartReflectionAdapter;
 import com.assignment.proddy.Entity.habit.Habit;
+import com.assignment.proddy.Entity.habitStreak.asyncTasks.SetHabitStreakTask;
 import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 import com.assignment.proddy.Entity.habitTracker.asyncTasks.InsertHabitTrackerTask;
 import com.assignment.proddy.Entity.reflection.Reflection;
@@ -44,15 +45,12 @@ public class StartReflection extends AppCompatActivity {
     FloatingActionButton backBtn, nextBtn;
     Reflection receivedReflection;
 
-    //1732301535647
-    //1732301637066
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_reflection);
         receivedReflection = (Reflection) getIntent().getSerializableExtra("Reflection");
-//        Log.d("ReceivedReflection", receivedReflection.toString());
         initViews();
         initViewModels();
         initFragments();
@@ -81,61 +79,55 @@ public class StartReflection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(startReflectionViewPager.getCurrentItem() == createReflectionFragments.size() -1){
-                    Reflection updatedReflection;
-                    if(receivedReflection.getReflectionId() == null){
-                        updatedReflection = new Reflection(UUID.randomUUID(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
-                                reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
-                                reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
-                                receivedReflection.getReflectionCreationDate());
-                        new InsertReflectionTask(StartReflection.this, new InsertReflectionTask.onInsertReflectionListener() {
-                            @Override
-                            public void onSuccess() {
-                                updatedReflection.setReflectionCreationDate(receivedReflection.getReflectionCreationDate());
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra("Reflection", updatedReflection);
-                                setResult(RESULT_OK, resultIntent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onFailure() {
-
-                            }
-                        }).execute(updatedReflection);
-
+                    if (receivedReflection.getReflectionId() == null) {
+                        insertRelection();
+                    } else {
+                        updateReflection();
                     }
-                    else{
-                        updatedReflection = new Reflection(receivedReflection.getReflectionId(), UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
-                                reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
-                                reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
-                                receivedReflection.getReflectionCreationDate());
-                        new UpdateReflectionTask(StartReflection.this, new UpdateReflectionTask.onUpdateReflectionListener() {
-                            @Override
-                            public void onSuccess() {
-                                Log.d("Updated Successfully", " haha ");
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra("Reflection", updatedReflection);
-                                setResult(RESULT_OK, resultIntent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onFailure() {
-
-                            }
-                        }).execute(updatedReflection);
-
-                    }
-
-                    for(Habit habit : reflectionSharedViewModel.getHabits().getValue()){
-                        new InsertHabitTrackerTask(StartReflection.this).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getTodayForInsertDB(),true));
-                    }
-
+                    markHabitsCompleted();
                 } else{
                     startReflectionViewPager.setCurrentItem(startReflectionViewPager.getCurrentItem() + 1);
                 }
             }
         });
+    }
+
+    private void updateReflection() {
+        Reflection reflection = getReflectionFromSharedViewModel(receivedReflection.getReflectionId());
+        new UpdateReflectionTask(StartReflection.this, new UpdateReflectionTask.onUpdateReflectionListener() {
+            @Override
+            public void onSuccess() {
+                setActivityResult(reflection);
+            }
+        }).execute(reflection);
+    }
+
+    private void insertRelection() {
+        Reflection reflection = getReflectionFromSharedViewModel(null);
+        new InsertReflectionTask(StartReflection.this, new InsertReflectionTask.onInsertReflectionListener() {
+            @Override
+            public void onSuccess() {
+                reflection.setReflectionCreationDate(receivedReflection.getReflectionCreationDate());
+                setActivityResult(reflection);
+            }
+        }).execute(reflection);
+    }
+
+    private void setActivityResult(Reflection reflection){
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("Reflection", reflection);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
+    private Reflection getReflectionFromSharedViewModel(UUID reflectionId){
+        if(reflectionId == null){
+            reflectionId = UUID.randomUUID();
+        }
+        return new Reflection(reflectionId, UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
+                reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
+                reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
+                receivedReflection.getReflectionCreationDate());
     }
 
     private void defineBackBtn(){
@@ -197,5 +189,11 @@ public class StartReflection extends AppCompatActivity {
         });
     }
 
+    private void markHabitsCompleted(){
+        for(Habit habit : reflectionSharedViewModel.getHabits().getValue()){
+            new InsertHabitTrackerTask(StartReflection.this).execute(new HabitTracker(UUID.randomUUID(),habit.getHabitId(), DateUtils.getDateOnly(DateUtils.getToday()),true));
+            new SetHabitStreakTask(StartReflection.this).execute(habit.getHabitId());
+        }
+    }
 
 }

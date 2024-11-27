@@ -33,7 +33,7 @@ public class SetHabitStreakTask extends AsyncTask<UUID,Void,Void> {
         if(existingStreak.getHabitStreakMaxStreak() < existingStreak.getHabitStreakCrrStreak()){
             existingStreak.setHabitStreakMaxStreak(existingStreak.getHabitStreakCrrStreak());
         }
-        existingStreak.setHabitStreakLastCompletedDate(DateUtils.getTodayForInsertDB());
+        existingStreak.setHabitStreakLastCompletedDate(DateUtils.getDateOnly(DateUtils.getToday()));
         habitStreakDao.update(existingStreak);
         return null;
     }

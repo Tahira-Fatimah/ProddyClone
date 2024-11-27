@@ -30,15 +30,10 @@ public class InsertReflectionTask extends AsyncTask<Reflection, Void, Long> {
         if(result != -1){
             onInsertReflectionListener.onSuccess();
             Toast.makeText(context, "Reflection Added", Toast.LENGTH_SHORT).show();
-        } else{
-            onInsertReflectionListener.onFailure();
-            Toast.makeText(context, "SEDDD", Toast.LENGTH_SHORT).show();
-
         }
     }
 
     public interface onInsertReflectionListener{
         void onSuccess();
-        void onFailure();
     }
 }

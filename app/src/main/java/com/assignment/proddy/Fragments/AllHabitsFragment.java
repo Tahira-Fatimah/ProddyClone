@@ -174,7 +174,7 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     }
 
     public void fetchHabitLists() {
-        new GetHabitsTask(requireContext(), this, DateUtils.getTodayForInsertDB(), UUID.fromString(AuthUtils.getLoggedInUser(getContext())))
+        new GetHabitsTask(requireContext(), this, DateUtils.getDateOnly(DateUtils.getToday()), UUID.fromString(AuthUtils.getLoggedInUser(getContext())))
                 .execute();
     }
 

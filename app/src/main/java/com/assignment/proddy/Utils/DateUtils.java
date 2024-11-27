@@ -21,14 +21,12 @@ public class DateUtils {
     public static Date getTodayForInsertDB(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(getToday());
-        calendar.add(Calendar.HOUR, +5);
         return calendar.getTime();
     }
 
     public static Date getYesterdayForDB(){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR,-1);
-        calendar.add(Calendar.HOUR, +5);
         return calendar.getTime();
     }
 
@@ -68,7 +66,6 @@ public class DateUtils {
     public static List<Date> getLatestWeek(){
         List<Date> latestSevenDates = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, +5);
 
         Date today = getDateOnly(calendar.getTime());
         latestSevenDates.add(today);
