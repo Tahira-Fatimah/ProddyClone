@@ -10,7 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/reflection_date_font_purple"
-        android:background="@drawable/rounded_background_1"
+        android:background="@drawable/rounded_background_4"
         android:textColor="@color/light_purple"
         android:text="\uE945"
         android:fontFamily="@font/evaicons"

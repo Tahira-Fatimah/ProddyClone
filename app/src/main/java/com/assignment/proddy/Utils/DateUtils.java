@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class DateUtils {
 
@@ -79,12 +78,6 @@ public class DateUtils {
         }
         Collections.reverse(latestSevenDates);
 
-        for (int i = 0; i <= 6; i++) {
-            Date date = latestSevenDates.get(i);
-            date.setHours(latestSevenDates.get(i).getHours()+5);
-            latestSevenDates.set(i,date);
-        }
-
         return latestSevenDates;
     }
 
@@ -101,24 +94,22 @@ public class DateUtils {
             calendar.add(Calendar.DATE, 1);
             monthDates.add(getDateOnly(calendar.getTime()));
         }
-
-        for (int i = 0; i <= max; i++) {
-            Date date = monthDates.get(i);
-            date.setHours(monthDates.get(i).getHours()+5);
-            monthDates.set(i,date);
-        }
         return monthDates;
     }
 
-    public static Date utcToSystemTime(Date utcDate) {
-        if (utcDate == null) return null;
-
-        long timeInMillis = utcDate.getTime();
-        TimeZone tz = TimeZone.getDefault();
-        int offset = tz.getOffset(timeInMillis);
-
-        return new Date(timeInMillis + offset); // Adjust for system time zone
+    public static String getDayOfWeek(Date date){
+        switch (date.getDay()){
+            case 0: return "Sunday";
+            case 1: return "Monday";
+            case 2: return "Tuesday";
+            case 3: return "Wednesday";
+            case 4: return "Thursday";
+            case 5: return "Friday";
+            case 6: return "Saturday";
+        }
+        return "Sunday";
     }
+
 
     public static int findDateIndex(Date inputDate) {
         Date today = getDateOnly(getToday());
@@ -127,15 +118,12 @@ public class DateUtils {
         calendar.add(Calendar.DAY_OF_MONTH, -30);
         Date startDate = getDateOnly(calendar.getTime());
 
-        Log.d("Start Date ", startDate.toString() + " Today  " + today.toString() + " input " + inputDate.toString());
 
         if (!inputDate.before(startDate) && !inputDate.after(today)) {
             long diffInMillies = inputDate.getTime() - startDate.getTime();
-            int position = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1; // +1 for 1-based index
-            Log.d("Position ", String.valueOf(position));
+            int position = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1;
             return position;
         } else {
-            // Return -1 for out-of-range dates
             return -1;
         }
     }

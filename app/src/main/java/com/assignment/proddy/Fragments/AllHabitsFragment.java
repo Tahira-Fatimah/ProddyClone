@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.assignment.proddy.Activities.HabitListActivity;
 import com.assignment.proddy.Activities.Settings;
 import com.assignment.proddy.Adapters.HabitListCompletedAdapter;
 import com.assignment.proddy.Adapters.HabitListIncompleteAdapter;
@@ -49,6 +50,7 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
     LinearLayout noHabit;
     TextView completionStatus;
     TextView todayText;
+    TextView openHabits;
     LinearLayout completedToday;
     Drawable arrowUp ;
     Drawable arrowDown;
@@ -74,12 +76,14 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
         noHabit = view.findViewById(R.id.noHabit);
         settings = view.findViewById(R.id.settings);
         todayText= view.findViewById(R.id.todayText);
+        openHabits = view.findViewById(R.id.openHabits);
         completionStatus = view.findViewById(R.id.completion_status);
         completedToday = view.findViewById(R.id.completedToday);
         incompleteHabitListRecyclerView = view.findViewById(R.id.habit_incomplete_recycler_view);
         completedHabitListRecyclerView = view.findViewById(R.id.habit_recycler_view);
 
         setSettingsOnClickListener();
+        setOpenHabitsListener();
         completionStatus.setOnClickListener(v -> toggleRecyclerViewVisibility());
         incompleteHabitListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         completedHabitListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -92,9 +96,16 @@ public class AllHabitsFragment extends Fragment implements onHabitsRetrievedList
         return view;
     }
 
+    private void setOpenHabitsListener(){
+        openHabits.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), HabitListActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        });
+    }
+
     private void setSettingsOnClickListener() {
         settings.setOnClickListener(v -> getContext().startActivity(new Intent(getContext(), Settings.class)));
-        getActivity().overridePendingTransition(android.R.anim.bounce_interpolator,0);
     }
 
     @Override

@@ -5,13 +5,15 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.UUID;
+
 public class AuthUtils {
 
-    public static void storeUserInfo(Context context){
+    public static void storeUserInfo(Context context, String userId){
         SharedPreferences userInfo = context.getSharedPreferences("ProddyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = userInfo.edit();
 
-        editor.putString("userId", "E01396FF-AFBD-4587-BED7-B1134B5A0A8F");
+        editor.putString("userId", userId);
         editor.putString("userName", "UserOne");
         editor.putString("userEmail", "user@email.com");
         editor.putBoolean("isLoggedIn", true);

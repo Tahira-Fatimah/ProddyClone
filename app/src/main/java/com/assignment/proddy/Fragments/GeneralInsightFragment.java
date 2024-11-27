@@ -241,16 +241,16 @@ public class GeneralInsightFragment extends Fragment implements onGetTrackersWit
     public void setCalendar(){
         adapter.empty();
         List<Date> monthDates = DateUtils.getMonth();
-        for (int i = 1; i < monthDates.size(); i++) {
+        for (int i = 0; i < monthDates.size(); i++) {
             if(dateCountMap.get(monthDates.get(i)) != null){
                 if(dateCountMap.get(monthDates.get(i)) == userHabitCount){
-                    adapter.addItem(Map.entry(String.valueOf(i),"ALL"));
+                    adapter.addItem(Map.entry(String.valueOf(i+1),"ALL"));
                 } else {
-                    adapter.addItem(Map.entry(String.valueOf(i),"SOME"));
+                    adapter.addItem(Map.entry(String.valueOf(i+1),"SOME"));
                 }
                 continue;
             }
-            adapter.addItem(Map.entry(String.valueOf(i),"NONE"));
+            adapter.addItem(Map.entry(String.valueOf(i+1),"NONE"));
         }
     }
 

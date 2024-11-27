@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.assignment.proddy.Adapters.IndividualInsightsAdapter;
@@ -18,6 +21,9 @@ import com.assignment.proddy.Entity.habit.asyncTasks.GetHabitsWithStreakAndTimeT
 import com.assignment.proddy.Entity.habitTracker.HabitTracker;
 import com.assignment.proddy.Entity.habitTracker.asyncTasks.getTrackerForHabitTask;
 import com.assignment.proddy.Entity.habitTracker.asyncTasks.onGetTrackerForHabit;
+import com.assignment.proddy.Entity.habitTracker.asyncTasks.onGetTrackersWithDateBoundListener;
+import com.assignment.proddy.Entity.user.asyncTasks.GetUserHabitCount;
+import com.assignment.proddy.Entity.user.asyncTasks.onUserHabitCountRetrieved;
 import com.assignment.proddy.ObjectMapping.HabitInsightData;
 import com.assignment.proddy.ObjectMapping.HabitWithStreakAndTime;
 import com.assignment.proddy.R;
@@ -31,18 +37,19 @@ import java.util.Map;
 import java.util.UUID;
 
 
-public class IndividualInsightFragment extends Fragment {
+public class IndividualInsightFragment extends Fragment implements onUserHabitCountRetrieved {
 
     ViewPager2 insightContainer;
     TextView iconLeft;
     TextView iconRight;
+    FrameLayout hasHabit;
+    LinearLayout noHabit;
 
     IndividualInsightsAdapter insightsAdapter;
 
     List<HabitWithStreakAndTime> habitWithStreakAndTimes;
     List<HabitTracker> habitTrackerData;
     Map<UUID,HabitInsightData> habitInsightDataMap;
-    List<HabitInsightData> habitInsightData;
 
     public IndividualInsightFragment() {}
 
@@ -58,6 +65,9 @@ public class IndividualInsightFragment extends Fragment {
 
         insightContainer = view.findViewById(R.id.viewPagerII);
         insightContainer.setPageTransformer(new CustomPageTransformer());
+
+        hasHabit = view.findViewById(R.id.hasHabitII);
+        noHabit = view.findViewById(R.id.noHabitII);
 
         iconLeft = view.findViewById(R.id.left_arrow);
         iconRight = view.findViewById(R.id.right_arrow);
@@ -75,8 +85,19 @@ public class IndividualInsightFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        fetchUserHabitCount();
+    }
 
-        fetchHabitsWithStreak();
+    public void fetchUserHabitCount(){
+        new GetUserHabitCount(getContext(),this).execute(UUID.fromString(AuthUtils.getLoggedInUser(getContext())));
+    }
+
+    @Override
+    public void userHabitCountRetrieved(int count) {
+        setViewState(count);
+        if(count > 0){
+            fetchHabitsWithStreak();
+        }
     }
 
     public void fetchHabitsWithStreak(){
@@ -99,11 +120,11 @@ public class IndividualInsightFragment extends Fragment {
                 @Override
                 public void ongetTrackerForHabit(List<HabitTracker> habitTrackersForHabit) {
                     habitTrackerData.addAll(habitTrackersForHabit);
+                    mapHabitInsightData();
                 }
             }, UUID.fromString(AuthUtils.getLoggedInUser(getContext())),habit.getHabitId(),
-                    DateUtils.getCurrentMonthStart(), DateUtils.getCurrentMonthEnd());
+                    DateUtils.getCurrentMonthStart(), DateUtils.getCurrentMonthEnd()).execute();
         }
-        mapHabitInsightData();
     }
 
     public void mapHabitInsightData(){
@@ -111,7 +132,6 @@ public class IndividualInsightFragment extends Fragment {
         for (HabitWithStreakAndTime habit: habitWithStreakAndTimes) {
             habitInsightDataMap.put(habit.getHabitId(),new HabitInsightData(habit, new ArrayList<>()));
         }
-
         for (HabitTracker habitTracker: habitTrackerData){
             HabitInsightData habitInsightData = habitInsightDataMap.get(habitTracker.getHabitTracker_HabitId());
             if (habitInsightData != null) {
@@ -146,6 +166,7 @@ public class IndividualInsightFragment extends Fragment {
     }
 
 
+
     public class CustomPageTransformer implements ViewPager2.PageTransformer {
         @Override
         public void transformPage(View page, float position) {
@@ -169,6 +190,14 @@ public class IndividualInsightFragment extends Fragment {
         }
     }
 
-
+    public void setViewState(int habitCount){
+        if(habitCount == 0){
+            hasHabit.setVisibility(View.GONE);
+            noHabit.setVisibility(View.VISIBLE);
+        } else {
+            hasHabit.setVisibility(View.VISIBLE);
+            noHabit.setVisibility(View.GONE);
+        }
+    }
 
 }

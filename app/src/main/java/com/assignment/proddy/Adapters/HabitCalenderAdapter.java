@@ -58,20 +58,12 @@ public class HabitCalenderAdapter extends BaseAdapter {
 
         TextView calendarTextView = convertView.findViewById(R.id.calenderItem);
 
-
         calendarTextView.setText(calendarItems.get(position).getKey());
 
-        String status = calendarItems.get(position).getValue();
-        int color = R.color.grid_item_calendar;
-        if(Objects.equals(status, "NONE")){
-            color = R.color.grid_item_calendar;
-        } else if (Objects.equals(status, "SOME")) {
-            color = R.color.today_item_calendar;
-        } else if (Objects.equals(status, "ALL")){
-            color = R.color.completed_habits_scale_1;
-        }
         calendarTextView.setBackgroundTintList(ColorStateList.valueOf(
-                context.getResources().getColor(color)
+                context.getResources().getColor(
+                        DrawableUtils.getCalendarItemColor(calendarItems.get(position).getValue())
+                )
         ));
 
         return convertView;
