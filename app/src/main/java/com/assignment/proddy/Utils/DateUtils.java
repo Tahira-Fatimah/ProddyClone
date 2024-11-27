@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DateUtils {
 
@@ -107,6 +108,36 @@ public class DateUtils {
             monthDates.set(i,date);
         }
         return monthDates;
+    }
+
+    public static Date utcToSystemTime(Date utcDate) {
+        if (utcDate == null) return null;
+
+        long timeInMillis = utcDate.getTime();
+        TimeZone tz = TimeZone.getDefault();
+        int offset = tz.getOffset(timeInMillis);
+
+        return new Date(timeInMillis + offset); // Adjust for system time zone
+    }
+
+    public static int findDateIndex(Date inputDate) {
+        Date today = getDateOnly(getToday());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -30);
+        Date startDate = getDateOnly(calendar.getTime());
+
+        Log.d("Start Date ", startDate.toString() + " Today  " + today.toString() + " input " + inputDate.toString());
+
+        if (!inputDate.before(startDate) && !inputDate.after(today)) {
+            long diffInMillies = inputDate.getTime() - startDate.getTime();
+            int position = (int) (diffInMillies / (1000 * 60 * 60 * 24)) + 1; // +1 for 1-based index
+            Log.d("Position ", String.valueOf(position));
+            return position;
+        } else {
+            // Return -1 for out-of-range dates
+            return -1;
+        }
     }
 
 
