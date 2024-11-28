@@ -125,5 +125,9 @@ public class DateUtils {
         }
     }
 
+    public static Date getDateOnlyForToday(){
+        return getDateOnly(getToday());
+    }
+
 
 }

@@ -161,6 +161,9 @@ public class EditHabit extends AppCompatActivity implements onHabitStackRetrieve
                     habit.setHabitType(HabitSingleton.getInstance().getHabitType());
                     Log.d("EditHabit", "Updated Habit: " + habit.toString());
                     new UpdateHabit(EditHabit.this).execute(habit);
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("UpdatedHabit", habit);
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                     overridePendingTransition(0,android.R.anim.fade_out);
                 }

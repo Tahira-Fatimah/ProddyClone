@@ -56,6 +56,7 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
     ImageView day4;
     ImageView day5;
     List<ImageView> checkboxes;
+    int EDIT_HABIT_REQUEST_CODE = 104;
 
 
     @Override
@@ -73,7 +74,12 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
     @Override
     protected void onResume(){
         super.onResume();
+        actionsOnResume();
         defineHabitStack();
+    }
+
+    private void actionsOnResume(){
+        habitNameTextView.setText(habit.getHabitName().toString());
     }
 
     private void initViews(){
@@ -141,11 +147,21 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_HABIT_REQUEST_CODE && resultCode == RESULT_OK) {
+            habit = (Habit) data.getSerializableExtra("UpdatedHabit");
+        }
+    }
+
+
     private void defineBtnClickListeners(){
         editbtn.setOnClickListener(v->{
             Intent intent = new Intent(HabitStepsListActivity.this, EditHabit.class);
             intent.putExtra("Habit", habit);
-            startActivity(intent);
+            startActivityForResult(intent, EDIT_HABIT_REQUEST_CODE);
         });
 
         closebtn.setOnClickListener(v->{
@@ -203,6 +219,7 @@ public class HabitStepsListActivity extends AppCompatActivity implements onHabit
         });
 
     }
+
     public static List<String> getLast5Days() {
         List<String> days = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();

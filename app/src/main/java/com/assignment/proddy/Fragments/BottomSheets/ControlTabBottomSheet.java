@@ -49,7 +49,7 @@ public class ControlTabBottomSheet extends BottomSheetDialogFragment {
                     @Override
                     public void onFailure() {
                         Reflection newReflection = new Reflection();
-                        newReflection.setReflectionCreationDate(DateUtils.getToday());
+                        newReflection.setReflectionCreationDate(DateUtils.getDateOnly(DateUtils.getToday()));
                         intent.putExtra("Reflection", newReflection);
                         startActivity(intent);
                     }

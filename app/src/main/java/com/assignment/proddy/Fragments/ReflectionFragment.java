@@ -112,7 +112,6 @@ public class ReflectionFragment extends Fragment {
                 tapToReflectButton.setVisibility(View.VISIBLE);
                 setCustomReflection(currentReflection);
             }
-            isComingBackFromAnotherActivity = false;
         }
     }
 
@@ -157,16 +156,17 @@ public class ReflectionFragment extends Fragment {
             public void onSuccess(Reflection reflection) {
                 tapToReflectButton.setVisibility(View.VISIBLE);
                 currentReflection = reflection;
-                defineDefaultReflection(Calendar.getInstance().getTime());
+                Log.d("Initial View Reflection ", currentReflection.toString());
+                defineDefaultReflection(DateUtils.getDateOnly(DateUtils.getToday()));
                 setCustomReflection(reflection);
             }
 
             @Override
             public void onFailure() {
                 tapToReflectButton.setVisibility(View.GONE);
-                defineDefaultReflection(Calendar.getInstance().getTime());
+                defineDefaultReflection(DateUtils.getDateOnly(DateUtils.getToday()));
             }
-        }).execute(Calendar.getInstance().getTime());
+        }).execute(DateUtils.getDateOnly(DateUtils.getToday()));
     }
 
     private void defineDefaultReflection(Date today){
@@ -203,7 +203,7 @@ public class ReflectionFragment extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -30);
-        Date todaysDate = Calendar.getInstance().getTime();
+        Date todaysDate = DateUtils.getDateOnly(DateUtils.getToday());
         for (int i = 0; i <= 30; i++) {
             LinearLayout childView = (LinearLayout) inflater.inflate(
                     R.layout.reflection_horizontal_scroll_view_date_item,
@@ -229,7 +229,7 @@ public class ReflectionFragment extends Fragment {
             childView.setContentDescription(currentDate.toString());
             dateContainerLinearLayout.setTag(currentDate);
 
-            if(currentDate.equals(DateUtils.getDateOnly(todaysDate))){
+            if(currentDate.equals(todaysDate)){
                 lastDateContainerClicked = dateContainerLinearLayout;
                 lastDateClicked = dayTextView;
                 lastMonthClicked = monthTextView;
@@ -260,11 +260,13 @@ public class ReflectionFragment extends Fragment {
 
         if(currentReflection!=null) {
             adjustSelectedDateColourOnResume(currentReflection.getReflectionCreationDate());
+        }
+        if(isComingBackFromAnotherActivity && currentReflection!= null){
             scrollHorizontalViewDateContainerToSpecificPosition();
-
-        } else{
+        }else{
             scrollHorizontalViewDateContainerToEnd();
         }
+        isComingBackFromAnotherActivity = false;
 
     }
 

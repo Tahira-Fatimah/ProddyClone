@@ -127,7 +127,7 @@ public class StartReflection extends AppCompatActivity {
         return new Reflection(reflectionId, UUID.fromString(AuthUtils.getLoggedInUser(StartReflection.this)),
                 reflectionSharedViewModel.getReflectionFeelingsList().getValue(), reflectionSharedViewModel.getReflectionFeelingRate().getValue(),
                 reflectionSharedViewModel.getReflectionActivitiesList().getValue(), reflectionSharedViewModel.getReflectionThoughts().getValue(),
-                receivedReflection.getReflectionCreationDate());
+                DateUtils.getDateOnly(receivedReflection.getReflectionCreationDate()));
     }
 
     private void defineBackBtn(){

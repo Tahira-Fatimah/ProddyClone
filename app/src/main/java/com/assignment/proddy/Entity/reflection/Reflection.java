@@ -124,6 +124,7 @@ public class Reflection implements Serializable {
                 ", reflectionFeelingsList=" + reflectionFeelingsList +
                 ", reflectionFeelingRate=" + reflectionFeelingRate +
                 ", reflectionActivitiesList=" + reflectionActivitiesList +
+                ", reflectionCreationDate=" + reflectionCreationDate.toString() +
                 ", reflectionThoughts='" + reflectionThoughts + '\'' +
                 '}';
     }
