@@ -26,7 +26,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="20dp"
             android:paddingHorizontal="20dp"
-            android:paddingVertical="40dp"
+            android:paddingTop="40dp"
             android:background="@drawable/habit_card"
             android:orientation="vertical">
 
@@ -46,7 +46,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/habitCategoryViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="320dp"
                 android:paddingLeft="48dp"
                 android:paddingEnd="48dp"
                 android:clipToPadding="false"

@@ -65,13 +65,14 @@ public class ReflectionFragment extends Fragment {
     GridLayout feelingsGridView, activitiesGridView;
     LinearLayout allBarsView;
     ImageView moodEmojiView, avgMoodEmojiView;
-    int avgMood;
     LinearLayout lastDateContainerClicked;
     TextView lastMonthClicked;
     TextView lastDateClicked;
     HorizontalScrollView dateContainerHorizontalScrollView;
     Reflection currentReflection;
+    int avgMood;
     private boolean isComingBackFromAnotherActivity = false;
+    String NOTHING_HERE_YET = "Nothing here yet. ";
 
     public ReflectionFragment() {
     }
@@ -154,26 +155,31 @@ public class ReflectionFragment extends Fragment {
         new GetReflectionByDateTodayTask(getContext(), new GetReflectionByDateTodayTask.onReflectionRetrievedListener() {
             @Override
             public void onSuccess(Reflection reflection) {
-                tapToReflectButton.setVisibility(View.VISIBLE);
                 currentReflection = reflection;
-                Log.d("Initial View Reflection ", currentReflection.toString());
-                defineDefaultReflection(DateUtils.getDateOnly(DateUtils.getToday()));
+                setTapToReflectBtnVisibility();
+                defineDefaultReflection(DateUtils.getDateOnlyForToday());
                 setCustomReflection(reflection);
             }
 
             @Override
             public void onFailure() {
-                tapToReflectButton.setVisibility(View.GONE);
-                defineDefaultReflection(DateUtils.getDateOnly(DateUtils.getToday()));
+                currentReflection = null;
+                setTapToReflectBtnVisibility();
+                defineDefaultReflection(DateUtils.getDateOnlyForToday());
             }
-        }).execute(DateUtils.getDateOnly(DateUtils.getToday()));
+        }).execute(DateUtils.getDateOnlyForToday());
     }
 
-    private void defineDefaultReflection(Date today){
-        SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(today, "Your mood on ");
-        moodDateView.setText(spannableBuilder);
-        moodTextView.setText("Nothing here yet.");
-        moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(-1));
+    private void setTapToReflectBtnVisibility(){
+        if(currentReflection == null){
+            tapToReflectButton.setVisibility(View.GONE);
+        } else{
+            tapToReflectButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void defineDefaultReflection(Date date){
+        setReflectionMoodTopBar(null, date);
         setAverageReflectionMood();
     }
 
@@ -203,7 +209,7 @@ public class ReflectionFragment extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -30);
-        Date todaysDate = DateUtils.getDateOnly(DateUtils.getToday());
+        Date todaysDate = DateUtils.getDateOnlyForToday();
         for (int i = 0; i <= 30; i++) {
             LinearLayout childView = (LinearLayout) inflater.inflate(
                     R.layout.reflection_horizontal_scroll_view_date_item,
@@ -302,7 +308,6 @@ public class ReflectionFragment extends Fragment {
     }
 
     public int findFeelingRateByDate(List<ReflectionDateAndRate> res, Date targetDate) {
-
         for (ReflectionDateAndRate reflection : res) {
             if (DateUtils.getDateOnly(targetDate).equals(DateUtils.getDateOnly(reflection.getReflectionCreationDate()))) {
                 return reflection.getReflectionFeelingRate();
@@ -317,7 +322,7 @@ public class ReflectionFragment extends Fragment {
             public void onSuccess(Reflection reflection) {
                 currentReflection = reflection;
                 clearViews();
-                tapToReflectButton.setVisibility(View.VISIBLE);
+                setTapToReflectBtnVisibility();
                 setCustomReflection(reflection);
             }
 
@@ -325,7 +330,7 @@ public class ReflectionFragment extends Fragment {
             public void onFailure() {
                 currentReflection = null;
                 clearViews();
-                tapToReflectButton.setVisibility(View.GONE);
+                setTapToReflectBtnVisibility();
                 defineDefaultReflection(selectedDate);
             }
         }).execute(selectedDate);
@@ -336,7 +341,6 @@ public class ReflectionFragment extends Fragment {
             @Override
             public void onSuccess(Float avg) {
                 setAverageReflectionMoodViews(avg);
-
             }
 
             @Override
@@ -463,7 +467,7 @@ public class ReflectionFragment extends Fragment {
         List<ReflectionFeelings> reflectionFeelings = reflection.getReflectionFeelingsList();
 
         setReflectionThoughts(reflectionThoughts);
-        setReflectionMoodTopBar(reflection);
+        setReflectionMoodTopBar(reflection, null);
         setReflectionFeelingsGridView(reflectionFeelings);
         setActivitiesGridView(reflectionActivities);
 
@@ -473,12 +477,19 @@ public class ReflectionFragment extends Fragment {
         thoughtsView.setText(reflectionThoughts);
     }
 
-    private void setReflectionMoodTopBar(Reflection reflection){
-        SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(reflection.getReflectionCreationDate(), "Your mood on ");
-        moodDateView.setText(spannableBuilder);
-        moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(reflection.getReflectionFeelingRate()));
-        moodTextView.setText(StringUtils.getMoodFromRate(reflection.getReflectionFeelingRate()));
-        moodNumView.setText(String.valueOf(reflection.getReflectionFeelingRate()));
+    private void setReflectionMoodTopBar(Reflection reflection, Date date){
+        if(reflection == null){
+            SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(date, "Your mood on ");
+            moodDateView.setText(spannableBuilder);
+            moodTextView.setText(NOTHING_HERE_YET);
+            moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(-1));
+        } else {
+            SpannableStringBuilder spannableBuilder = StringUtils.getSpannableString(reflection.getReflectionCreationDate(), "Your mood on ");
+            moodDateView.setText(spannableBuilder);
+            moodEmojiView.setImageResource(DrawableUtils.getReflectionEmojiDrawable(reflection.getReflectionFeelingRate()));
+            moodTextView.setText(StringUtils.getMoodFromRate(reflection.getReflectionFeelingRate()));
+            moodNumView.setText(String.valueOf(reflection.getReflectionFeelingRate()));
+        }
     }
 
     private void setActivitiesGridView(List<ReflectionActivities> reflectionActivities){

@@ -2,6 +2,12 @@ package com.assignment.proddy.Activities;
 
 import static java.lang.Integer.parseInt;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +34,9 @@ import com.assignment.proddy.SharedViewModel.NavigationViewModel;
 import com.assignment.proddy.Utils.StringUtils;
 import com.assignment.proddy.Utils.AuthUtils;
 
+import java.sql.Time;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,12 +71,8 @@ public class CreateHabit extends AppCompatActivity{
                 findViewById(R.id.done5)
         );
 
-        backBtn = findViewById(R.id.backBtn);
-        continueBtn = findViewById(R.id.continueBtn);
-        cancelBtn = findViewById(R.id.cancel);
-        navigationViewModel = new ViewModelProvider(this).get(NavigationViewModel.class);
-        habitSharedViewModel = new ViewModelProvider(this).get(HabitSharedViewModel.class);
-
+        initViews();
+        initSharedViewModels();
         observeSharedViewModel();
         fillFragment(fragments[0], true);
         defineBackBtn();
@@ -76,6 +80,17 @@ public class CreateHabit extends AppCompatActivity{
         defineCancelBtn();
 
 
+    }
+
+    private void initViews(){
+        backBtn = findViewById(R.id.backBtn);
+        continueBtn = findViewById(R.id.continueBtn);
+        cancelBtn = findViewById(R.id.cancel);
+    }
+
+    private void initSharedViewModels(){
+        navigationViewModel = new ViewModelProvider(this).get(NavigationViewModel.class);
+        habitSharedViewModel = new ViewModelProvider(this).get(HabitSharedViewModel.class);
     }
 
     private void observeSharedViewModel(){
@@ -125,16 +140,9 @@ public class CreateHabit extends AppCompatActivity{
                 if(habitDaysValidation()){
                     habitSharedViewModel.setHabitDays(StringUtils.getAllDays());
                 }
-
                 continueBtn.setClickable(false);
                 continueBtn.setEnabled(false);
-//                UUID loggedInUserID = AuthUtils.getLoggedInUser(this);
-                Habit habit = new Habit(UUID.randomUUID(),habitSharedViewModel.getHabitName().getValue(),
-                        habitSharedViewModel.getHabitMotivationMessage().getValue(),
-                        habitSharedViewModel.getHabitType().getValue(),
-                        UUID.fromString(AuthUtils.getLoggedInUser(this)),
-                        habitSharedViewModel.getReminderTime().getValue(),
-                        habitSharedViewModel.getHabitDays().getValue());
+                Habit habit = getHabit();
                 new InsertHabit(this).execute(habit);
                 new InsertHabitStreakTask(this).execute(habit.getHabitId());
                 finish();
@@ -145,9 +153,6 @@ public class CreateHabit extends AppCompatActivity{
                 fillFragment(fragments[currentFragmentIndex], true);
             }
         }
-        System.out.println(habitSharedViewModel.toString());
-
-
     }
 
     private void goToPreviousFragment() {
@@ -202,5 +207,13 @@ public class CreateHabit extends AppCompatActivity{
         }
     }
 
+    private Habit getHabit(){
+        return new Habit(UUID.randomUUID(),habitSharedViewModel.getHabitName().getValue(),
+                habitSharedViewModel.getHabitMotivationMessage().getValue(),
+                habitSharedViewModel.getHabitType().getValue(),
+                UUID.fromString(AuthUtils.getLoggedInUser(this)),
+                habitSharedViewModel.getReminderTime().getValue(),
+                habitSharedViewModel.getHabitDays().getValue());
+    }
 
 }
